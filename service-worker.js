@@ -9,7 +9,7 @@
  * - Separação lógica de Core Assets vs Imagens
  */
 
-const CACHE_VERSION = 35; // Atualizado apos otimizar assets para PWA
+const CACHE_VERSION = 36; // Atualizado apos otimizar assets para PWA
 const CACHE_NAME = `roleta-sensorial-v${CACHE_VERSION}`;
 
 /* ─── Definição de Assets ─── */
