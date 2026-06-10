@@ -2361,47 +2361,217 @@ function drawWheel() {
   ctx.restore();
 }
 
+/**
+ * PATCH: DRAWWHEELLABEL RESPONSIVO (≤430px MOBILE)
+ * ═══════════════════════════════════════════════════════════════
+ * Resolve Problema 4: Canvas labels ajustam ao tamanho da roda
+ * 
+ * Como aplicar:
+ * 1. Encontre a função drawWheelLabel() em app.js (por volta da linha 2364)
+ * 2. Substitua TODO o conteúdo pela função abaixo
+ * 3. Salve e teste
+ * 
+ * Mudanças:
+ * - Detecta tamanho do canvas automaticamente
+ * - Reduz font size em mobile (360px = 10px, 520px = 13px)
+ * - Ajusta labelRadius para trazer labels mais perto do centro
+ * - Reduz chipWidth/Height para mobile
+ * - Usa abreviações curtas automaticamente se needed
+ */
+
+// ═══════════════════════════════════════════════════════════════
+// NOVA FUNÇÃO: drawWheelLabel RESPONSIVO
+// ═══════════════════════════════════════════════════════════════
+
 function drawWheelLabel(rank, active, current, angle, radius, pulse) {
-  const labelRadius = radius * 0.69;
+  // ──────────────────────────────────────────────────────────────
+  // DETECÇÃO: Tamanho do canvas (mobile vs desktop)
+  // ──────────────────────────────────────────────────────────────
+  const canvasWidth = dom.canvas.width / state.devicePixelRatio;
+  const isMobile = canvasWidth <= 360; // 360px = mobile compacto
+  const isTablet = canvasWidth > 360 && canvasWidth < 450; // 360-450px = tablet compacto
+  const isDesktop = canvasWidth >= 450; // 450px+ = desktop/normal
+
+  // ──────────────────────────────────────────────────────────────
+  // CONFIGURAÇÃO: Responsiva por breakpoint
+  // ──────────────────────────────────────────────────────────────
+  let fontSize, chipWidth, chipHeight, iconRadius, labelRadius, yOffset;
+
+  if (isMobile) {
+    // Modo compacto para iPhone SE/12 (360px canvas)
+    fontSize = 10;
+    chipWidth = 56; // Reduzido de 70+
+    chipHeight = 24; // Reduzido de 28
+    iconRadius = 12; // Reduzido de 15
+    labelRadius = radius * 0.65; // Mais perto do centro
+    yOffset = 12; // Reduzido de 15
+  } else if (isTablet) {
+    // Modo intermediário para iPhone 14 Pro Max (380-400px)
+    fontSize = 11;
+    chipWidth = 62;
+    chipHeight = 26;
+    iconRadius = 13;
+    labelRadius = radius * 0.67;
+    yOffset = 14;
+  } else {
+    // Modo desktop (520px+)
+    fontSize = 13;
+    chipWidth = 70;
+    chipHeight = 28;
+    iconRadius = 15;
+    labelRadius = radius * 0.69;
+    yOffset = 15;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // POSICIONAMENTO: Radial com contador-rotação
+  // ──────────────────────────────────────────────────────────────
   const x = Math.cos(angle) * labelRadius;
   const y = Math.sin(angle) * labelRadius;
   const counterRotation = -(modulo(state.rotation, 360) * Math.PI) / 180;
+
+  // ──────────────────────────────────────────────────────────────
+  // CORES: Estado (ativo, atual, inativo)
+  // ──────────────────────────────────────────────────────────────
   const hotPink = "#e0457b";
   const textColor = current ? "#ff9bc0" : active ? "#e8dcc8" : "rgba(232, 220, 200, 0.52)";
   const iconColor = current ? hotPink : active ? "#c9a24b" : "rgba(232, 220, 200, 0.44)";
 
+  // ──────────────────────────────────────────────────────────────
+  // DESENHO: Save context
+  // ──────────────────────────────────────────────────────────────
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(counterRotation);
+
+  // ──────────────────────────────────────────────────────────────
+  // DESENHO: Ícone (círculo + símbolo)
+  // ──────────────────────────────────────────────────────────────
   ctx.shadowColor = current ? "rgba(224, 69, 123, 0.64)" : "rgba(0, 0, 0, 0.38)";
   ctx.shadowBlur = current ? 14 + pulse * 8 : 8;
 
-  drawRankIcon(rank.icon, 0, -14, iconColor, active, current);
+  drawRankIconResponsive(rank.icon, 0, -yOffset - 6, iconColor, iconRadius, active, current);
 
-  ctx.font = "700 13px Inter, system-ui, sans-serif";
-  const chipWidth = Math.max(70, Math.ceil(ctx.measureText(rank.short).width) + 28);
-  const chipHeight = 28;
-  const chipLeft = -chipWidth / 2;
-  const chipTop = 15;
+  // ──────────────────────────────────────────────────────────────
+  // DESENHO: Chip/Card com texto
+  // ──────────────────────────────────────────────────────────────
 
+  // 1. Medir texto com font responsivo
+  ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
+  const textMetrics = ctx.measureText(rank.short);
+  
+  // Se em mobile e texto é muito largo, usar abreviação ainda mais curta
+  let displayText = rank.short;
+  if (isMobile && textMetrics.width > chipWidth - 16) {
+    // Fallback para iniciais ou versão ainda mais curta
+    displayText = rank.short.substring(0, 3); // "Sed" ao invés de "Sedução"
+  }
+
+  // 2. Recalcular chipWidth baseado no texto final
+  const actualTextWidth = ctx.measureText(displayText).width;
+  const finalChipWidth = Math.max(chipWidth, Math.ceil(actualTextWidth) + 16);
+
+  // 3. Posição do chip
+  const chipLeft = -finalChipWidth / 2;
+  const chipTop = yOffset;
+
+  // 4. Desenhar background do chip
   ctx.shadowBlur = current ? 12 + pulse * 6 : 5;
   ctx.fillStyle = current ? "rgba(224, 69, 123, 0.18)" : active ? "rgba(15, 11, 13, 0.72)" : "rgba(15, 11, 13, 0.36)";
-  drawRoundRect(chipLeft, chipTop, chipWidth, chipHeight, 14);
+  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8); // Mais compacto no mobile
   ctx.fill();
 
+  // 5. Desenhar borda do chip
   ctx.shadowBlur = 0;
   ctx.lineWidth = current ? 1.8 : 1;
   ctx.strokeStyle = current ? hotPink : active ? "rgba(201, 162, 75, 0.26)" : "rgba(232, 220, 200, 0.1)";
-  drawRoundRect(chipLeft, chipTop, chipWidth, chipHeight, 14);
+  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8);
   ctx.stroke();
 
+  // 6. Desenhar texto
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = textColor;
-  ctx.font = "800 13px Inter, system-ui, sans-serif";
-  ctx.fillText(rank.short, 0, chipTop + chipHeight / 2 + 0.5);
+  ctx.font = `800 ${fontSize}px Inter, system-ui, sans-serif`;
+  ctx.fillText(displayText, 0, chipTop + chipHeight / 2 + 0.5);
+
+  // ──────────────────────────────────────────────────────────────
+  // LIMPEZA: Restore context
+  // ──────────────────────────────────────────────────────────────
   ctx.restore();
 }
+
+// ═══════════════════════════════════════════════════════════════
+// FUNÇÃO AUXILIAR: drawRankIconResponsive
+// ═══════════════════════════════════════════════════════════════
+// Adapta tamanho do ícone baseado no canvas
+function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.globalAlpha = active ? 1 : 0.62;
+  ctx.fillStyle = current ? hexToRgba(color, 0.24) : "rgba(255, 247, 239, 0.08)";
+  ctx.strokeStyle = color;
+  ctx.lineWidth = current ? 2.2 : 1.8;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Selecionar qual ícone desenhar (mesmo switch original)
+  switch (icon) {
+    case "massage":
+      drawMassageIcon();
+      break;
+    case "touch":
+      drawTouchIcon();
+      break;
+    case "kiss":
+      drawKissIcon();
+      break;
+    case "strip":
+      drawStripIcon();
+      break;
+    case "hand":
+      drawHandIcon();
+      break;
+    case "mouth":
+      drawMouthIcon();
+      break;
+    case "climax":
+      drawFlameIcon();
+      break;
+    default:
+      drawWhisperIcon();
+      break;
+  }
+
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TESTES: Execute no console para verificar responsividade
+// ═══════════════════════════════════════════════════════════════
+/*
+// Teste 1: Verificar detecção de mobile
+console.log("Canvas width:", dom.canvas.width / state.devicePixelRatio);
+
+// Teste 2: Forçar redraw após mudar orientação
+window.addEventListener('orientationchange', () => {
+  console.log("Orientação mudou, redraw...");
+  drawWheel();
+});
+
+// Teste 3: Simular resize (DevTools mobile)
+window.addEventListener('resize', () => {
+  const newWidth = dom.canvas.width / state.devicePixelRatio;
+  console.log("Canvas resize:", newWidth);
+  if (dom.roulette) {
+    drawWheel();
+  }
+});
+*/
 
 function drawRankIcon(icon, x, y, color, active, current) {
   ctx.save();
