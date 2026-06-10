@@ -1761,7 +1761,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   15. RESPONSIVE DESIGN & ACCESSIBILITY (@layer utilities)
+   15. RESPONSIVE DESIGN & ACCESSIBILITY (@layer states)
    ═══════════════════════════════════════════════════════════════ */
 @layer states {
   /* Breakpoint: Tablet (900px) */
@@ -2646,73 +2646,58 @@
     }
   }
 
-   /* Impede que a marca empurre os botões laterais */
-.brand {
-  overflow: hidden;
-  min-width: 0;
-}
-
-/* Em telas menores, reduz o tamanho da marca para caber tudo */
-@media (max-width: 700px) {
-  .topbar {
-    gap: 6px;
-  }
-
-  #open-session {
-    min-width: 60px;
-    padding-inline: 8px;
-    font-size: 0.7rem;
-  }
-
-  .brand {
-    padding: 4px 8px;
-  }
-
-  .brand-mark {
-    width: 32px;
-    height: 32px;
-  }
-
-  .brand-copy {
-    gap: 2px;
-  }
-
-  .brand-kicker {
-    display: none;
-  }
-
-  .brand-copy strong {
-    font-size: 0.9rem;
-  }
-
-  .vip-badge {
-    display: none;
-  }
-
-  .topbar-actions .music-control {
-    padding: 0 6px 0 0;
-    gap: 4px;
-  }
-
-  #music-volume {
-    width: 60px;
-  }
-
-  #open-history {
-    padding-inline: 8px;
-    font-size: 0.7rem;
-  }
-}
-
   /* ═══════════════════════════════════════════════════════════════
      LANDSCAPE: Ajustes adicionais para iPhone deitado
      ═══════════════════════════════════════════════════════════════ */
-
   @media (orientation: landscape) and (max-height: 500px) {
     .topbar {
       min-height: 48px;
       padding: 4px 8px;
       gap: 6px;
+      grid-template-columns: auto 1fr auto;
+    }
+
+    .brand {
+      overflow: hidden;
+      min-width: 0;
+      padding: 4px 8px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+    }
+
+    .brand-copy strong {
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-kicker,
+    .vip-badge {
+      display: none;
+    }
+
+    #open-session {
+      min-width: 44px;
+      padding-inline: 6px;
+      font-size: 0.7rem;
+    }
+
+    .music-control {
+      padding: 0 4px 0 0;
+      gap: 2px;
+    }
+
+    #music-volume {
+      width: 50px;
+    }
+
+    #open-history {
+      padding-inline: 6px;
+      font-size: 0.7rem;
     }
 
     .app-grid {
