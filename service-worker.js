@@ -18,6 +18,7 @@ const CORE_ASSETS = [
   "./index.html",
   "./style.css",
   "./theme-boudoir.css",
+  "./style-mobile-compact.css",
   "./data/challenges.js",
   "./app.js",
   "./manifest.json",
