@@ -1953,22 +1953,17 @@
       --rank-shadow: rgba(214, 21, 66, 0.5);
     }
 
-/**
- * PATCHES CSS MOBILE COMPACTO (≤430px)
- * ═══════════════════════════════════════════════════════════════
- * Cole isso no FINAL do seu @layer states (após @media prefers-contrast)
- * 
- * Resolve os 4 problemas:
- * 1. Safe area não respeitado
- * 2. Modal hero demais
- * 3. Topbar apertada
- * 4. Canvas labels cortam (JS handles this)
- */
+    input:focus-visible,
+    select:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--rank-color);
+      outline-offset: 2px;
+    }
+  }
 
   /* ═══════════════════════════════════════════════════════════════
-     NOVO BREAKPOINT: Mobile Compacto (≤430px)
+     PATCHES MOBILE COMPACTO (≤430px) - APLICADOS SEMPRE
      ═══════════════════════════════════════════════════════════════ */
-  
   @media (max-width: 430px) {
     /* ─── VARIÁVEIS SAFE-AREA ─── */
     :root {
@@ -2696,14 +2691,6 @@
 
     h2 {
       font-size: clamp(1.1rem, 4vw, 1.5rem);
-    }
-  }
-     
-    input:focus-visible,
-    select:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--rank-color);
-      outline-offset: 2px;
     }
   }
 }
