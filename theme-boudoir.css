@@ -1,6 +1,7 @@
 /*
  * Theme: Boudoir Lite
  * Loaded after style.css so the original app structure stays intact.
+ * Improved version — better contrast, a11y, performance & refined details.
  */
 
 :root {
@@ -64,6 +65,7 @@
   44% { transform: scale(1); }
 }
 
+/* ✨ Melhoria: Movimento mais sutil para o logo flutuante */
 @keyframes boudoirLogoFloat {
   0%, 100% {
     filter: drop-shadow(0 0 14px rgba(216, 179, 109, 0.26));
@@ -71,8 +73,8 @@
   }
 
   50% {
-    filter: drop-shadow(0 0 24px rgba(217, 138, 131, 0.38));
-    transform: translateY(-8px);
+    filter: drop-shadow(0 0 20px rgba(217, 138, 131, 0.32));
+    transform: translateY(-4px);
   }
 }
 
@@ -403,6 +405,7 @@ h2 {
   gap: 8px;
 }
 
+/* ✨ Melhoria: transição suave nos badges */
 .profile-badge {
   display: inline-flex;
   align-items: center;
@@ -415,6 +418,9 @@ h2 {
   font-size: 0.78rem;
   font-weight: 800;
   line-height: 1;
+  transition: background var(--transition-fast, 180ms ease),
+              color var(--transition-fast, 180ms ease),
+              box-shadow var(--transition-fast, 180ms ease);
 }
 
 .profile-badge svg {
@@ -599,7 +605,8 @@ textarea,
   border: 1px solid transparent;
   border-radius: 5px;
   background: rgba(255, 244, 234, 0.025);
-  color: #d8c9be;
+  /* ✨ Melhoria: melhor contraste do texto */
+  color: #e8d9ce;
   padding: 5px 6px;
   transition: border-color var(--transition-fast),
               background var(--transition-fast),
@@ -633,9 +640,11 @@ textarea,
   box-shadow: 0 0 12px rgba(216, 179, 109, 0.2), inset 0 0 0 3px rgba(8, 4, 6, 0.28);
 }
 
+/* ✨ Melhoria: foco visível aprimorado para checkboxes */
 .preference-group input[type="checkbox"]:focus-visible {
   outline: 2px solid var(--color-gold);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(201, 162, 75, 0.3);
 }
 
 .preference-group label:has(input[type="checkbox"]:checked) {
@@ -661,8 +670,9 @@ textarea,
   text-align: left;
 }
 
+/* ✨ Melhoria: melhor legibilidade do texto do consentimento */
 .consent-line span {
-  color: #cdaf96;
+  color: #ddbfa6;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 0.95rem;
 }
@@ -681,6 +691,13 @@ textarea,
   border-color: rgba(240, 207, 141, 0.88);
   background: linear-gradient(135deg, #c9a24b, #e0457b);
   box-shadow: inset 0 0 0 4px rgba(8, 4, 6, 0.26), 0 0 14px rgba(216, 179, 109, 0.2);
+}
+
+/* ✨ Melhoria: foco visível no checkbox de consentimento */
+.consent-line input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(201, 162, 75, 0.3);
 }
 
 .entry-actions {
@@ -706,9 +723,10 @@ textarea,
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34), 0 0 22px rgba(216, 179, 109, 0.16);
 }
 
+/* ✨ Melhoria: espaçamento mais legível no botão girar */
 .spin-btn {
   border-radius: 999px;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -1132,6 +1150,8 @@ textarea,
 .history-list::-webkit-scrollbar-thumb {
   border-radius: 999px;
   background: linear-gradient(180deg, var(--color-gold), var(--color-hot));
+  /* ✨ Melhoria: borda para melhor contraste do thumb */
+  border: 1px solid rgba(255, 244, 234, 0.1);
 }
 
 .history-section {
@@ -1385,6 +1405,10 @@ textarea,
   background: rgba(18, 8, 12, 0.96);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE & ACCESSIBILITY
+   ═══════════════════════════════════════════════════════════════ */
+
 @media (max-width: 900px) {
   .entry-panel {
     grid-template-columns: 1fr;
@@ -1502,7 +1526,29 @@ textarea,
   }
 }
 
+/* ✨ Melhoria: tamanho do centro da roleta em telas muito pequenas */
+@media (max-width: 400px) {
+  .wheel-core {
+    width: 72px;
+    height: 72px;
+  }
+
+  .wheel-core strong {
+    font-size: 1.8rem;
+  }
+}
+
+/* ✨ Melhoria: respeitar preferência de movimento reduzido de forma abrangente */
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
   .entry-main .app-logo,
   .entry-main .app-logo .logo-ring,
   .entry-main .app-logo .logo-flame,
@@ -1513,4 +1559,19 @@ textarea,
   .result-panel {
     animation: none;
   }
+}
+
+/* ✨ Melhoria: foco visível global para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Garantir que elementos já com borda também tenham foco visível */
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-color: var(--color-gold);
 }
