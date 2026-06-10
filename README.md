@@ -1,47 +1,35 @@
-# Roleta Erotica: Progressao Sensorial
+# 🎡 Roleta Erótica: Progressão Sensorial
 
-PWA privada para adultos, com roleta sensorial adaptativa, historico local, filtros de limites e modo offline.
+> PWA privada e progressiva para adultos — uma roleta sensorial adaptativa com histórico local, filtros de limites e funcionamento offline.
 
-## Aviso
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Age](https://img.shields.io/badge/age-18%2B-red)
+![PWA](https://img.shields.io/badge/PWA-ready-green)
 
-Conteudo destinado exclusivamente a maiores de 18 anos. Use apenas em contexto consensual e privado.
+---
 
-## Rodar localmente
+## ⚠️ Aviso
+
+**Conteúdo exclusivo para maiores de 18 anos.**  
+Use apenas em contexto consensual, privado e com respeito aos limites de todas as pessoas envolvidas.
+
+---
+
+## ✨ Funcionalidades
+
+- 🎲 **Roleta aleatória** com desafios sensoriais progressivos (ranks 1 a 7)
+- 👥 **Modos casal e solo**, com variações para diferentes configurações de gênero
+- 🧠 **Sistema adaptativo** que alterna turnos, aprende preferências e ajusta o tom
+- 🔁 **Loops de recuo** para prolongar a experiência antes do clímax
+- 🔞 **Filtro de limites** configurável por categoria (oral, penetração, anal, dominação, brinquedos, etc.)
+- 📝 **Histórico local** com armazenamento em `localStorage`
+- 🌐 **PWA instalável** com suporte offline (service worker + cache)
+- 🎨 **Interface responsiva** com gestão de estado de roupa e pronomes adaptativos
+- 🌍 **Internacionalização parcial** via placeholders dinâmicos de gênero
+
+---
+
+## 🚀 Rodar localmente
 
 ```bash
 python -m http.server 4192 --bind 127.0.0.1
-```
-
-Depois acesse:
-
-```text
-http://127.0.0.1:4192/
-```
-
-## Antes de publicar
-
-Otimize as imagens sempre que trocar arquivos dentro de `assets`:
-
-```bash
-python tools/optimize-assets.py
-```
-
-O script mantem os mesmos nomes e caminhos, mas reduz os JPEGs para tamanhos adequados para navegador/PWA.
-
-## Publicar no GitHub Pages
-
-1. Suba os arquivos para um repositorio.
-2. Em `Settings > Pages`, selecione a branch principal e a pasta raiz.
-3. Abra a URL publicada e instale pelo navegador.
-
-O app usa caminhos relativos (`./`), entao funciona tanto localmente quanto em GitHub Pages dentro de subpasta.
-
-## PWA
-
-- `manifest.json` com icones PNG reais e maskable icons.
-- `service-worker.js` guarda o shell principal e cacheia assets sob demanda.
-- Funciona offline depois do primeiro carregamento completo.
-
-## Privacidade
-
-O estado da sessao fica no navegador via `localStorage`. Nao ha backend.
