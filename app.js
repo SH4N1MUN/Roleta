@@ -28,7 +28,7 @@ const RANKS = [
    accent: "#a78bfa",
    icon: "whisper",
    image: "assets/fundo-05.jpg",
-  caption: "Falas, confissões, sussurros e leitura do clima."
+   caption: "Falas, confissões, sussurros e leitura do clima."
  },
  {
    rank: 2,
