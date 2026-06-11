@@ -268,6 +268,8 @@ const CLOTHING_RULES = {
   "r1-solo-04": { before: { actor: "naked" } },
   "r2-solo-03": { before: { actor: "naked" } },
   "r2-solo-06": { before: { actor: "naked" } },
+  "r3-solo-01": { atLeast: { actor: "partial" } },
+  "r3-solo-02": { atLeast: { actor: "naked" } },
   "r3-solo-03": { atLeast: { actor: "underwear" }, before: { actor: "naked" } },
   "r3-solo-04": { atLeast: { actor: "underwear" }, before: { actor: "naked" } },
   "r4-solo-01": { before: { actor: "naked" }, effects: { actor: "partial" } },
