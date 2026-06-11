@@ -66,35 +66,30 @@ Use apenas em contexto consensual, privado e com respeito aos limites de todas a
 
 ## 📦 Estrutura do projeto
 
-┌─────────────────────────────────────────────────────────────┐
-│ 🎡 ROLETA ERÓTICA │
-│ Progressão Sensorial │
-└─────────────────────────────────────────────────────────────┘
-│
-┌─────────────────────┼─────────────────────┐
-│ │ │
-┌────┴────┐ ┌────┴────┐ ┌────┴────┐
-│ 🌐 Web │ │ 📱 PWA │ │ 🛠️ Dev │
-│ Core │ │ Assets │ │ Tools │
-└────┬────┘ └────┬────┘ └────┬────┘
-│ │ │
-┌────┼────────┐ ┌────┼────────┐ ┌───┴───┐
-│ │ │ │ │ │ │ │
-┌──┴──┐ │ ┌──────┴──┐ ┌──┴──┐ │ ┌──────┴──┐ ┌──┴──┐ ┌──┴──┐
-│HTML │ │ │JavaScript│ │Ícone│ │ │ Áudio │ │Otim.│ │Repo │
-│ │ │ │ │ │PWA │ │ │ Fundo │ │Img │ │Estr.│
-└─────┘ │ └─────────┘ └─────┘ │ └─────────┘ └─────┘ └─────┘
-│ │
-┌────┴────┐ ┌────┴────┐
-│ │ │ │
-┌──┴──┐ ┌───┴───┐ ┌───┴───┐ ┌───┴───┐
-│style│ │theme- │ │fundo- │ │fundo- │
-│.css │ │boudoir│ │01.jpg │ │02.jpg │
-└─────┘ │.css │ └───────┘ └───────┘
-└───────┘
+```txt
+roleta-sensorial/
+├── index.html
+├── style.css
+├── theme-boudoir.css
+├── app.js
+├── manifest.json
+├── service-worker.js
+├── assets/
+│   ├── icons/
+│   │   ├── icon-192.png
+│   │   └── icon-512.png
+│   ├── images/
+│   │   ├── fundo-01.jpg
+│   │   └── fundo-02.jpg
+│   └── audio/
+│       └── background.mp3
+├── docs/
+│   ├── screenshot-entry.png
+│   ├── screenshot-wheel.png
+│   └── screenshot-result.png
+└── README.md
 
 ---
-
 
 ### 🗂️ Descrição dos diretórios
 
