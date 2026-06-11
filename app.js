@@ -20,26 +20,26 @@ const BACKGROUND_TRACK_TITLE = "Smooth Dark Type Beat - Tower Beatz";
 const DEFAULT_MUSIC_VOLUME = 0.42;
 
 const RANKS = [
-  {
-    rank: 1,
-    phase: "Conexão",
-    short: "Conexão",
-    color: "#7c3aed",
-    accent: "#a78bfa",
-    icon: "whisper",
-    image: "assets/fundo-05.jpg",
-    caption: "Falas, confissões, sussurros e leitura do clima."
-  },
-  {
-    rank: 2,
-    phase: "Toque & Massagem",
-    short: "Toque",
-    color: "#d97706",
-    accent: "#f59e0b",
-    icon: "massage",
-    image: "assets/fundo-02.jpg",
-    caption: "Mãos, dedos, pressão e descoberta do corpo."
-  },
+ {
+   rank: 1,
+   phase: "Falas, confissões, sussurros e leitura do clima.",
+   short: "Conexão",
+   color: "#7c3aed",
+   accent: "#a78bfa",
+   icon: "whisper",
+   image: "assets/fundo-05.jpg",
+  caption: "Falas, confissões, sussurros e leitura do clima."
+ },
+ {
+   rank: 2,
+   phase: "Mãos, dedos, pressão e descoberta do corpo.",
+   short: "Toque",
+   color: "#d97706",
+   accent: "#f59e0b",
+   icon: "massage",
+   image: "assets/fundo-02.jpg",
+   caption: "Mãos, dedos, pressão e descoberta do corpo."
+ },
   {
     rank: 3,
     phase: "Rituais & Rotina",
