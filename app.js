@@ -817,6 +817,8 @@ function loadStoredState() {
   if (state.pauseWord) dom.pauseWord.value = state.pauseWord;
   if (state.overrideRank) dom.rankOverride.value = String(state.overrideRank);
   syncArousalState();
+
+  updateProfileLabels();
 }
 
 function saveSession() {
@@ -3748,22 +3750,21 @@ window.addEventListener("beforeunload", () => {
 });
 
 // Atualiza dinamicamente os labels de limites com os nomes reais
-(function() {
+function updateProfileLabels() {
   const nameInput1 = document.getElementById('partner-one-name');
   const nameInput2 = document.getElementById('partner-two-name');
   const label1 = document.getElementById('profile1-limits-label');
   const label2 = document.getElementById('profile2-limits-label');
 
-  function updateLabels() {
-    const name1 = nameInput1.value.trim() || 'Perfil 1';
-    const name2 = nameInput2.value.trim() || 'Perfil 2';
-    if (label1) label1.textContent = `${name1} · limites`;
-    if (label2) label2.textContent = `${name2} · limites`;
-  }
+  const name1 = nameInput1?.value.trim() || 'Perfil 1';
+  const name2 = nameInput2?.value.trim() || 'Perfil 2';
+  if (label1) label1.textContent = `${name1} · limites`;
+  if (label2) label2.textContent = `${name2} · limites`;
+}
 
-  if (nameInput1 && nameInput2) {
-    nameInput1.addEventListener('input', updateLabels);
-    nameInput2.addEventListener('input', updateLabels);
-    updateLabels();
+// Atualiza ao digitar
+document.addEventListener('input', (e) => {
+  if (e.target.id === 'partner-one-name' || e.target.id === 'partner-two-name') {
+    updateProfileLabels();
   }
-})();
+});
