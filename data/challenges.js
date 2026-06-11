@@ -406,7 +406,7 @@ const CHALLENGES = [
 { id: "r2-solo-05", rank: 2, mode: "solo", title: "Automassagem quente", text: "{actor}, faça uma massagem lenta no pescoço, peito, barriga e coxas. Evite {own_intimacy} por enquanto e deixe a vontade crescer.", seconds: 150 },
 { id: "r2-solo-06", rank: 2, mode: "solo", title: "Massagem por cima", text: "{actor}, massageie {bottom_underwear} por cima da roupa íntima com a palma da mão, sem entrar ainda. Pressão firme, ritmo lento.", seconds: 120 },
 { id: "r3-solo-01", rank: 4, mode: "solo", title: "Boca e dedos", text: "{actor}, chupe os próprios dedos devagar, molhe bem a boca e arraste essa umidade pelo pescoço, peito e barriga sem tocar em {own_intimacy}.", seconds: 90 },
-{ id: "r3-solo-02", rank: 4, mode: "solo", title: "Beijo imaginário", text: "{actor}, imagine a boca de alguém te beijando sem pudor." seconds: 120 }
+{ id: "r3-solo-02", rank: 4, mode: "solo", title: "Beijo imaginário", text: "{actor}, imagine a boca de alguém te beijando sem pudor.", seconds: 120 }
 
 ];
 
