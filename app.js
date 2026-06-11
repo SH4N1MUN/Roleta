@@ -2545,29 +2545,30 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
   const isTablet = canvasWidth > 360 && canvasWidth < 450;
   const isDesktop = canvasWidth >= 450;
 
+  // 🔧 NOVOS VALORES: fontes menores e labels mais próximas do centro
   let fontSize, chipWidth, chipHeight, iconRadius, labelRadius, yOffset;
 
   if (isMobile) {
-    fontSize = 10;
-    chipWidth = 56;
-    chipHeight = 24;
-    iconRadius = 12;
-    labelRadius = radius * 0.65;
-    yOffset = 12;
+    fontSize = 7;        // reduzido de 10
+    chipWidth = 44;      // reduzido de 56
+    chipHeight = 18;     // reduzido de 24
+    iconRadius = 9;      // reduzido de 12
+    labelRadius = radius * 0.72;  // mais perto do centro
+    yOffset = 8;
   } else if (isTablet) {
-    fontSize = 11;
-    chipWidth = 62;
-    chipHeight = 26;
-    iconRadius = 13;
-    labelRadius = radius * 0.67;
-    yOffset = 14;
+    fontSize = 8;        // reduzido de 11
+    chipWidth = 50;      // reduzido de 62
+    chipHeight = 20;     // reduzido de 26
+    iconRadius = 10;     // reduzido de 13
+    labelRadius = radius * 0.74;
+    yOffset = 10;
   } else {
-    fontSize = 13;
-    chipWidth = 70;
-    chipHeight = 28;
-    iconRadius = 15;
-    labelRadius = radius * 0.69;
-    yOffset = 15;
+    fontSize = 10;       // reduzido de 13
+    chipWidth = 58;      // reduzido de 70
+    chipHeight = 22;     // reduzido de 28
+    iconRadius = 12;     // reduzido de 15
+    labelRadius = radius * 0.76;  // mais perto do centro (era 0.69)
+    yOffset = 12;
   }
 
   const x = Math.cos(angle) * labelRadius;
@@ -2583,31 +2584,54 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
   ctx.rotate(counterRotation);
 
   ctx.shadowColor = current ? "rgba(224, 69, 123, 0.64)" : "rgba(0, 0, 0, 0.38)";
-  ctx.shadowBlur = current ? 14 + pulse * 8 : 8;
+  ctx.shadowBlur = current ? 10 + pulse * 6 : 5;
 
-  drawRankIconResponsive(rank.icon, 0, -yOffset - 6, iconColor, iconRadius, active, current);
+  drawRankIconResponsive(rank.icon, 0, -yOffset - 4, iconColor, iconRadius, active, current);
 
   ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
-  let displayText = rank.short;
+  
+  // 🔧 NOVO: abreviação mais agressiva para caber na fatia
+  const shortLabels = {
+    "Conexão": "Conex",
+    "Toque": "Toque",
+    "Rituais": "Ritual",
+    "Beijos": "Beijos",
+    "Desafios": "Desaf",
+    "Sensorial": "Senso",
+    "Strip": "Strip",
+    "Fantasia": "Fanta",
+    "Manual": "Manual",
+    "Oral": "Oral",
+    "Poder": "Poder",
+    "Clímax": "Clímax",
+    "Surpresa": "Surpr",
+    "Cuidado": "Cuid"
+  };
+  
+  let displayText = shortLabels[rank.short] || rank.short;
+  
+  // Se ainda não couber, trunca com "..."
+  ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
   const textMetrics = ctx.measureText(displayText);
-  if (isMobile && textMetrics.width > chipWidth - 16) {
-    displayText = rank.short.substring(0, 3);
+  if (textMetrics.width > chipWidth - 10) {
+    displayText = displayText.substring(0, 4) + ".";
   }
+  
   const actualTextWidth = ctx.measureText(displayText).width;
-  const finalChipWidth = Math.max(chipWidth, Math.ceil(actualTextWidth) + 16);
+  const finalChipWidth = Math.max(chipWidth, Math.ceil(actualTextWidth) + 12);
 
   const chipLeft = -finalChipWidth / 2;
   const chipTop = yOffset;
 
-  ctx.shadowBlur = current ? 12 + pulse * 6 : 5;
+  ctx.shadowBlur = current ? 8 + pulse * 4 : 4;
   ctx.fillStyle = current ? "rgba(224, 69, 123, 0.18)" : active ? "rgba(15, 11, 13, 0.72)" : "rgba(15, 11, 13, 0.36)";
-  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8);
+  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 6);
   ctx.fill();
 
   ctx.shadowBlur = 0;
-  ctx.lineWidth = current ? 1.8 : 1;
+  ctx.lineWidth = current ? 1.5 : 0.8;
   ctx.strokeStyle = current ? hotPink : active ? "rgba(201, 162, 75, 0.26)" : "rgba(232, 220, 200, 0.1)";
-  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8);
+  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 6);
   ctx.stroke();
 
   ctx.textAlign = "center";
