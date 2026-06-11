@@ -20,8 +20,6 @@ Use apenas em contexto consensual, privado e com respeito aos limites de todas a
 
 <p align="center">
   <img src="docs/screenshot-entry.png" alt="Tela de entrada" width="250" />
-  <img src="docs/screenshot-wheel.png" alt="Roleta girando" width="250" />
-  <img src="docs/screenshot-result.png" alt="Resultado do desafio" width="250" />
 </p>
 
 ---
