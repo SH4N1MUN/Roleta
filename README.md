@@ -66,7 +66,7 @@ Use apenas em contexto consensual, privado e com respeito aos limites de todas a
 
 ## 📦 Estrutura do projeto
 
-```txt
+
 roleta-sensorial/
 ├── index.html
 ├── style.css
