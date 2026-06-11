@@ -22,84 +22,161 @@ const DEFAULT_MUSIC_VOLUME = 0.42;
 const RANKS = [
   {
     rank: 1,
-    phase: "Falas & Sedução",
-    short: "Sedução",
-    color: "#c9a24b",
-    accent: "#e0457b",
+    phase: "Conexão",
+    short: "Conexão",
+    color: "#7c3aed",
+    accent: "#a78bfa",
     icon: "whisper",
     image: "assets/fundo-05.jpg",
-    caption: "Janela inicial: falas, sedução e leitura do clima."
+    caption: "Falas, confissões, sussurros e leitura do clima."
   },
   {
     rank: 2,
-    phase: "Massagem & Carícias",
-    short: "Massagem",
-    color: "#c98f4b",
-    accent: "#c9a24b",
+    phase: "Toque & Massagem",
+    short: "Toque",
+    color: "#d97706",
+    accent: "#f59e0b",
     icon: "massage",
     image: "assets/fundo-02.jpg",
-    caption: "Depois da sedução: massagem, pele e toque sem pressa."
+    caption: "Mãos, dedos, pressão e descoberta do corpo."
   },
   {
     rank: 3,
-    phase: "Beijos Intensos",
-    short: "Beijos",
-    color: "#d0637f",
-    accent: "#e3c878",
-    icon: "kiss",
+    phase: "Rituais & Rotina",
+    short: "Rituais",
+    color: "#f59e0b",
+    accent: "#fbbf24",
+    icon: "ritual",
     image: "assets/fundo-03.jpg",
-    caption: "Transição física: beijos longos e ritmo mais colado."
+    caption: "Preparação, respiração e criação de clima."
   },
   {
     rank: 4,
-    phase: "Striptease & Preliminares",
-    short: "Strip",
-    color: "#e0457b",
-    accent: "#c9a24b",
-    icon: "strip",
-    image: "assets/fundo-04.jpg",
-    caption: "Depois dos beijos: roupa saindo, provocação e controle combinado."
+    phase: "Beijos",
+    short: "Beijos",
+    color: "#f9a8d4",
+    accent: "#fbcfe8",
+    icon: "kiss",
+    image: "assets/fundo-03.jpg",
+    caption: "Boca com boca, mordidas e trilhas pelo corpo."
   },
   {
     rank: 5,
-    phase: "Estimulação Manual",
-    short: "Manual",
-    color: "#b93463",
-    accent: "#ff9bc0",
-    icon: "hand",
-    image: "assets/fundo-06.jpg",
-    caption: "Alta voltagem: timers e vibração acompanham a ação."
+    phase: "Desafios & Brincadeiras",
+    short: "Desafios",
+    color: "#f97316",
+    accent: "#fb923c",
+    icon: "game",
+    image: "assets/fundo-04.jpg",
+    caption: "Jogos, imitações, áudios e competição divertida."
   },
   {
     rank: 6,
-    phase: "Sexo Oral",
-    short: "Oral",
-    color: "#8f1834",
-    accent: "#c9a24b",
-    icon: "mouth",
-    image: "assets/fundo-09.jpg",
-    caption: "Ritmo de boca e corpo; ranks suaves quase desaparecem."
+    phase: "Sensorial",
+    short: "Sensorial",
+    color: "#38bdf8",
+    accent: "#7dd3fc",
+    icon: "sensory",
+    image: "assets/fundo-06.jpg",
+    caption: "Temperatura, texturas, gelo e sopro."
   },
   {
     rank: 7,
-    phase: "Penetração / Clímax",
+    phase: "Strip & Exibição",
+    short: "Strip",
+    color: "#f2c36b",
+    accent: "#fcd34d",
+    icon: "strip",
+    image: "assets/fundo-04.jpg",
+    caption: "Roupa saindo, espelho e voyeurismo."
+  },
+  {
+    rank: 8,
+    phase: "Fantasia & Roleplay",
+    short: "Fantasia",
+    color: "#a855f7",
+    accent: "#c084fc",
+    icon: "fantasy",
+    image: "assets/fundo-09.jpg",
+    caption: "Personagens, cenários e teatro erótico."
+  },
+  {
+    rank: 9,
+    phase: "Estimulação Manual",
+    short: "Manual",
+    color: "#fb923c",
+    accent: "#fdba74",
+    icon: "hand",
+    image: "assets/fundo-06.jpg",
+    caption: "Masturbação, mão guiada e edging."
+  },
+  {
+    rank: 10,
+    phase: "Sexo Oral",
+    short: "Oral",
+    color: "#ff4778",
+    accent: "#fda4af",
+    icon: "mouth",
+    image: "assets/fundo-09.jpg",
+    caption: "Língua, sucção e técnicas detalhadas."
+  },
+  {
+    rank: 11,
+    phase: "Poder & Provocação",
+    short: "Poder",
+    color: "#9f1239",
+    accent: "#e11d48",
+    icon: "power",
+    image: "assets/fundo-10.jpg",
+    caption: "Tapas, restrições, ordens e controle."
+  },
+  {
+    rank: 12,
+    phase: "Penetração & Clímax",
     short: "Clímax",
-    color: "#5d0e20",
-    accent: "#e0457b",
+    color: "#dc2626",
+    accent: "#ef4444",
     icon: "climax",
     image: "assets/fundo-12.jpg",
-    caption: "Pico da curva: posições, clímax e controle do desfecho."
+    caption: "Posições, ritmo e desfecho."
+  },
+  {
+    rank: 13,
+    phase: "Surpresa",
+    short: "Surpresa",
+    color: "#8b5cf6",
+    accent: "#a78bfa",
+    icon: "surprise",
+    image: "assets/fundo-01.jpg",
+    caption: "Coringas, adoração e combos inesperados."
+  },
+  {
+    rank: 14,
+    phase: "Aftercare",
+    short: "Cuidado",
+    color: "#10b981",
+    accent: "#34d399",
+    icon: "aftercare",
+    image: "assets/fundo-05.jpg",
+    caption: "Pós-sexo, hidratação, carinho e acolhimento."
   }
 ];
 
 const WEIGHT_MATRIX = {
-  1: [1, 0, 0, 0, 0, 0, 0],
-  2: [0.35, 1, 0.12, 0, 0, 0, 0],
-  3: [0.08, 0.42, 1, 0.18, 0, 0, 0],
-  4: [0, 0.14, 0.55, 1, 0.2, 0, 0],
-  5: [0, 0, 0.18, 0.58, 1, 0.28, 0],
-  6: [0, 0, 0, 0.2, 0.72, 1, 0.38],
-  7: [0, 0, 0, 0, 0.42, 0.88, 1.25]
+  1:  [1, 0.35, 0.28, 0.12, 0.08, 0.05, 0, 0, 0, 0, 0, 0, 0.18, 0],
+  2:  [0.22, 1, 0.38, 0.28, 0.12, 0.18, 0.05, 0, 0, 0, 0, 0, 0.15, 0],
+  3:  [0.08, 0.28, 1, 0.45, 0.32, 0.22, 0.12, 0.08, 0, 0, 0, 0, 0.18, 0],
+  4:  [0, 0.12, 0.35, 1, 0.48, 0.38, 0.28, 0.18, 0.12, 0.05, 0, 0, 0.15, 0],
+  5:  [0, 0.05, 0.18, 0.35, 1, 0.45, 0.42, 0.32, 0.22, 0.12, 0.08, 0, 0.22, 0],
+  6:  [0, 0, 0.08, 0.22, 0.38, 1, 0.52, 0.42, 0.28, 0.22, 0.12, 0.05, 0.18, 0],
+  7:  [0, 0, 0, 0.12, 0.28, 0.45, 1, 0.55, 0.48, 0.32, 0.22, 0.08, 0.25, 0],
+  8:  [0, 0, 0, 0.05, 0.18, 0.28, 0.42, 1, 0.58, 0.52, 0.38, 0.22, 0.28, 0],
+  9:  [0, 0, 0, 0, 0.12, 0.18, 0.32, 0.45, 1, 0.72, 0.58, 0.42, 0.22, 0],
+  10: [0, 0, 0, 0, 0, 0.12, 0.22, 0.35, 0.62, 1, 0.78, 0.68, 0.28, 0],
+  11: [0, 0, 0, 0, 0, 0.05, 0.15, 0.28, 0.45, 0.68, 1, 0.88, 0.32, 0],
+  12: [0, 0, 0, 0, 0, 0, 0.12, 0.25, 0.38, 0.58, 0.78, 1.25, 0.28, 0],
+  13: [0.18, 0.18, 0.22, 0.22, 0.28, 0.25, 0.28, 0.28, 0.22, 0.22, 0.22, 0.18, 1, 0],
+  14: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.58, 0.35, 1]
 };
 
 const AROUSAL_LEVELS = [
@@ -326,7 +403,59 @@ const CLOTHING_RULES = {
   "r6-solo-m-new-03": { atLeast: { actor: "underwear" } },
   "r7-solo-m-new-04": { atLeast: { actor: "underwear" } },
   "r5-recv-01": { atLeast: { receiver: "underwear" } },
-  "r5-recv-02": { atLeast: { receiver: "underwear" } }
+  "r5-recv-02": { atLeast: { receiver: "underwear" } },
+  "r2-desafios-01": {},
+  "r2-desafios-02": {},
+  "r2-desafios-03": {},
+  "r2-desafios-04": {},
+  "r2-desafios-05": {},
+  "r2-desafios-06": {},
+  "r2-desafios-07": {},
+  "r2-desafios-08": {},
+  "r2-desafios-09": {},
+  "r3-desafios-01": {},
+  "r3-desafios-02": {},
+  "r3-desafios-03": {},
+  "r3-desafios-04": {},
+  "r3-desafios-05": {},
+  "r3-desafios-06": {},
+  "r3-desafios-07": {},
+  "r3-desafios-08": {},
+  "r4-desafios-01": { atLeast: { all: "naked" } },
+  "r4-desafios-02": { atLeast: { actor: "partial" } },
+  "r4-desafios-03": { atLeast: { all: "naked" } },
+  "r4-desafios-04": { atLeast: { all: "naked" } },
+  "r4-desafios-05": { atLeast: { all: "naked" } },
+  "r4-desafios-06": {},
+  "r5-desafios-01": { atLeast: { receiver: "underwear" } },
+  "r5-desafios-02": { atLeast: { receiver: "underwear" } },
+  "r5-desafios-03": { atLeast: { receiver: "underwear" } },
+  "r5-desafios-04": { atLeast: { actor: "partial" } },
+  "r6-desafios-01": { atLeast: { all: "naked" } },
+  "r2-rituais-01": {},
+  "r2-rituais-02": {},
+  "r3-rituais-01": {},
+  "r3-rituais-02": {},
+  "r4-rituais-01": { atLeast: { all: "naked" } },
+  "r4-rituais-02": { atLeast: { receiver: "naked" } },
+  "r5-rituais-01": { atLeast: { receiver: "naked" } },
+  "r5-rituais-02": { atLeast: { receiver: "naked" } },
+  "r4-fantasia-01": {},
+  "r4-fantasia-02": {},
+  "r5-fantasia-01": { atLeast: { receiver: "underwear" } },
+  "r5-fantasia-02": { atLeast: { receiver: "underwear" } },
+  "r6-fantasia-01": { atLeast: { all: "naked" } },
+  "r6-fantasia-02": { atLeast: { all: "naked" } },
+  "r7-fantasia-01": { atLeast: { all: "naked" } },
+  "r7-fantasia-02": { atLeast: { all: "naked" } },
+  "r8-aftercare-01": {},
+  "r8-aftercare-02": {},
+  "r8-aftercare-03": {},
+  "r8-aftercare-04": {},
+  "r8-aftercare-05": {},
+  "r8-aftercare-06": {},
+  "r8-aftercare-07": {},
+  "r8-aftercare-08": {}
 };
 
 const PRONOUN_PRESETS = {
@@ -803,13 +932,13 @@ function endSession() {
 function updateSessionRank(options = {}) {
   const previous = state.currentRank;
   const naturalRank = calculateNaturalRank();
-  const biasedRank = clamp(naturalRank + state.heatBias, 1, 7);
+  const biasedRank = clamp(naturalRank + state.heatBias, 1, 14);
   const pacedRank = applyLearningPacing(biasedRank);
   const arousalPacedRank = applyArousalPacing(pacedRank);
   const continuity = getSessionContinuity();
   const continuityCeiling = getContinuityRankCeiling(continuity.clothing);
-  const requestedRank = state.overrideRank || (arousalPacedRank === 7 && !isRankSevenNaturallyUnlocked() ? 6 : arousalPacedRank);
-  state.currentRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 7);
+  const requestedRank = state.overrideRank || arousalPacedRank;
+  state.currentRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 14);
   state.lastWeights = computeRankWeights();
 
   if (state.currentRank !== previous || options.forcePulse) {
@@ -822,12 +951,19 @@ function updateSessionRank(options = {}) {
 function calculateNaturalRank() {
   const minutesElapsed = getMinutesElapsed();
 
-  if (minutesElapsed >= 55 || state.spinCount >= 28) return 7;
-  if (minutesElapsed >= 45 || state.spinCount >= 22) return 6;
-  if (minutesElapsed >= 35 || state.spinCount >= 16) return 5;
-  if (minutesElapsed >= 25 || state.spinCount >= 12) return 4;
-  if (minutesElapsed >= 18 || state.spinCount >= 9) return 3;
-  if (minutesElapsed >= 12 || state.spinCount >= 6) return 2;
+  if (minutesElapsed >= 80 || state.spinCount >= 35) return 14;
+  if (minutesElapsed >= 70 || state.spinCount >= 30) return 13;
+  if (minutesElapsed >= 60 || state.spinCount >= 26) return 12;
+  if (minutesElapsed >= 50 || state.spinCount >= 22) return 11;
+  if (minutesElapsed >= 42 || state.spinCount >= 18) return 10;
+  if (minutesElapsed >= 35 || state.spinCount >= 15) return 9;
+  if (minutesElapsed >= 28 || state.spinCount >= 12) return 8;
+  if (minutesElapsed >= 22 || state.spinCount >= 10) return 7;
+  if (minutesElapsed >= 18 || state.spinCount >= 8) return 6;
+  if (minutesElapsed >= 14 || state.spinCount >= 6) return 5;
+  if (minutesElapsed >= 10 || state.spinCount >= 4) return 4;
+  if (minutesElapsed >= 6 || state.spinCount >= 3) return 3;
+  if (minutesElapsed >= 3 || state.spinCount >= 1) return 2;
   return 1;
 }
 
@@ -837,9 +973,9 @@ function applyLearningPacing(rank) {
   const learning = normalizeLearning(state.learning);
   if (!learning.seductionFeedbackCount) return rank;
 
-  if (learning.femaleWarmth <= -3) return Math.min(rank, 2);
-  if (learning.femaleWarmth <= -2) return Math.min(rank, 3);
-  if (learning.femaleWarmth < 0 && rank >= 5) return rank - 1;
+  if (learning.femaleWarmth <= -3) return Math.min(rank, 4);
+  if (learning.femaleWarmth <= -2) return Math.min(rank, 6);
+  if (learning.femaleWarmth < 0 && rank >= 9) return rank - 1;
 
   return rank;
 }
@@ -853,10 +989,10 @@ function applyArousalPacing(rank) {
   const minScore = Math.min(...scores);
   const maxScore = Math.max(...scores);
 
-  if (minScore <= 0) return Math.min(rank, 3);
-  if (minScore === 1 && rank >= 6) return rank - 1;
-  if (minScore >= 2 && maxScore >= 4 && rank >= 5) return Math.min(rank + 1, 7);
-  if (minScore >= 2 && maxScore >= 3 && rank >= 4) return Math.min(rank + 1, 7);
+  if (minScore <= 0) return Math.min(rank, 5);
+  if (minScore === 1 && rank >= 10) return rank - 1;
+  if (minScore >= 2 && maxScore >= 4 && rank >= 8) return Math.min(rank + 1, 14);
+  if (minScore >= 2 && maxScore >= 3 && rank >= 6) return Math.min(rank + 1, 14);
 
   return rank;
 }
@@ -869,14 +1005,10 @@ function computeRankWeights() {
   return base.map((weight, index) => {
     const rank = index + 1;
     if (!remainingByRank[rank]) return 0;
-    if (rank === 7 && !isRankSevenNaturallyUnlocked() && state.overrideRank !== 7) return 0;
+    if (rank === 14 && state.currentRank < 12) return 0;
+    if (rank === 13 && state.spinCount < 3) return weight * 0.18;
     return weight;
   });
-}
-
-function isRankSevenNaturallyUnlocked() {
-  const minutesElapsed = getMinutesElapsed();
-  return minutesElapsed >= 24 || state.spinCount >= 10;
 }
 
 function countRemainingByRank(usedSet) {
@@ -1004,7 +1136,7 @@ function getChallengeWeight(challenge) {
 }
 
 function getRankSixPhaseMultiplier(challenge) {
-  if (challenge.rank !== 6) return 1;
+  if (challenge.rank !== 10) return 1;
 
   const variant = getRankSixPhaseVariant(challenge);
   if (!variant) return 1;
@@ -1035,7 +1167,7 @@ function getRankSixPhaseMultiplier(challenge) {
 function getRankSixPhaseVariant(challenge) {
   if (RANK_SIX_PHASE_VARIANTS.has(challenge.phaseVariant)) return challenge.phaseVariant;
   if (challenge.loop) return "retreat";
-  if (challenge.rank !== 6) return null;
+  if (challenge.rank !== 10) return null;
 
   const haystack = `${challenge.id || ""} ${challenge.title || ""}`.toLowerCase();
 
@@ -1061,11 +1193,11 @@ function getArousalMultiplier(challenge) {
 
   let multiplier = 1;
 
-  if (challenge.rank >= 6 && lowestScore <= 1) multiplier *= lowestScore <= 0 ? 0.18 : 0.5;
-  if (challenge.rank >= 5 && focusScore <= 0) multiplier *= 0.35;
-  if (challenge.rank <= 3 && lowestScore <= 1) multiplier *= 1.35;
-  if (challenge.rank >= 5 && focusScore >= 3) multiplier *= 1.18;
-  if (challenge.rank >= 6 && focusScore >= 4) multiplier *= 1.3;
+  if (challenge.rank >= 10 && lowestScore <= 1) multiplier *= lowestScore <= 0 ? 0.18 : 0.5;
+  if (challenge.rank >= 9 && focusScore <= 0) multiplier *= 0.35;
+  if (challenge.rank <= 5 && lowestScore <= 1) multiplier *= 1.35;
+  if (challenge.rank >= 8 && focusScore >= 3) multiplier *= 1.18;
+  if (challenge.rank >= 10 && focusScore >= 4) multiplier *= 1.3;
   if (challenge.loop && Math.max(actorScore, receiverScore) >= 4) multiplier *= 1.8;
 
   return clamp(multiplier, 0.12, 2.4);
@@ -1143,7 +1275,7 @@ function getChallengeFeedbackTags(challenge) {
 }
 
 function getNextAvailableChallengeEntries(pool = getChallengePool(), used = new Set(state.usedChallengeIds), options = {}) {
-  const maxRank = isRankSevenNaturallyUnlocked() || state.overrideRank === 7 ? 7 : 6;
+  const maxRank = state.currentRank < 12 ? 13 : 14;
   const available = pool
     .filter((challenge) => !challenge.loop && !used.has(challenge.id) && challenge.rank <= maxRank)
     .sort((a, b) => a.rank - b.rank);
@@ -1165,14 +1297,14 @@ function getNextAvailableChallengeEntries(pool = getChallengePool(), used = new 
 }
 
 function selectStrategicRetreat(pool, used) {
-  if (state.currentRank !== 7 || Math.random() > 0.35) return null;
+  if (state.currentRank !== 12 || Math.random() > 0.35) return null;
   if (!hasCompletedRankSevenAction()) return null;
   const retreats = pool.filter((challenge) => challenge.loop && !used.has(challenge.id));
   return retreats.length ? randomFrom(retreats) : null;
 }
 
 function hasCompletedRankSevenAction() {
-  return state.history.some((entry) => entry.rank >= 7 && !entry.loop);
+  return state.history.some((entry) => entry.rank >= 12 && !entry.loop);
 }
 
 function getChallengePool() {
@@ -1339,29 +1471,29 @@ function getSessionContinuity() {
 
 function getContinuityRankCeiling(clothing) {
   const partnerKeys = getContinuityPartnerKeys();
-  if (!partnerKeys.length) return 4;
+  if (!partnerKeys.length) return 7;
 
   const stages = partnerKeys.map((key) => getClothingStage(clothing, key));
   const allNaked = stages.every((stage) => stage >= CLOTHING_STAGE.naked);
   const anyNaked = stages.some((stage) => stage >= CLOTHING_STAGE.naked);
   const anyUnderwear = stages.some((stage) => stage >= CLOTHING_STAGE.underwear);
 
-  if (allNaked) return 7;
-  if (anyNaked) return 6;
-  if (anyUnderwear) return 6;
-  return 4;
+  if (allNaked) return 14;
+  if (anyNaked) return 12;
+  if (anyUnderwear) return 10;
+  return 7;
 }
 
 function getTemporalRankFloor(maxRankReached, clothing) {
   let floor = 1;
 
-  if (maxRankReached >= 5) floor = 4;
-  if (maxRankReached >= 6) floor = 5;
-  if (maxRankReached >= 7) floor = 5;
+  if (maxRankReached >= 9) floor = 5;
+  if (maxRankReached >= 10) floor = 6;
+  if (maxRankReached >= 12) floor = 7;
 
   const partnerKeys = getContinuityPartnerKeys();
   const allNaked = partnerKeys.length && partnerKeys.every((key) => getClothingStage(clothing, key) >= CLOTHING_STAGE.naked);
-  if (allNaked) floor = Math.max(floor, 4);
+  if (allNaked) floor = Math.max(floor, 6);
 
   return floor;
 }
@@ -1393,18 +1525,18 @@ function applyClothingEffects(clothing, effects, entry) {
 }
 
 function applyImplicitContinuityEffects(clothing, entry) {
-  if (entry.rank >= 7) {
+  if (entry.rank >= 12) {
     applyClothingEffects(clothing, { all: "naked" }, entry);
     return;
   }
 
-  if (entry.rank >= 6) {
+  if (entry.rank >= 10) {
     const target = entry.mode === "solo" ? "actor" : "receiver";
     applyClothingEffects(clothing, { [target]: entry.mode === "solo" ? "underwear" : "naked" }, entry);
     return;
   }
 
-  if (entry.rank >= 5) {
+  if (entry.rank >= 9) {
     const target = entry.mode === "solo" ? "actor" : "receiver";
     applyClothingEffects(clothing, { [target]: "underwear" }, entry);
   }
@@ -1511,7 +1643,7 @@ function getResultImage(challenge, rank) {
 }
 
 function getLegacyResultImage(challenge, rank) {
-  if (challenge.rank === 6 && challenge.receiverPreset === "masculine") return "assets/fundo-10.jpg";
+  if (challenge.rank === 10 && challenge.receiverPreset === "masculine") return "assets/fundo-10.jpg";
   return rank.image;
 }
 
@@ -1664,24 +1796,28 @@ function tickTimer(timestamp) {
 
 function pulseTimerVibration(timestamp) {
   const rank = state.currentChallenge?.rank || 0;
-  if (rank < 5 || !navigator.vibrate) return;
+  if (rank < 8 || !navigator.vibrate) return;
 
   const tension = state.timerInitial
     ? clamp(1 - state.timerRemaining / state.timerInitial, 0, 1)
     : 0;
   const intervalRanges = {
-    5: [11000, 4200],
-    6: [7600, 2600],
-    7: [5200, 1500]
+    8: [13000, 5000],
+    9: [11000, 4200],
+    10: [7600, 2600],
+    11: [5200, 1500],
+    12: [3800, 1000]
   };
-  const [slow, fast] = intervalRanges[rank] || intervalRanges[5];
+  const [slow, fast] = intervalRanges[rank] || intervalRanges[8];
   const interval = slow - (slow - fast) * tension;
-  const pulse = Math.round(70 + tension * 110 + (rank - 5) * 24);
+  const pulse = Math.round(70 + tension * 110 + (rank - 8) * 24);
   const gap = Math.round(95 - tension * 54);
   const patterns = {
-    5: [pulse, gap, pulse + 30],
-    6: [pulse, gap, pulse + 45, gap, pulse + 70],
-    7: [pulse, gap, pulse + 55, gap, pulse + 90, gap, pulse + 125]
+    8: [pulse, gap, pulse + 30],
+    9: [pulse, gap, pulse + 45, gap, pulse + 70],
+    10: [pulse, gap, pulse + 55, gap, pulse + 90, gap, pulse + 125],
+    11: [pulse, gap, pulse + 60, gap, pulse + 100, gap, pulse + 150],
+    12: [pulse, gap, pulse + 70, gap, pulse + 120, gap, pulse + 180]
   };
 
   if (!state.lastVibrationAt || timestamp - state.lastVibrationAt >= interval) {
@@ -1713,8 +1849,8 @@ function signalTimerEnd() {
 
 function signalMoment(rank) {
   if (!navigator.vibrate) return;
-  if (rank >= 7) navigator.vibrate([120, 50, 160, 60, 220]);
-  else if (rank >= 5) navigator.vibrate([90, 50, 120]);
+  if (rank >= 12) navigator.vibrate([120, 50, 160, 60, 220]);
+  else if (rank >= 9) navigator.vibrate([90, 50, 120]);
 }
 
 function closeResult() {
@@ -1843,7 +1979,7 @@ function updatePacingFromChallengeFeedback(delta, challenge) {
     return;
   }
 
-  if (delta > 0 && challenge.rank >= 4) {
+  if (delta > 0 && challenge.rank >= 6) {
     state.heatBias = clamp(state.heatBias + 1, -2, 2);
   }
 }
@@ -1873,11 +2009,9 @@ function replaceCurrentChallenge(previousChallenge) {
 
 function getReplacementChallengeEntries(previousChallenge) {
   const used = new Set(state.usedChallengeIds);
-  const maxRank = isRankSevenNaturallyUnlocked() || state.overrideRank === 7 ? 7 : 6;
   const pool = getChallengePool().filter((challenge) =>
     !challenge.loop &&
-    !used.has(challenge.id) &&
-    challenge.rank <= maxRank
+    !used.has(challenge.id)
   );
   const sameRank = pool.filter((challenge) => challenge.rank === previousChallenge.rank);
   const nearby = pool.filter((challenge) =>
@@ -1992,7 +2126,7 @@ function updateArousalFromInsight(answer, challenge) {
 
 function handleOverrideChange() {
   const value = Number(dom.rankOverride.value);
-  state.overrideRank = value ? clamp(value, 1, 7) : null;
+  state.overrideRank = value ? clamp(value, 1, 14) : null;
   saveSession();
   updateSessionRank({ forcePulse: true });
   renderAll();
@@ -2405,52 +2539,22 @@ function drawWheel() {
   ctx.restore();
 }
 
-/**
- * PATCH: DRAWWHEELLABEL RESPONSIVO (≤430px MOBILE)
- * ═══════════════════════════════════════════════════════════════
- * Resolve Problema 4: Canvas labels ajustam ao tamanho da roda
- * 
- * Como aplicar:
- * 1. Encontre a função drawWheelLabel() em app.js (por volta da linha 2364)
- * 2. Substitua TODO o conteúdo pela função abaixo
- * 3. Salve e teste
- * 
- * Mudanças:
- * - Detecta tamanho do canvas automaticamente
- * - Reduz font size em mobile (360px = 10px, 520px = 13px)
- * - Ajusta labelRadius para trazer labels mais perto do centro
- * - Reduz chipWidth/Height para mobile
- * - Usa abreviações curtas automaticamente se needed
- */
-
-// ═══════════════════════════════════════════════════════════════
-// NOVA FUNÇÃO: drawWheelLabel RESPONSIVO
-// ═══════════════════════════════════════════════════════════════
-
 function drawWheelLabel(rank, active, current, angle, radius, pulse) {
-  // ──────────────────────────────────────────────────────────────
-  // DETECÇÃO: Tamanho do canvas (mobile vs desktop)
-  // ──────────────────────────────────────────────────────────────
   const canvasWidth = dom.canvas.width / state.devicePixelRatio;
-  const isMobile = canvasWidth <= 360; // 360px = mobile compacto
-  const isTablet = canvasWidth > 360 && canvasWidth < 450; // 360-450px = tablet compacto
-  const isDesktop = canvasWidth >= 450; // 450px+ = desktop/normal
+  const isMobile = canvasWidth <= 360;
+  const isTablet = canvasWidth > 360 && canvasWidth < 450;
+  const isDesktop = canvasWidth >= 450;
 
-  // ──────────────────────────────────────────────────────────────
-  // CONFIGURAÇÃO: Responsiva por breakpoint
-  // ──────────────────────────────────────────────────────────────
   let fontSize, chipWidth, chipHeight, iconRadius, labelRadius, yOffset;
 
   if (isMobile) {
-    // Modo compacto para iPhone SE/12 (360px canvas)
     fontSize = 10;
-    chipWidth = 56; // Reduzido de 70+
-    chipHeight = 24; // Reduzido de 28
-    iconRadius = 12; // Reduzido de 15
-    labelRadius = radius * 0.65; // Mais perto do centro
-    yOffset = 12; // Reduzido de 15
+    chipWidth = 56;
+    chipHeight = 24;
+    iconRadius = 12;
+    labelRadius = radius * 0.65;
+    yOffset = 12;
   } else if (isTablet) {
-    // Modo intermediário para iPhone 14 Pro Max (380-400px)
     fontSize = 11;
     chipWidth = 62;
     chipHeight = 26;
@@ -2458,7 +2562,6 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
     labelRadius = radius * 0.67;
     yOffset = 14;
   } else {
-    // Modo desktop (520px+)
     fontSize = 13;
     chipWidth = 70;
     chipHeight = 28;
@@ -2467,88 +2570,55 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
     yOffset = 15;
   }
 
-  // ──────────────────────────────────────────────────────────────
-  // POSICIONAMENTO: Radial com contador-rotação
-  // ──────────────────────────────────────────────────────────────
   const x = Math.cos(angle) * labelRadius;
   const y = Math.sin(angle) * labelRadius;
   const counterRotation = -(modulo(state.rotation, 360) * Math.PI) / 180;
 
-  // ──────────────────────────────────────────────────────────────
-  // CORES: Estado (ativo, atual, inativo)
-  // ──────────────────────────────────────────────────────────────
   const hotPink = "#e0457b";
   const textColor = current ? "#ff9bc0" : active ? "#e8dcc8" : "rgba(232, 220, 200, 0.52)";
   const iconColor = current ? hotPink : active ? "#c9a24b" : "rgba(232, 220, 200, 0.44)";
 
-  // ──────────────────────────────────────────────────────────────
-  // DESENHO: Save context
-  // ──────────────────────────────────────────────────────────────
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(counterRotation);
 
-  // ──────────────────────────────────────────────────────────────
-  // DESENHO: Ícone (círculo + símbolo)
-  // ──────────────────────────────────────────────────────────────
   ctx.shadowColor = current ? "rgba(224, 69, 123, 0.64)" : "rgba(0, 0, 0, 0.38)";
   ctx.shadowBlur = current ? 14 + pulse * 8 : 8;
 
   drawRankIconResponsive(rank.icon, 0, -yOffset - 6, iconColor, iconRadius, active, current);
 
-  // ──────────────────────────────────────────────────────────────
-  // DESENHO: Chip/Card com texto
-  // ──────────────────────────────────────────────────────────────
-
-  // 1. Medir texto com font responsivo
   ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
-  const textMetrics = ctx.measureText(rank.short);
-  
-  // Se em mobile e texto é muito largo, usar abreviação ainda mais curta
   let displayText = rank.short;
+  const textMetrics = ctx.measureText(displayText);
   if (isMobile && textMetrics.width > chipWidth - 16) {
-    // Fallback para iniciais ou versão ainda mais curta
-    displayText = rank.short.substring(0, 3); // "Sed" ao invés de "Sedução"
+    displayText = rank.short.substring(0, 3);
   }
-
-  // 2. Recalcular chipWidth baseado no texto final
   const actualTextWidth = ctx.measureText(displayText).width;
   const finalChipWidth = Math.max(chipWidth, Math.ceil(actualTextWidth) + 16);
 
-  // 3. Posição do chip
   const chipLeft = -finalChipWidth / 2;
   const chipTop = yOffset;
 
-  // 4. Desenhar background do chip
   ctx.shadowBlur = current ? 12 + pulse * 6 : 5;
   ctx.fillStyle = current ? "rgba(224, 69, 123, 0.18)" : active ? "rgba(15, 11, 13, 0.72)" : "rgba(15, 11, 13, 0.36)";
-  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8); // Mais compacto no mobile
+  drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8);
   ctx.fill();
 
-  // 5. Desenhar borda do chip
   ctx.shadowBlur = 0;
   ctx.lineWidth = current ? 1.8 : 1;
   ctx.strokeStyle = current ? hotPink : active ? "rgba(201, 162, 75, 0.26)" : "rgba(232, 220, 200, 0.1)";
   drawRoundRect(chipLeft, chipTop, finalChipWidth, chipHeight, 8);
   ctx.stroke();
 
-  // 6. Desenhar texto
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillStyle = textColor;
   ctx.font = `800 ${fontSize}px Inter, system-ui, sans-serif`;
   ctx.fillText(displayText, 0, chipTop + chipHeight / 2 + 0.5);
 
-  // ──────────────────────────────────────────────────────────────
-  // LIMPEZA: Restore context
-  // ──────────────────────────────────────────────────────────────
   ctx.restore();
 }
 
-// ═══════════════════════════════════════════════════════════════
-// FUNÇÃO AUXILIAR: drawRankIconResponsive
-// ═══════════════════════════════════════════════════════════════
-// Adapta tamanho do ícone baseado no canvas
 function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
   ctx.save();
   ctx.translate(x, y);
@@ -2563,7 +2633,6 @@ function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
   ctx.arc(0, 0, radius, 0, Math.PI * 2);
   ctx.fill();
 
-  // Selecionar qual ícone desenhar (mesmo switch original)
   switch (icon) {
     case "massage":
       drawMassageIcon();
@@ -2586,6 +2655,27 @@ function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
     case "climax":
       drawFlameIcon();
       break;
+    case "game":
+      drawGameIcon();
+      break;
+    case "ritual":
+      drawRitualIcon();
+      break;
+    case "sensory":
+      drawSensoryIcon();
+      break;
+    case "fantasy":
+      drawFantasyIcon();
+      break;
+    case "power":
+      drawPowerIcon();
+      break;
+    case "surprise":
+      drawSurpriseIcon();
+      break;
+    case "aftercare":
+      drawAftercareIcon();
+      break;
     default:
       drawWhisperIcon();
       break;
@@ -2593,29 +2683,6 @@ function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
 
   ctx.restore();
 }
-
-// ═══════════════════════════════════════════════════════════════
-// TESTES: Execute no console para verificar responsividade
-// ═══════════════════════════════════════════════════════════════
-/*
-// Teste 1: Verificar detecção de mobile
-console.log("Canvas width:", dom.canvas.width / state.devicePixelRatio);
-
-// Teste 2: Forçar redraw após mudar orientação
-window.addEventListener('orientationchange', () => {
-  console.log("Orientação mudou, redraw...");
-  drawWheel();
-});
-
-// Teste 3: Simular resize (DevTools mobile)
-window.addEventListener('resize', () => {
-  const newWidth = dom.canvas.width / state.devicePixelRatio;
-  console.log("Canvas resize:", newWidth);
-  if (dom.roulette) {
-    drawWheel();
-  }
-});
-*/
 
 function drawRankIcon(icon, x, y, color, active, current) {
   ctx.save();
@@ -2652,6 +2719,27 @@ function drawRankIcon(icon, x, y, color, active, current) {
       break;
     case "climax":
       drawFlameIcon();
+      break;
+    case "game":
+      drawGameIcon();
+      break;
+    case "ritual":
+      drawRitualIcon();
+      break;
+    case "sensory":
+      drawSensoryIcon();
+      break;
+    case "fantasy":
+      drawFantasyIcon();
+      break;
+    case "power":
+      drawPowerIcon();
+      break;
+    case "surprise":
+      drawSurpriseIcon();
+      break;
+    case "aftercare":
+      drawAftercareIcon();
       break;
     default:
       drawWhisperIcon();
@@ -2793,6 +2881,93 @@ function drawFlameIcon() {
   ctx.stroke();
 }
 
+function drawGameIcon() {
+  ctx.beginPath();
+  drawRoundRect(-10, -10, 20, 20, 4);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(-4, -2, 2, 0, Math.PI * 2);
+  ctx.arc(4, -2, 2, 0, Math.PI * 2);
+  ctx.arc(-4, 5, 2, 0, Math.PI * 2);
+  ctx.arc(4, 5, 2, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawRitualIcon() {
+  ctx.beginPath();
+  ctx.moveTo(0, -10);
+  ctx.lineTo(0, 10);
+  ctx.moveTo(-8, 4);
+  ctx.quadraticCurveTo(0, 10, 8, 4);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, -4, 3, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawSensoryIcon() {
+  ctx.beginPath();
+  ctx.moveTo(-4, 8);
+  ctx.quadraticCurveTo(-10, 0, -4, -8);
+  ctx.moveTo(0, 8);
+  ctx.quadraticCurveTo(-6, 0, 0, -8);
+  ctx.moveTo(4, 8);
+  ctx.quadraticCurveTo(-2, 0, 4, -8);
+  ctx.stroke();
+}
+
+function drawFantasyIcon() {
+  ctx.beginPath();
+  ctx.moveTo(0, -10);
+  ctx.lineTo(7, -4);
+  ctx.lineTo(4, 3);
+  ctx.lineTo(-4, 3);
+  ctx.lineTo(-7, -4);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, -4, 2.5, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawPowerIcon() {
+  ctx.beginPath();
+  ctx.moveTo(0, -10);
+  ctx.lineTo(-7, 4);
+  ctx.lineTo(-2, 4);
+  ctx.lineTo(0, 10);
+  ctx.lineTo(7, -4);
+  ctx.lineTo(2, -4);
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function drawSurpriseIcon() {
+  ctx.beginPath();
+  ctx.arc(0, 0, 9, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(-5, -3);
+  ctx.lineTo(-5, -5);
+  ctx.moveTo(5, -3);
+  ctx.lineTo(5, -5);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(-3, 4);
+  ctx.quadraticCurveTo(0, 7, 3, 4);
+  ctx.stroke();
+}
+
+function drawAftercareIcon() {
+  ctx.beginPath();
+  ctx.moveTo(0, 3);
+  ctx.bezierCurveTo(-9, -2, -9, -9, -3, -8);
+  ctx.bezierCurveTo(0, -7, 0, -3, 0, -3);
+  ctx.bezierCurveTo(0, -3, 0, -7, 3, -8);
+  ctx.bezierCurveTo(9, -9, 9, -2, 0, 3);
+  ctx.stroke();
+}
+
 function drawRoundRect(x, y, width, height, radius) {
   if (typeof ctx.roundRect === "function") {
     ctx.beginPath();
@@ -2842,15 +3017,15 @@ function startWheelIntroAnimation() {
 
 function applyRankTheme() {
   const rank = getRankMeta(state.currentRank);
-  const heat = (rank.rank - 1) / 6;
+  const heat = (rank.rank - 1) / 13;
   document.body.dataset.rank = String(rank.rank);
   document.documentElement.style.setProperty("--heat", String(heat));
   document.documentElement.style.setProperty("--rank-color", rank.color);
   document.documentElement.style.setProperty("--rank-accent", rank.accent);
   document.documentElement.style.setProperty("--rank-shadow", hexToRgba(rank.color, 0.42 + heat * 0.22));
   document.documentElement.style.setProperty("--primary-start", rank.color);
-  document.documentElement.style.setProperty("--primary-end", rank.rank <= 2 ? rank.accent : "#e0457b");
-  document.documentElement.style.setProperty("--primary-ink", rank.rank <= 2 ? "#140d10" : "#fff7ef");
+  document.documentElement.style.setProperty("--primary-end", rank.rank <= 4 ? rank.accent : "#e0457b");
+  document.documentElement.style.setProperty("--primary-ink", rank.rank <= 4 ? "#140d10" : "#fff7ef");
   dom.stageBg.style.backgroundImage = getRankSceneImage(rank);
 }
 
@@ -2883,7 +3058,7 @@ function getNextRankHint() {
   if (arousalHint) return arousalHint;
   const learningHint = getLearningPacingHint();
   if (learningHint) return learningHint;
-  if (state.currentRank >= 7) return "Categoria final liberada: a janela agora privilegia clímax e desfecho.";
+  if (state.currentRank >= 14) return "Categoria final: sessão encerrando, foco no aftercare.";
 
   const pool = getChallengePool();
   const used = new Set(state.usedChallengeIds);
@@ -2896,14 +3071,22 @@ function getNextRankHint() {
 
   const next = state.currentRank + 1;
   const thresholds = {
-    2: { minutes: 12, spins: 6 },
-    3: { minutes: 18, spins: 9 },
-    4: { minutes: 25, spins: 12 },
-    5: { minutes: 35, spins: 16 },
-    6: { minutes: 45, spins: 22 },
-    7: { minutes: 55, spins: 28 }
+    2: { minutes: 3, spins: 1 },
+    3: { minutes: 6, spins: 3 },
+    4: { minutes: 10, spins: 4 },
+    5: { minutes: 14, spins: 6 },
+    6: { minutes: 18, spins: 8 },
+    7: { minutes: 22, spins: 10 },
+    8: { minutes: 28, spins: 12 },
+    9: { minutes: 35, spins: 15 },
+    10: { minutes: 42, spins: 18 },
+    11: { minutes: 50, spins: 22 },
+    12: { minutes: 60, spins: 26 },
+    13: { minutes: 70, spins: 30 },
+    14: { minutes: 80, spins: 35 }
   };
   const target = thresholds[next];
+  if (!target) return "Explore as categorias livremente.";
   const remainingMinutes = Math.max(0, Math.ceil(target.minutes - getMinutesElapsed()));
   const remainingSpins = Math.max(0, target.spins - state.spinCount);
 
@@ -2933,7 +3116,7 @@ function getArousalPacingHint() {
   if (cold) return `${cold.name || "Participante"} marcou frio: a roleta segura a intensidade e favorece aquecimento.`;
 
   const warming = participants.find((partner) => getArousalScore(partner) === 1);
-  if (warming && state.currentRank >= 5) {
+  if (warming && state.currentRank >= 8) {
     return `${warming.name || "Participante"} ainda esta aquecendo: estimulos diretos perdem peso.`;
   }
 
@@ -3405,7 +3588,7 @@ function getMusicElement() {
       state.musicMuted = true;
       saveMusicPreferences();
       renderMusicControls();
-      showToast("NÃ£o foi possÃ­vel carregar a trilha de fundo.");
+      showToast("Não foi possível carregar a trilha de fundo.");
     });
   }
   return musicElement;
@@ -3555,6 +3738,6 @@ window.addEventListener("beforeunload", () => {
   if (nameInput1 && nameInput2) {
     nameInput1.addEventListener('input', updateLabels);
     nameInput2.addEventListener('input', updateLabels);
-    updateLabels(); // inicial
+    updateLabels();
   }
 })();
