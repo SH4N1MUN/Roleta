@@ -1,736 +1,412 @@
 "use strict";
 
-
-
 // Developer-maintained challenge bank. This file is loaded by index.html before app.js.
-
 // Keep this file out of the UI: it is not editable by final users, only by project maintainers.
-
-
 
 (() => {
 
 const CHALLENGES = [
 
+// ═══════════════════════════════════════════════════════════════
+// RANK 1 — CONEXÃO (Falas, confissões, sussurros)
+// ═══════════════════════════════════════════════════════════════
 { id: "r1-01", rank: 1, title: "Confissão em voz baixa", text: "{actor}, sussurre uma fantasia leve que gostaria de começar hoje, sem tocar em {receiver}.", seconds: 0 },
-
 { id: "r1-02", rank: 1, title: "Três gatilhos", text: "{actor}, diga três detalhes de {receiver} que aumentam seu desejo quando vocês estão a sós.", seconds: 0 },
-
 { id: "r1-03", rank: 1, title: "Promessa curta", text: "{actor}, aproxime os lábios do ouvido de {receiver} e prometa uma coisa que pretende fazer devagar esta noite.", seconds: 45 },
-
 { id: "r1-04", rank: 1, title: "Olhar fixo", text: "Fiquem frente a frente por um minuto. {actor} conduz a respiração e {receiver} acompanha sem desviar o olhar.", seconds: 60 },
-
 { id: "r1-05", rank: 1, title: "Pergunta proibida", text: "{actor}, faça uma pergunta provocante. {receiver} responde em detalhes, mantendo a voz baixa.", seconds: 0 },
-
 { id: "r1-06", rank: 1, title: "Mapa do desejo", text: "{actor}, aponte três lugares do corpo de {receiver} que quer explorar depois. Só vale apontar, sem tocar.", seconds: 0 },
-
 { id: "r1-07", rank: 1, title: "Comando sutil", text: "{actor}, dê uma ordem simples e sensual para {receiver} cumprir agora, dentro dos limites combinados.", seconds: 0 },
-
 { id: "r1-08", rank: 1, title: "Frase na pele", text: "{actor}, escolha uma frase curta e diga perto do pescoço de {receiver}, sem encostar os lábios.", seconds: 45 },
-
-{ id: "r2-01", rank: 2, title: "Ponta dos dedos", text: "{actor}, percorra os braços, ombros e nuca de {receiver} usando apenas a ponta dos dedos.", seconds: 90 },
-
-{ id: "r2-02", rank: 2, title: "Massagem lenta", text: "{actor}, faça uma massagem lenta nos ombros de {receiver}. A pressão deve seguir a respiração {pron_rec}.", seconds: 120 },
-
-{ id: "r2-09", rank: 2, title: "Massagem de costas", text: "{actor}, massageie as costas de {receiver} do pescoço até a lombar, alternando pressão firme, pausa e ponta dos dedos.", seconds: 150 },
-
-{ id: "r2-10", rank: 2, title: "Massagem nas coxas", text: "{actor}, massageie as coxas de {receiver} por cima da roupa, subindo devagar e recuando antes de chegar perto demais.", seconds: 120 },
-
-{ id: "r2-11", rank: 2, title: "Massagem guiada", text: "{receiver}, guie as mãos de {actor} e diga onde quer mais pressão, onde quer leveza e onde ainda não quer toque.", seconds: 120 },
-
-{ id: "r2-03", rank: 2, title: "Calor das mãos", text: "{actor}, aqueça as mãos e toque a cintura, costas e coxas de {receiver}, sem pressa e sem invadir limites.", seconds: 90 },
-
-{ id: "r2-04", rank: 2, title: "Vendar e adivinhar", text: "{receiver} fecha os olhos. {actor} toca três pontos do corpo e deixa {receiver} adivinhar onde foi.", seconds: 90 },
-
-{ id: "r2-05", rank: 2, title: "Pele contra pele", text: "Sentem-se próximos. {actor} guia as mãos de {receiver} pelos lugares em que quer receber carinho.", seconds: 120 },
-
-{ id: "r2-06", rank: 2, title: "Sem pressa", text: "{actor}, toque {receiver} por cima da roupa por dois minutos, alternando leveza, pressão e pausa.", seconds: 120 },
-
-{ id: "r2-07", rank: 2, title: "Trajeto quente", text: "{actor}, trace um caminho com as mãos da nuca até a lombar de {receiver}, repetindo cada vez mais devagar.", seconds: 90 },
-
-{ id: "r2-08", rank: 2, title: "Troca de controle", text: "{receiver} escolhe onde quer receber toque. {actor} obedece por um minuto, {actor_attentive} aos sinais.", seconds: 60 },
-
-{ id: "r3-01", rank: 3, title: "Beijo cronometrado", text: "{actor}, beije {receiver} por dois minutos, mudando o ritmo a cada trinta segundos.", seconds: 120 },
-
-{ id: "r3-02", rank: 3, title: "Nuca e pausa", text: "{actor}, beije a nuca de {receiver}; sempre que {subj_rec} reagir, pare por três segundos antes de continuar.", seconds: 90 },
-
-{ id: "r3-03", rank: 3, title: "Boca sem mãos", text: "Beijem-se sem usar as mãos. Quem tocar primeiro deve sussurrar exatamente o que estava querendo fazer.", seconds: 90 },
-
-{ id: "r3-04", rank: 3, title: "Mordida leve", text: "{actor}, alterne beijo e mordida leve nos lábios de {receiver}, mantendo o contato visual entre as pausas.", seconds: 75 },
-
-{ id: "r3-05", rank: 3, title: "Do ombro à boca", text: "{actor}, comece pelo ombro de {receiver} e suba com beijos lentos até encontrar a boca.", seconds: 90 },
-
-{ id: "r3-06", rank: 3, title: "Ritmo espelhado", text: "{receiver} escolhe um ritmo de beijo por vinte segundos. {actor} repete e intensifica por mais vinte.", seconds: 80 },
-
-{ id: "r3-07", rank: 3, title: "Beijo interrompido", text: "{actor}, comece um beijo intenso e interrompa no melhor momento para dizer o que quer em seguida.", seconds: 60 },
-
-{ id: "r3-08", rank: 3, title: "Cintura presa", text: "{actor}, segure a cintura de {receiver} e conduza um beijo lento, firme e colado.", seconds: 90 },
-
-{ id: "r4-01", rank: 4, title: "Uma peça a menos", text: "{actor}, escolha uma peça de roupa de {receiver} para retirar devagar, mantendo contato visual.", seconds: 90 },
-
-{ id: "r4-02", rank: 4, title: "Mãos combinadas", text: "{actor}, segure os pulsos de {receiver} por um minuto e provoque com beijos e carícias nos limites acordados.", seconds: 60 },
-
-{ id: "r4-03", rank: 4, title: "Strip silencioso", text: "{actor}, retire uma peça sua sem falar. {receiver} só pode observar até o cronômetro acabar.", seconds: 90 },
-
-{ id: "r4-09", rank: 4, title: "Striptease guiado", text: "{actor}, faça um striptease lento para {receiver}. {receiver} só pode mandar com palavras curtas: mais devagar, vira, chega perto ou para.", seconds: 150 },
-
-{ id: "r4-10", rank: 4, title: "Roupa saindo no olhar", text: "{receiver}, retire uma peça de roupa devagar mantendo os olhos em {actor}. {actor} observa sem tocar até o timer zerar.", seconds: 120 },
-
-{ id: "r4-11", rank: 4, title: "Strip alternado", text: "Alternem: cada um tira uma peça ou ajusta a roupa para provocar mais. Ninguém toca na bucetinha ou no pau ainda; é só desejo acumulando.", seconds: 150 },
-
-{ id: "r4-04", rank: 4, title: "Comando de posição", text: "{actor}, peça que {receiver} mude de posição na cama ou no sofá e conduza dois minutos de provocação.", seconds: 120 },
-
-{ id: "r4-05", rank: 4, title: "Amarra leve", text: "Se ambos quiserem, usem lenço ou gravata para limitar uma das mãos de {receiver}; {actor} controla o ritmo.", seconds: 120 },
-
-{ id: "r4-06", rank: 4, title: "Quente e frio", text: "{actor}, alterne sopro frio e beijo quente em uma zona sensível escolhida por {receiver}.", seconds: 90 },
-
-{ id: "r4-07", rank: 4, title: "Espelho", text: "Fiquem diante de um espelho. {actor} descreve em voz baixa o que deseja ver acontecer em seguida.", seconds: 60 },
-
-{ id: "r4-08", rank: 4, title: "Obediência curta", text: "{actor}, dê três comandos sensuais simples. {receiver} cumpre um por vez e pode ajustar qualquer limite.", seconds: 0 },
-
-{ id: "r5-01", rank: 5, title: "Mão guiada", text: "{receiver} guia a mão de {actor} para receber estímulo manual no ritmo que preferir.", seconds: 120 },
-
-{ id: "r5-02", rank: 5, title: "Olhos presos", text: "{actor}, estimule {receiver} com a mão mantendo contato visual. Pausas são parte do jogo.", seconds: 120 },
-
-{ id: "r5-03", rank: 5, title: "Ritmo dos sinais", text: "{actor}, use estímulo manual e só mude velocidade quando {receiver} pedir com uma palavra ou gesto.", seconds: 150 },
-
-{ id: "r5-04", rank: 5, title: "Mútuo", text: "Toquem-se ao mesmo tempo por dois minutos, ajustando pressão e ritmo sem tirar os olhos um do outro.", seconds: 120 },
-
-{ id: "r5-05", rank: 5, title: "Controle de pausa", text: "{actor}, aproxime {receiver} do limite do prazer manualmente e pause por cinco segundos antes de continuar.", seconds: 120 },
-
-{ id: "r5-06", rank: 5, title: "Duas velocidades", text: "{actor}, alterne trinta segundos lentos e trinta segundos intensos de estímulo manual.", seconds: 120 },
-
-{ id: "r5-07", rank: 5, title: "Pedido direto", text: "{receiver}, diga exatamente como quer receber toque. {actor} segue a instrução por noventa segundos.", seconds: 90 },
-
-{ id: "r5-08", rank: 5, title: "Sem finalizar", text: "{actor}, estimule {receiver} manualmente, mas pare sempre que sentir que o clímax está chegando.", seconds: 150 },
-
-{ id: "r6-01", rank: 6, title: "Oral guiado", text: "{receiver} guia {actor} com palavras curtas para receber prazer oral do jeito mais confortável.", seconds: 120 },
-
-{ id: "r6-02", rank: 6, title: "Temperatura", text: "{actor}, use beijo, sopro e variação de temperatura {rec_intimacy_locative} de {receiver}.", seconds: 120 },
-
-{ id: "r6-03", rank: 6, title: "Ritmo constante", text: "{actor}, mantenha prazer oral em ritmo constante por dois minutos; {receiver} só pode orientar com a voz.", seconds: 120 },
-
-{ id: "r6-04", rank: 6, title: "Controle do receptor", text: "{receiver}, escolha posição e ritmo. {actor} oferece prazer oral respeitando cada ajuste.", seconds: 150 },
-
-{ id: "r6-05", rank: 6, title: "Pausa provocante", text: "{actor}, aproxime-se com a boca, pause, beije ao redor e só continue quando {receiver} pedir claramente.", seconds: 120 },
-
-{ id: "r6-06", rank: 6, title: "Alternância", text: "Alternem quem recebe prazer oral a cada minuto, mantendo cuidado, higiene e consentimento explícito.", seconds: 180 },
-
-{ id: "r6-07", rank: 6, title: "Mãos e boca", text: "{actor}, combine mãos e boca em {receiver}, seguindo o ritmo que arrancar a reação mais clara.", seconds: 120 },
-
-{ id: "r6-08", rank: 6, title: "Quase lá", text: "{actor}, conduza {receiver} perto do clímax com prazer oral e pare por cinco segundos antes de retomar.", seconds: 150 },
-
-{ id: "r7-01", rank: 7, title: "Posição favorita", text: "Escolham a posição de penetração favorita do casal. {actor} conduz o primeiro minuto e {receiver} conduz o segundo.", seconds: 120 },
-
-{ id: "r7-02", rank: 7, title: "Lento profundo", text: "Iniciem penetração em ritmo lento, com foco em respiração, olhar e controle do clímax.", seconds: 150 },
-
-{ id: "r7-03", rank: 7, title: "Troca de comando", text: "Durante três minutos, troquem quem dita ritmo, profundidade e pausa a cada trinta segundos.", seconds: 180 },
-
-{ id: "r7-04", rank: 7, title: "Beirada", text: "Escolham uma posição estável na beirada da cama ou sofá e mantenham ritmo firme com comunicação clara.", seconds: 120 },
-
-{ id: "r7-05", rank: 7, title: "Controle de orgasmo", text: "Aproximem-se do clímax e pausem juntos por dez segundos antes de continuar.", seconds: 150 },
-
-{ id: "r7-06", rank: 7, title: "Ritmo selvagem combinado", text: "Com consentimento explícito, aumentem a intensidade por um minuto e voltem ao ritmo lento no minuto seguinte.", seconds: 120 },
-
-{ id: "r7-07", rank: 7, title: "Clímax de um", text: "Escolham quem será o foco. A outra pessoa dedica três minutos para conduzir o prazer até onde for desejado.", seconds: 180 },
-
-{ id: "r7-08", rank: 7, title: "Final sincronizado", text: "Tentem sincronizar respiração, movimento e pausa até chegar ao clímax juntos ou encerrar no ponto mais intenso.", seconds: 180 },
-
-{ id: "r1-conexao-01", rank: 1, seductionFlow: true, learningTags: ["whisper", "slowBuild", "femaleResponds"], title: "Memória carinhosa", text: "{actor}, responda: qual é o momento mais carinhoso que tivemos juntos? {receiver}, escuta e depois adiciona um detalhe que {subj_actor} pode ter esquecido.", seconds: 0 },
-
-{ id: "r1-conexao-02", rank: 1, seductionFlow: true, learningTags: ["confidenceBuild", "desireSignal", "femaleResponds"], title: "O que te conquista", text: "{actor}, diga três coisas simples de {receiver} que te conquistam (um sorriso, um gesto, uma risada). {receiver} escuta e diz qual faz mais efeito.", seconds: 0 },
-
-{ id: "r1-conexao-03", rank: 1, seductionFlow: true, learningTags: ["safePacing", "adaptiveTone", "femaleResponds"], title: "Zona de conforto", text: "{actor}, responda: com {receiver}, qual é o seu nível de conforto? Fale de um detalhe que {subj_rec} faz que te deixa tranquilo(a).", seconds: 0 },
-
-{ id: "r1-conexao-04", rank: 1, seductionFlow: true, learningTags: ["confidenceBuild", "desireSignal", "slowBuild"], title: "Quando começou", text: "{actor}, conte quando {subj_rec} {receiver} te pareceu realmente desejável. {receiver} escuta e depois explica o que mais te marcou nesse dia.", seconds: 0 },
-
-{ id: "r1-conexao-05", rank: 1, seductionFlow: true, learningTags: ["femaleChoice", "bodyMap", "playful"], title: "Presentes para dar", text: "{actor}, diga três presentes sensoriais que gostaria de dar a {receiver} hoje (um beijo no pescoço, uma massagem, um sussurro). {receiver} escolhe qual quer primeiro.", seconds: 0 },
-
-{ id: "r1-conexao-06", rank: 1, seductionFlow: true, learningTags: ["desireSignal", "languagePreference", "whisper"], title: "Segredo favoritista", text: "{actor}, confessa um detalhe específico de {receiver} que ninguém mais sabe que te deixa louco(a). {receiver} agora tem permissão de usar isso como arma.", seconds: 0 },
-
-{ id: "r1-conexao-07", rank: 1, seductionFlow: true, learningTags: ["femaleChoice", "limits", "desireSignal"], title: "O que você quer hoje", text: "{actor}, diga em voz baixa uma vontade clara que tem com {receiver} para hoje. {receiver} pode dizer \"sim\", \"não\" ou \"talvez depois\".", seconds: 0 },
-
-{ id: "r1-conexao-08", rank: 1, seductionFlow: true, learningTags: ["whisper", "slowBuild", "safePacing"], title: "Respiração lenta", text: "Aproximem-se. {actor}, diga muito perto do ouvido de {receiver} a coisa mais carinhosa que pensa {pron_rec}. {receiver} só respira e aproveita.", seconds: 60 },
-
-{ id: "r1-conexao-09", rank: 1, seductionFlow: true, learningTags: ["femaleLeads", "limits", "languagePreference"], title: "Desejos invertidos", text: "{receiver}, diga uma vontade que nunca confessou. {actor} escuta sem julgar e depois diz se topa ou prefere explorar outra coisa.", seconds: 0 },
-
-{ id: "r1-conexao-10", rank: 1, seductionFlow: true, learningTags: ["whisper", "bodyMap", "slowBuild"], title: "Toque invisível", text: "{actor}, de olhos fechados, toque o rosto de {receiver} com as pontas dos dedos e descreva o que sente. {receiver} fica em silêncio.", seconds: 45 },
-
-{ id: "r1-conexao-11", rank: 1, seductionFlow: true, learningTags: ["connection", "affection", "listening"], title: "Sentir-se amado", text: "{actor}, responda: qual foi o momento em que você mais se sentiu amado(a) por {receiver}? {receiver}, escuta e depois diz o que achou bonito nessa resposta.", seconds: 0 },
-
-{ id: "r1-conexao-12", rank: 1, seductionFlow: true, learningTags: ["trust", "affection", "confidenceBuild"], title: "Segurança boa", text: "{actor}, diga uma coisa que {receiver} faz que te passa segurança. {receiver}, escuta e depois conta uma coisa que {actor} faz que também te tranquiliza.", seconds: 0 },
-
-{ id: "r1-conexao-13", rank: 1, seductionFlow: true, learningTags: ["appreciation", "connection", "confidenceBuild"], title: "Detalhe especial", text: "{actor}, diga qual detalhe de {receiver} você acha especial. {receiver}, escuta e depois fala um detalhe de {actor} que também chama sua atenção.", seconds: 0 },
-
-{ id: "r1-conexao-14", rank: 1, seductionFlow: true, learningTags: ["memory", "connection", "slowBuild"], title: "Virou importante", text: "{actor}, conte quando percebeu que {receiver} tinha se tornado alguém importante. {receiver}, escuta e depois conta se lembra desse período.", seconds: 0 },
-
-{ id: "r1-conexao-15", rank: 1, seductionFlow: true, learningTags: ["communication", "listening", "connection"], title: "Boa conversa", text: "{actor}, diga o que faz uma conversa com {receiver} ficar gostosa e leve. {receiver}, escuta e depois conta qual tipo de conversa mais gosta de ter com {actor}.", seconds: 0 },
-
-{ id: "r1-conexao-16", rank: 1, seductionFlow: true, learningTags: ["memory", "connection", "playful"], title: "Lembrança favorita", text: "{actor}, conte qual é sua lembrança favorita com {receiver}. {receiver}, escuta e depois adiciona um detalhe que também marcou você.", seconds: 0 },
-
-{ id: "r1-conexao-17", rank: 1, seductionFlow: true, learningTags: ["playful", "memory", "connection"], title: "Dia engraçado", text: "{actor}, conte qual foi o dia mais engraçado que vocês já viveram juntos. {receiver}, escuta e depois conta sua versão desse momento.", seconds: 0 },
-
-{ id: "r1-conexao-18", rank: 1, seductionFlow: true, learningTags: ["memory", "slowBuild", "connection"], title: "Reviver um momento", text: "{actor}, escolha um momento com {receiver} que gostaria de reviver. {receiver}, escuta e depois diz se escolheria o mesmo ou outro.", seconds: 0 },
-
-{ id: "r1-conexao-19", rank: 1, seductionFlow: true, learningTags: ["memory", "sensory", "connection"], title: "Lembra nós dois", text: "{actor}, diga uma música, lugar, comida ou cheiro que lembra vocês dois. {receiver}, escuta e depois diz uma lembrança que veio na cabeça.", seconds: 0 },
-
-{ id: "r1-conexao-20", rank: 1, seductionFlow: true, learningTags: ["appreciation", "memory", "affection"], title: "Pequena atitude", text: "{actor}, conte uma pequena atitude de {receiver} que marcou você. {receiver}, escuta e depois conta uma atitude de {actor} que também ficou guardada.", seconds: 0 },
-
-{ id: "r1-conexao-21", rank: 1, seductionFlow: true, learningTags: ["dreams", "future", "connection"], title: "Sonho juntos", text: "{actor}, diga um sonho que gostaria de realizar com {receiver}. {receiver}, escuta e depois conta qual parte desse sonho parece mais legal.", seconds: 0 },
-
-{ id: "r1-conexao-22", rank: 1, seductionFlow: true, learningTags: ["future", "connection", "slowBuild"], title: "Cena do futuro", text: "{actor}, imagine uma cena simples de vocês dois no futuro e descreva. {receiver}, escuta e depois acrescenta um detalhe nessa cena.", seconds: 0 },
-
-{ id: "r1-conexao-23", rank: 1, seductionFlow: true, learningTags: ["future", "playful", "connection"], title: "Lugar especial", text: "{actor}, diga um lugar que gostaria de conhecer com {receiver}. {receiver}, escuta e depois escolhe uma coisa que vocês fariam lá.", seconds: 0 },
-
-{ id: "r1-conexao-24", rank: 1, seductionFlow: true, learningTags: ["routine", "future", "connection"], title: "Hábito gostoso", text: "{actor}, sugira um hábito simples que vocês poderiam criar juntos. {receiver}, escuta e depois diz se toparia começar essa semana.", seconds: 0 },
-
-{ id: "r1-conexao-25", rank: 1, seductionFlow: true, learningTags: ["routine", "care", "connection"], title: "Rotina mais leve", text: "{actor}, diga uma coisa simples que deixaria a rotina de vocês mais leve. {receiver}, escuta e depois sugere outra ideia pequena.", seconds: 0 },
-
-{ id: "r1-conexao-26", rank: 1, seductionFlow: true, learningTags: ["care", "affection", "safePacing"], title: "Carinho preferido", text: "{actor}, conte qual gesto de carinho no dia a dia mais gosta de receber de {receiver}. {receiver}, escuta e depois conta o seu também.", seconds: 0 },
-
-{ id: "r1-conexao-27", rank: 1, seductionFlow: true, learningTags: ["affection", "languagePreference", "connection"], title: "Amor em atitude", text: "{actor}, diga uma atitude simples de {receiver} que para você demonstra amor. {receiver}, escuta e depois fala uma atitude de {actor} que tem esse efeito.", seconds: 0 },
-
-{ id: "r1-conexao-28", rank: 1, seductionFlow: true, learningTags: ["appreciation", "languagePreference", "confidenceBuild"], title: "Elogio bom", text: "{actor}, diga um elogio que gosta de receber de {receiver}. {receiver}, escuta e depois faz esse elogio olhando para {actor}.", seconds: 0 },
-
-{ id: "r1-conexao-29", rank: 1, seductionFlow: true, learningTags: ["playful", "dateNight", "connection"], title: "Encontro barato", text: "{actor}, descreva um encontro perfeito com {receiver} sem gastar muito. {receiver}, escuta e depois escolhe a melhor parte da ideia.", seconds: 0 },
-
-{ id: "r1-conexao-30", rank: 1, seductionFlow: true, learningTags: ["playful", "music", "connection"], title: "Música-tema", text: "{actor}, escolha uma música que combina com vocês dois. {receiver}, escuta e depois diz se concorda ou escolheria outra.", seconds: 0 },
-
-{ id: "r1-conexao-31", rank: 1, seductionFlow: true, learningTags: ["smell", "sensory", "memory"], title: "Cheiro que provoca", text: "{actor}, diga qual cheiro de {receiver} mais te provoca. {receiver}, escuta e depois conta qual cheiro de {actor} também te pega.", seconds: 0 },
-
-{ id: "r1-conexao-32", rank: 1, seductionFlow: true, learningTags: ["voice", "desireSignal", "whisper"], title: "Voz que arrepia", text: "{actor}, diga que tom de voz de {receiver} te arrepia. {receiver}, responda usando exatamente esse tom de voz.", seconds: 45 },
-
-{ id: "r1-conexao-33", rank: 1, seductionFlow: true, learningTags: ["touch", "bodyMap", "slowBuild"], title: "Toque favorito", text: "{actor}, descreva como gosta de ser tocado(a) por {receiver}. {receiver}, escuta e depois descreve como gosta de ser tocado(a) também.", seconds: 0 },
-
-{ id: "r1-conexao-34", rank: 1, seductionFlow: true, learningTags: ["morning", "routine", "connection"], title: "Manhã perfeita", text: "{actor}, descreva como seria uma manhã perfeita com {receiver}. {receiver}, escuta e depois acrescenta um detalhe que faria essa manhã ainda melhor.", seconds: 0 },
-
-{ id: "r1-conexao-35", rank: 1, seductionFlow: true, learningTags: ["jealousy", "playful", "desireSignal"], title: "Ciúme gostoso", text: "{actor}, confesse: teve alguma vez que sentiu um ciúme gostoso de {receiver}? {receiver}, escuta e diz se já sentiu o mesmo.", seconds: 0 },
-
-{ id: "r2-verdade-01", rank: 2, title: "Verdade: Fantasias", text: "{actor}, responda com honestidade: qual é uma fantasia que teria vergonha de contar? {receiver} escuta com respeito e depois compartilha a própria.", seconds: 0 },
-
-{ id: "r2-verdade-02", rank: 2, title: "Verdade: Ciúmes", text: "{actor}, seja honesto(a): houve um momento em que sentiu ciúmes de algo relacionado a {receiver}? Descreva sem julgamento.", seconds: 0 },
-
-{ id: "r2-verdade-03", rank: 2, title: "Verdade: Desejo", text: "{actor}, responda com sinceridade: em que momento desta semana {subj_rec} desejou mais {dir_rec}?", seconds: 0 },
-
-{ id: "r2-consequencia-01", rank: 2, title: "Consequência: Massagem especial", text: "{receiver}, como punição leve, {actor} vai massagear seus pés, tornozelos e panturrilhas por cinco minutos enquanto vocês conversam.", seconds: 300 },
-
-{ id: "r2-consequencia-02", rank: 2, title: "Consequência: Sussurro contínuo", text: "{actor}, como consequência, sussurre no ouvido de {receiver} por dois minutos. {receiver} não pode falar, só ouvir e aproveitar.", seconds: 120 },
-
-{ id: "r2-consequencia-03", rank: 2, title: "Consequência: Toque coberto", text: "{receiver}, {actor} vai massagear seus ombros, nuca e braços com as pontas dos dedos, coberto por uma toalha ou pano.", seconds: 180 },
-
-{ id: "r3-strip-01", rank: 3, title: "Strip: Começar", text: "{actor}, é hora de começar a se desnudar. Retire uma peça por vez e o coloque(a) de um lado, mantendo o contato visual com {receiver} durante o processo.", seconds: 0 },
-
-{ id: "r3-strip-02", rank: 3, requiresFemale: true, actorPreset: "feminine", title: "Strip: Ela sinaliza", text: "{actor}, escolha qual peça quer que {receiver} retire primeiro: superior, inferior ou acessório. {receiver} obedece lentamente.", seconds: 0 },
-
-{ id: "r3-strip-03", rank: 3, title: "Strip: Beijo a cada camada", text: "{actor}, retire uma peça de {receiver} lentamente e beije a pele que fica exposta antes de tirar a próxima.", seconds: 0 },
-
-{ id: "r3-strip-04", rank: 3, title: "Strip: Ele escolhe", text: "{actor}, retire uma peça de {receiver} e coloque em você. Depois tire uma sua e ofereça para {receiver} calçar se quiser.", seconds: 0 },
-
-{ id: "r3-strip-05", rank: 3, title: "Strip: Provocação coberta", text: "{receiver}, retire uma peça mas mantenha a outra por cima. {actor} observa enquanto {subj_rec} se move lentamente.", seconds: 0 },
-
-{ id: "r3-strip-06", rank: 3, title: "Strip: Tudo menos a roupa", text: "{actor}, retire tudo que está cobrindo você. Fique em frente a {receiver} por um minuto sem se cobrir nem pedir desculpas.", seconds: 60 },
-
-{ id: "r4-strip-01", rank: 4, title: "Strip: Íntimo exposto", text: "{receiver}, retire a roupa externa e fique só de roupa íntima. {actor} pode observar e tocar por cima da peça enquanto {subj_rec} se sente confortável.", seconds: 0 },
-
-{ id: "r4-strip-02", rank: 4, title: "Strip: Toque coberto", text: "{receiver}, {actor} vai remover sua roupa externa mas deixar {art_rec} {receiver} coberto(a) pela roupa íntima. Toque suavemente por cima.", seconds: 120 },
-
-{ id: "r4-strip-03", rank: 4, title: "Strip: Quase tudo", text: "{actor}, tire sua roupa quase toda. Retire tudo exceto a roupa de baixo e deixe {receiver} observar seu corpo quase inteiro.", seconds: 0 },
-
-{ id: "r4-strip-04", rank: 4, title: "Strip: Desnudo completo", text: "Quem ainda estiver de roupa íntima, agora retira também. Fiquem nus um para o outro por alguns momentos, observando e respirando juntos.", seconds: 60 },
-
-{ id: "r4-strip-05", rank: 4, title: "Strip: Corpos juntos", text: "{actor}, aproxime seu corpo completamente desnudo do de {receiver}. Fiquem colados pele com pele, lentamente, deixando que o contato fale.", seconds: 90 },
-
-{ id: "r5-surprise-01", rank: 5, insight: true, requiresFemale: true, receiverPreset: "feminine", title: "Surpresa: Massagem no busto", text: "{receiver}, fique de frente para {actor}. {actor} vai massagear seus seios por 45 segundos, prestando atenção aos seus sinais.", seconds: 45 },
-
-{ id: "r5-surprise-02", rank: 5, insight: true, requiresFemale: true, actorPreset: "feminine", title: "Surpresa: Toque coberto", text: "{actor}, coloque a mão por dentro da calcinha e comece a brincar com {own_intimacy} enquanto {receiver} observa por 60 segundos.", seconds: 60 },
-
-{ id: "r5-surprise-03", rank: 5, insight: true, actorPreset: "masculine", title: "Surpresa: Masturbação coberta", text: "{actor}, masturbe seu próprio pau por cima da cueca enquanto {receiver} observa. Deixe {subj_rec} ver cada movimento por 30 segundos.", seconds: 30 },
-
-{ id: "r5-surprise-04", rank: 5, insight: true, title: "Surpresa: Dedo na boca", text: "{actor}, coloque o seu dedo (ou o dedo de {receiver}) dentro da boca de {receiver} e chupe lentamente por 45 segundos.", seconds: 45 },
-
-{ id: "r6-surprise-01", rank: 6, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na boca", text: "{actor}, passe o pau na boca de {receiver} como se fosse um batom, suavemente, durante 30 segundos.", seconds: 30 },
-
-{ id: "r6-surprise-02", rank: 6, insight: true, receiverPreset: "feminine", title: "Surpresa: Chupa mamilo esquerdo", text: "{actor}, chupe o mamilo esquerdo de {receiver} com intensidade crescente durante 30 segundos.", seconds: 30 },
-
-{ id: "r6-surprise-03", rank: 6, insight: true, receiverPreset: "feminine", title: "Surpresa: Chupa mamilo direito", text: "{actor}, agora o mamilo direito. Chupe enquanto {receiver} segura sua cabeça durante 30 segundos.", seconds: 30 },
-
-{ id: "r6-surprise-04", rank: 6, insight: true, receiverPreset: "feminine", title: "Surpresa: Ambos os mamilos", text: "{actor}, alterne entre os dois mamilos de {receiver}, variando a pressão. {receiver} diz \"mais\" ou \"menos\" durante 45 segundos.", seconds: 45 },
-
-{ id: "r6-surprise-05", rank: 6, insight: true, title: "Surpresa: Beijo quente", text: "{actor}, dê um beijo longo e delicado {rec_intimacy_locative}. Deixe a boca explorar lentamente durante 45 segundos.", seconds: 45 },
-
-{ id: "r6-surprise-06", rank: 6, insight: true, title: "Surpresa: Língua lenta", text: "{actor}, passe a língua {rec_intimacy_locative} de forma exploratória. {receiver} pode guiar com as mãos durante 60 segundos.", seconds: 60 },
-
-{ id: "r6-surprise-07", rank: 6, insight: true, requiresFemale: true, actorPreset: "feminine", title: "Surpresa: Biqueinho como batom", text: "{actor}, use seu biqueinho e passe nos lábios de {receiver} como se fosse um batom, deixando o contato tomar conta durante 30 segundos.", seconds: 30 },
-
-{ id: "r6-surprise-08", rank: 6, insight: true, requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Surpresa: Peito no pau", text: "{actor}, passe seus seios no pau de {receiver} enquanto {subj_rec} está duro durante 45 segundos.", seconds: 45 },
-
-{ id: "r6-surprise-09", rank: 6, insight: true, title: "Surpresa: Chupa o dedo", text: "{actor}, coloque o seu dedo dentro da boca de {receiver} e deixe {subj_rec} chupar enquanto vocês se olham durante 45 segundos.", seconds: 45 },
-
-{ id: "r6-surprise-10", rank: 6, insight: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na língua", text: "{actor}, passe o pau na língua de {receiver}. Deixe {subj_rec} sentir a textura durante 20 segundos.", seconds: 20 },
-
-{ id: "r6-surprise-11", rank: 6, insight: true, requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Surpresa: Tapa no pau", text: "{actor}, bata o pau de {receiver} na sua boca (suavemente) 5 vezes. Deixe {subj_rec} sentir a brincadeira.", seconds: 0 },
-
-{ id: "r6-surprise-12", rank: 6, insight: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na língua (intenso)", text: "{actor}, bata o pau na língua de {receiver} ritmicamente durante 30 segundos. {receiver} fica receptiva.", seconds: 30 },
-
-{ id: "r7-surprise-01", rank: 7, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Posição escolhida", text: "{receiver}, escolha a posição para serem penetrados (por cima, por trás, deitados). {actor} entra e encontra o ritmo que ela pedir por 180 segundos.", seconds: 180 },
-
-{ id: "r7-surprise-02", rank: 7, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Aceleração progressiva", text: "{actor}, penetra devagar no início. A cada minuto, aumente a velocidade. {receiver} diz \"fica assim\" quando quer que mantenha o ritmo durante 180 segundos.", seconds: 180 },
-
-{ id: "r7-surprise-03", rank: 7, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pressão combinada", text: "{actor}, durante a penetração, pressione o clitóris de {receiver} com o polegar enquanto mantém um ritmo constante durante 120 segundos.", seconds: 120 },
-
-{ id: "r7-surprise-04", rank: 7, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Ritmo de sua escolha", text: "{receiver}, dita o ritmo durante a penetração. {actor} obedece cada comando: \"mais rápido\", \"mais profundo\", \"pare\", \"continua\" durante 150 segundos.", seconds: 150 },
-
-{ id: "r1-solo-01", rank: 1, mode: "solo", title: "Mão por cima", text: "{actor}, comece direto: faça carinho {underwear_outer}, sem tirar a peça. Use pressão leve, depois firme, até o corpo pedir mais.", seconds: 75 },
-
-{ id: "r1-solo-02", rank: 1, mode: "solo", title: "Esquenta rápido", text: "{actor}, esfregue a palma da mão {underwear_outer}. Nada de discurso: só ritmo, calor e respiração mais pesada.", seconds: 75 },
-
-{ id: "r1-solo-03", rank: 1, mode: "solo", title: "Pressão por cima", text: "{actor}, pressione {bottom_underwear} contra {own_intimacy} usando a palma da mão. Segura firme por alguns segundos, solta e repete.", seconds: 90 },
-
-{ id: "r1-solo-04", rank: 1, mode: "solo", title: "Sem tirar nada", text: "{actor}, mantenha a roupa no corpo e provoque {own_intimacy} só por cima da peça. Se ficar bom, aumenta o ritmo sem pedir licença.", seconds: 90 },
-
-{ id: "r2-solo-01", rank: 2, mode: "solo", title: "Pele acesa", text: "{actor}, passe as mãos pelo peito, barriga e coxas, desviando de {own_intimacy}. A regra é deixar o corpo pedir mais antes de obedecer.", seconds: 120 },
-
-{ id: "r2-solo-03", rank: 2, mode: "solo", title: "Por cima da peça", text: "{actor}, faça carinho {underwear_outer}. Alterne círculos lentos, pressão com a palma e fricção curta, sem tirar a roupa íntima.", seconds: 120 },
-
-{ id: "r2-solo-04", rank: 2, mode: "solo", title: "Busto, barriga e coxa", text: "{actor}, explore {chest_underwear}, barriga e parte interna das coxas. Depois volte para {bottom_underwear} por cima, mais firme.", seconds: 120 },
-
-{ id: "r2-solo-05", rank: 2, mode: "solo", title: "Automassagem quente", text: "{actor}, faça uma massagem lenta no pescoço, peito, barriga e coxas. Evite {own_intimacy} por enquanto e deixe a vontade crescer.", seconds: 150 },
-
-{ id: "r2-solo-06", rank: 2, mode: "solo", title: "Massagem por cima", text: "{actor}, massageie {bottom_underwear} por cima da roupa íntima com a palma da mão, sem entrar ainda. Pressão firme, ritmo lento.", seconds: 120 },
-
-{ id: "r2-solo-02", rank: 2, mode: "solo", insight: true, insightTarget: "actor", title: "Check de calor", text: "{actor}, confira se você já está {arousal_actor}. Se sim, mantenha a provocação por mais um minuto. Se não, volte para pescoço, mamilos e coxas até o corpo responder.", seconds: 90 },
-
-{ id: "r3-solo-01", rank: 3, mode: "solo", title: "Boca e dedos", text: "{actor}, chupe os próprios dedos devagar, molhe bem a boca e arraste essa umidade pelo pescoço, peito e barriga sem tocar em {own_intimacy}.", seconds: 90 },
-
-{ id: "r3-solo-03", rank: 3, mode: "solo", title: "Por dentro da roupa", text: "{actor}, coloque a mão {underwear_inside}, mas ainda sem masturbar de verdade. Só segura, aperta de leve e deixa o calor aumentar.", seconds: 120 },
-
-{ id: "r3-solo-04", rank: 3, mode: "solo", title: "Fricção sem tirar", text: "{actor}, mantenha a roupa íntima no lugar e esfregue {own_intimacy} por cima dela. Se quiser gozar rápido, aumente o ritmo nos últimos trinta segundos.", seconds: 120 },
-
-{ id: "r3-solo-02", rank: 3, mode: "solo", title: "Beijo imaginário", text: "{actor}, imagine a boca de alguém te beijando sem pudor. Use uma mão para apertar coxas e bunda, mas deixe {own_intimacy} esperando.", seconds: 120 },
-
-{ id: "r4-couple-01", rank: 4, mode: "couple", insight: true, title: "Check: está molhada ou duro?", text: "{actor}, confira com calma se {art_rec} {receiver} já está {arousal_rec}. Se sim, continue com a boca mais perto de {rec_intimacy_article}. Se não, volte para pescoço, mamilos, barriga e coxas por dois minutos.", seconds: 120 },
-
-{ id: "r4-solo-01", rank: 4, mode: "solo", title: "Strip para si", text: "{actor}, tire uma peça de roupa bem devagar, olhando para o próprio corpo como se estivesse sendo {actor_devoured} com os olhos.", seconds: 120 },
-
-{ id: "r4-solo-02", rank: 4, mode: "solo", title: "Proibido tocar", text: "{actor}, fique só de roupa íntima ou no limite mais confortável antes de ficar {actor_naked}. Acaricie tudo ao redor de {own_intimacy}, mas não toque direto. Segura esse tesão.", seconds: 120 },
-
-{ id: "r4-solo-03", rank: 4, mode: "solo", title: "Dentro da peça", text: "{actor}, deslize a mão {underwear_inside}. Agora pode tocar {own_intimacy}, mas comece lento e aumente sem ficar pensando demais.", seconds: 150 },
-
-{ id: "r4-solo-04", rank: 4, mode: "solo", title: "Roupa íntima afastada", text: "{actor}, afaste {bottom_underwear} só o bastante para tocar pele com pele. Faça movimentos curtos e sujos, voltando por cima da peça quando ficar intenso.", seconds: 150 },
-
-{ id: "r4-solo-05", rank: 4, mode: "solo", title: "Strip no espelho", text: "{actor}, tire uma peça de roupa de frente para o espelho, bem devagar, olhando para onde quer tocar depois.", seconds: 120 },
-
-{ id: "r4-solo-06", rank: 4, mode: "solo", title: "Striptease rápido", text: "{actor}, tire a roupa em três etapas: provoca, pausa e tira. Depois fique alguns segundos só olhando para o próprio corpo antes de tocar.", seconds: 120 },
-
-{ id: "r5-couple-01", rank: 5, mode: "couple", insight: true, title: "Mão suja e olho fixo", text: "{actor}, use a mão em {receiver} do jeito mais safado que {subj_rec} aguentar, olhando nos olhos. Se {art_rec} {receiver} estiver {arousal_rec}, aumente o ritmo; se não, volte para beijos e coxas.", seconds: 180 },
-
-{ id: "r5-couple-02", rank: 5, mode: "couple", title: "Confere e obedece", text: "{actor}, pergunte sem vergonha: \"quer minha mão onde?\". {receiver} responde e você obedece por dois minutos, alternando pressão, pausa e provocação.", seconds: 120 },
-
-{ id: "r5-solo-01", rank: 5, mode: "solo", title: "Masturbação guiada", text: "{actor}, toque {own_intimacy} lentamente, como se estivesse ensinando alguém a te dar prazer. Quando ficar intenso demais, pare por cinco segundos e volte mais {actor_dirty}.", seconds: 180 },
-
-{ id: "r5-solo-03", rank: 5, mode: "solo", title: "Masturbação rápida", text: "{actor}, masturbe {own_intimacy} sem enrolar. Trinta segundos rápido, dez segundos lento, e repete até o cronômetro acabar.", seconds: 150 },
-
-{ id: "r5-solo-04", rank: 5, mode: "solo", insight: true, insightTarget: "actor", title: "Gozar se quiser", text: "{actor}, se o corpo já estiver no ponto, acelere e goze sem culpa. Se ainda não estiver, volte para um toque mais lento e aumente a pressão aos poucos.", seconds: 180 },
-
-{ id: "r5-solo-02", rank: 5, mode: "solo", insight: true, insightTarget: "actor", title: "Check de ponto", text: "{actor}, veja se você já está {arousal_actor}. Se sim, masturbe-se no ritmo da respiração. Se não, tire a mão e volte para mamilos, boca, coxas e imaginação.", seconds: 150 },
-
-{ id: "r6-couple-01", rank: 6, mode: "couple", insight: true, title: "Boca sem educação", text: "{actor}, coloque a boca {rec_intimacy_locative} de {receiver} e use língua, saliva e pressão sem pressa. Se {art_rec} {receiver} estiver {arousal_rec}, mantenha o ritmo; se não, volte a provocar ao redor até {subj_rec} pedir.", seconds: 240 },
-
-{ id: "r6-couple-02", rank: 6, mode: "couple", title: "Língua e comando", text: "{receiver}, diga exatamente onde quer a língua de {actor}. {actor}, obedeça por quatro minutos, alternando sucção, lambida lenta e pausa cruel.", seconds: 240 },
-
-{ id: "r6-solo-01", rank: 6, mode: "solo", title: "Espelho sem vergonha", text: "{actor}, vá para o espelho, molhe a mão e masturbe {own_intimacy} olhando para si. Ritmo firme, sem pausa longa: é para esquentar rápido.", seconds: 240 },
-
-{ id: "r6-solo-02", rank: 6, mode: "solo", title: "Lento até perder a calma", text: "{actor}, masturbe-se tão devagar que chegue a irritar. Quando o corpo pedir força, negue por dez segundos e só então aumente.", seconds: 240 },
-
-{ id: "r7-couple-01", rank: 7, mode: "couple", insight: true, title: "Penetração com leitura do corpo", text: "Antes de penetrar, {actor} confere se {art_rec} {receiver} está {arousal_rec}. Se sim, avancem e mantenham contato visual. Se não, parem tudo e voltem para boca, mão e coxas até o corpo liberar.", seconds: 300 },
-
-{ id: "r7-couple-02", rank: 7, mode: "couple", title: "Ritmo sujo controlado", text: "Escolham uma posição confortável para penetração. Quem estiver por cima dita o ritmo por um minuto; depois o outro manda, com ordens curtas e safadas.", seconds: 300 },
-
-{ id: "r7-solo-01", rank: 7, mode: "solo", title: "Clímax na beirada", text: "{actor}, masturbe {own_intimacy} até chegar perto demais. Quando sentir que vai gozar, pare, respire, xingue baixinho se precisar, e volte mais lento.", seconds: 300 },
-
-{ id: "r7-solo-02", rank: 7, mode: "solo", insight: true, insightTarget: "actor", title: "Orgasmo sob controle", text: "{actor}, escolha se quer gozar ou se torturar mais um pouco. Se quiser gozar, acelere sem culpa. Se quiser prolongar, tire a mão de {own_intimacy} por trinta segundos.", seconds: 300 },
-
-{ id: "r4-couple-m-01", rank: 4, mode: "couple", receiverPreset: "masculine", title: "Mordida por cima da cueca", text: "{actor}, dê mordidas leves no pau de {receiver} por cima da cueca, só para deixar {art_rec} {receiver} pulsando de tesão sem tirar nada do lugar.", seconds: 90 },
-
-{ id: "r4-couple-f-01", rank: 4, mode: "couple", receiverPreset: "feminine", title: "Arredar a calcinha", text: "{actor}, arrede a calcinha de {receiver} de lado e dê um beijo bem molhado na virilha {pron_rec}. Depois solte o tecido e deixe {art_rec} {receiver} querendo mais.", seconds: 90 },
-
-{ id: "r4-couple-f-02", rank: 4, mode: "couple", receiverPreset: "feminine", title: "Água gelada no peito", text: "{actor}, beba água bem gelada e chupe o biquinho do peito de {receiver}, alternando língua fria, sucção e sopro quente.", seconds: 90 },
-
-{ id: "r4-couple-any-01", rank: 4, mode: "couple", title: "Puxão por trás", text: "{actor}, coloque {receiver} de costas ou de quatro, puxe o cabelo {pron_rec} com firmeza combinada e morda a nuca de um jeito ardido.", seconds: 75 },
-
-{ id: "r5-couple-f-01", rank: 5, mode: "couple", receiverPreset: "feminine", title: "Beliscão leve no peito", text: "{actor}, chupe um bico do peito de {receiver} com força gostosa enquanto belisca o outro peito com os dedos, provocando até {subj_rec} se contorcer.", seconds: 120 },
-
-{ id: "r5-couple-f-02", rank: 5, mode: "couple", insight: true, receiverPreset: "feminine", title: "Dedada rápida com saliva", text: "{actor}, molhe bem os dedos com saliva e masturbe a bucetinha de {receiver} com movimentos rápidos e firmes, parando se {subj_rec} pedir ajuste.", seconds: 120 },
-
-{ id: "r5-couple-any-01", rank: 5, mode: "couple", title: "Lamber virilha até o umbigo", text: "{actor}, lamba com vontade a dobra da virilha de {receiver}, suba devagar pela barriga e termine sugando o umbigo {pron_rec}.", seconds: 100 },
-
-{ id: "r5-couple-any-02", rank: 5, mode: "couple", title: "Esfregar na coxa", text: "{actor}, sente na coxa de {receiver} e esfregue seu {actor_intimacy} direto na pele, com força suficiente para sentir o atrito e deixar tudo mais molhado.", seconds: 150 },
-
-{ id: "r6-couple-m-01", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Foco nas bolas", text: "{actor}, arrede a cueca de {receiver} de lado e lamba bem as bolas e o corpo do pau {pron_rec}. Pare a boca antes de chegar na cabeça para deixar {art_rec} {receiver} no limite.", seconds: 180 },
-
-{ id: "r6-couple-f-01", rank: 6, mode: "couple", insight: true, receiverPreset: "feminine", title: "Sopro quente na bucetinha", text: "{actor}, abra bem as pernas de {receiver}, encoste a boca perto da bucetinha {pron_rec} e solte sopros quentes, bem lentos, até sentir o corpo {pron_rec} reagir.", seconds: 120 },
-
-{ id: "r6-couple-m-02", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Sopro quente no pau", text: "{actor}, encoste a boca perto do pau de {receiver} e sopre quente desde a base até a cabeça, sem chupar ainda.", seconds: 120 },
-
-{ id: "r6-couple-m-03", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Água gelada na cabeça", text: "{actor}, beba água bem gelada e dê um beijo frio na cabeça do pau de {receiver}. Depois esquente com a língua e repita.", seconds: 120 },
-
-{ id: "r6-couple-f-02", rank: 6, mode: "couple", insight: true, receiverPreset: "feminine", title: "Beijo no clitóris", text: "{actor}, ache o clitóris de {receiver} com os dedos e dê um beijo molhado e focado bem em cima dele, sem pressa de sair dali.", seconds: 120 },
-
-{ id: "r6-couple-f-03", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Bucetinha em círculos", text: "{actor}, lamba os lábios externos da bucetinha de {receiver} rodando a língua no sentido horário, mantendo a pressão constante.", seconds: 120 },
-
-{ id: "r6-couple-f-04", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Bucetinha anti-horário", text: "{actor}, agora lamba os lábios externos da bucetinha de {receiver} no sentido anti-horário, devagar e molhado.", seconds: 120 },
-
-{ id: "r6-couple-f-05", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Vertical externo", text: "{actor}, lamba os lábios externos da bucetinha de {receiver} subindo e descendo com a língua sem parar.", seconds: 120 },
-
-{ id: "r6-couple-f-06", rank: 6, mode: "couple", insight: true, receiverPreset: "feminine", title: "Vertical interno", text: "{actor}, abra a bucetinha de {receiver} com as mãos e lamba os lábios internos de cima para baixo, focando na parte mais molhada.", seconds: 120 },
-
-{ id: "r6-couple-f-07", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Figura 8 no clitóris", text: "{actor}, faça um movimento de figura 8 com a língua ao redor do clitóris de {receiver}, sem pressa, deixando {subj_rec} sentir cada curva.", seconds: 120 },
-
-{ id: "r6-couple-f-08", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Alfabeto no clitóris", text: "{actor}, escreva o alfabeto com a ponta da língua no clitóris de {receiver}. Cada letra é uma sensação nova. Vá até o fim ou até {subj_rec} pedir para parar.", seconds: 150 },
-
-{ id: "r6-couple-f-09", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Oral com mão no peito", text: "{actor}, enquanto chupa a bucetinha de {receiver}, estenda uma mão para cima e agarre o peito {pron_rec}, esfregando o mamilo no mesmo ritmo da boca.", seconds: 120 },
-
-{ id: "r6-couple-f-10", rank: 6, mode: "couple", insight: true, receiverPreset: "feminine", title: "Língua penetrando", text: "{actor}, alterne entre lamber o clitóris de {receiver} e enfiar a língua dentro da bucetinha {pron_rec}. Vá e volte no ritmo que {subj_rec} responder melhor.", seconds: 120 },
-
-{ id: "r6-couple-f-11", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Lábios internos espalhados", text: "{actor}, espalhe bem os lábios da bucetinha de {receiver} com os dedos para expor o clitóris. Lamba direto nele com pressão constante, sem nada atrapalhar.", seconds: 120 },
-
-{ id: "r6-couple-m-04", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Só a cabecinha", text: "{actor}, coloque só a cabeça do pau de {receiver} na boca e gire a língua em volta do freio, sem engolir mais do que isso.", seconds: 120 },
-
-{ id: "r6-couple-m-05", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Engolir em sequência", text: "{actor}, chupe o pau de {receiver} em sequência: cinco segundos fundo, tira para lamber, quinze segundos fundo, pausa curta, e vinte segundos no limite confortável. Sem forçar garganta.", seconds: 180 },
-
-{ id: "r6-couple-any-01", rank: 6, mode: "couple", title: "Saliva quente", text: "{actor}, coloque bastante saliva {rec_intimacy_locative} de {receiver} e espalhe com a mão com pressão firme antes de começar a chupar.", seconds: 120 },
-
-{ id: "r6-couple-any-02", rank: 6, mode: "couple", title: "Tapa na bunda no oral", text: "{actor}, enquanto chupa {rec_intimacy_article} de {receiver}, dê tapas firmes e combinados na bunda {pron_rec}, deixando a pele quente.", seconds: 150 },
-
-{ id: "r6-couple-any-03", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Caminho do períneo", text: "{actor}, desça a ponta da língua depois da bucetinha de {receiver} e lamba o períneo com firmeza. Só avance para anal nela se isso já foi combinado e ela pedir mais.", seconds: 120 },
-
-{ id: "r6-couple-any-04", rank: 6, mode: "couple", title: "Facesit com controle", text: "{actor}, sente no rosto de {receiver} para {subj_rec} lamber seu {actor_intimacy}. Mantenham espaço para respirar e combinem um sinal de pausa.", seconds: 150 },
-
-{ id: "r6-couple-fm-01", rank: 6, mode: "couple", actorPreset: "feminine", receiverPreset: "masculine", title: "Espanhola agressiva", text: "{actor}, encaixe o pau de {receiver} entre os peitos e esfregue com força de cima para baixo, usando saliva para deixar a cabeça bem molhada.", seconds: 180 },
-
-{ id: "r6-couple-any-05", rank: 6, mode: "couple", insight: true, receiverPreset: "feminine", title: "Dedo no bumbum no oral", text: "{actor}, enquanto chupa {rec_intimacy_article} de {receiver}, se ela curtir anal, use um dedo lubrificado para massagear só a bordinha do cu {pron_rec}, sem insistir se houver qualquer desconforto.", seconds: 150 },
-
-{ id: "r6-couple-any-06", rank: 6, mode: "couple", title: "69 de lado", text: "Fiquem de lado em posição de 69 e chupem um ao outro com bastante saliva até o timer zerar. Quem precisar pausar toca duas vezes no corpo do outro.", seconds: 180 },
-
-{ id: "r6-couple-m-06", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Massagem embaixo do saco", text: "{actor}, enquanto chupa o pau de {receiver}, use uma mão para apertar o saco {pron_rec} e a outra para massagear firme a raiz do pau embaixo das bolas.", seconds: 150 },
-
-{ id: "r6-couple-m-07", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Surpresa no períneo", text: "{actor}, faça uma surpresa a {receiver} massageando o períneo, a área entre o ânus e a raiz do saco. Use um toque firme para {subj_rec} se conectar com essa zona tão sensível.", seconds: 120 },
-
-{ id: "r6-couple-m-08", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Polegar na cabeça", text: "{actor}, segure o pau de {receiver} com firmeza e provoque com movimentos lentos para cima e para baixo. Massageie a cabeça com a superfície do polegar. Quando sentir que está perto demais, espalhe a energia sexual com as mãos por todo o corpo {pron_rec}.", seconds: 180 },
-
-{ id: "r6-couple-m-09", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Alongar em direções opostas", text: "{actor}, brinque com o pau e as bolas de {receiver}, esticando em direções opostas para aumentar o fluxo sanguíneo. Faça isso com calma, é para aumentar o prazer, não a pressa.", seconds: 120 },
-
-{ id: "r6-couple-m-10", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Toque gentil nas bolas", text: "{actor}, dedique um tempo só para as bolas de {receiver}. Segure, agite e puxe suavemente, com um toque gentil e respeitoso. Transforme isso numa experiência estimulante e quase curativa.", seconds: 120 },
-
-{ id: "r6-couple-m-11", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Brincar com a palma", text: "{actor}, deixe o pau de {receiver} saltar na palma da sua mão. Envolva-o e acaricie de diferentes ângulos. Observe a respiração {pron_rec} e como o corpo reage a cada novo estímulo.", seconds: 120 },
-
-{ id: "r6-couple-m-12", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Esfregar rápido e ponto M", text: "{actor}, coloque o pau de {receiver} entre as mãos e esfregue rápido, deixando o óleo ou lubrificante escorrer. Estimule bastante a cabeça. Localize o ponto do milhão de dólares no períneo e pressione firme para reverter a vontade de gozar e prolongar o prazer.", seconds: 150 },
-
-{ id: "r6-couple-m-13", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Anel e torção", text: "{actor}, faça um anel com os dedos ao redor do pau de {receiver} e trabalhe da raiz até a ponta. Use movimentos de torção bem na cabeça, sem pressa de ir embora dali.", seconds: 120 },
-
-{ id: "r6-couple-m-14", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Respirem juntos", text: "{actor}, para fazer {receiver} aguentar mais, varie a velocidade do toque e aplique técnicas diferentes a cada momento. Respirem juntos e distribuam essa energia dos genitais até o coração. Mantenha-se presente.", seconds: 150 },
-
-{ id: "r6-couple-m-15", rank: 6, mode: "couple", receiverPreset: "masculine", title: "Efeito vibratório final", text: "{actor}, crie um efeito vibratório com as mãos no pau de {receiver} e bombeie a ponta contra a base. Repita as melhores técnicas de antes e não deixe nenhuma parte dos genitais sem atenção. Espalhe o toque para o resto do corpo {pron_rec}.", seconds: 180 },
-
-{ id: "r7-couple-any-01", rank: 7, mode: "couple", title: "Mordida na perna", text: "Durante a penetração mais selvagem, quem estiver com a boca livre dá uma mordida firme na coxa ou na batata da perna do outro, no auge do rala e rola.", seconds: 180 },
-
-{ id: "r5-solo-05", rank: 5, mode: "solo", title: "Rebolado de quatro", text: "{actor}, fique de quatro na cama olhando para trás, rebole o bumbum devagar e masturbe {own_intimacy} no mesmo ritmo.", seconds: 180 },
-
-{ id: "loop-couple-01", rank: 6, mode: "couple", loop: true, title: "RECUO: da penetração para a boca", text: "Recuo estratégico. Se já estavam penetrando, parem agora. {actor}, volte com a boca para {rec_intimacy_article} de {receiver}; {receiver}, diga se quer mais língua, mais pressão ou mais pausa.", seconds: 180 },
-
-{ id: "loop-couple-02", rank: 6, mode: "couple", loop: true, title: "RECUO: deixa implorar", text: "Interrompam o ritmo antes do clímax. {actor}, provoque {receiver} com boca e mão, mas pare sempre que {subj_rec} ficar perto demais. A meta é deixar {art_rec} {receiver} implorando.", seconds: 180 },
-
-{ id: "loop-solo-01", rank: 6, mode: "solo", loop: true, title: "RECUO SOLO: sem tocar", text: "{actor}, quando estiver quase gozando, tire a mão imediatamente. Por sessenta segundos, nada de tocar {own_intimacy}: só respiração, mamilos, coxas e cabeça suja.", seconds: 180 },
-
-{ id: "loop-solo-02", rank: 6, mode: "solo", loop: true, title: "RECUO SOLO: tortura mental", text: "{actor}, pare no limite e descreva em voz baixa a cena mais safada que vier na cabeça. Só volte a tocar {own_intimacy} quando o cronômetro mandar.", seconds: 180 },
-
-{ id: "r4-couple-mh-01", rank: 4, mode: "couple", requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Esfregada no colo", text: "{actor}, sente no colo de {receiver} ainda com roupas de baixo. Esfregue seu quadril no volume dele lentamente, sussurrando o quanto ele está duro, por 90 segundos.", seconds: 90 },
-
-{ id: "r6-couple-hm-01", rank: 6, mode: "couple", requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Dedos e boca em sincronia", text: "{actor}, posicione-se entre as pernas de {receiver}. Use seus dedos e boca simultaneamente no clitóris e nos lábios internos, acompanhando o ritmo da respiração dela.", seconds: 150 },
-
+{ id: "r1-conexao-01", rank: 1, seductionFlow: true, learningTags: ["whisper","slowBuild","femaleResponds"], title: "Memória carinhosa", text: "{actor}, responda: qual é o momento mais carinhoso que tivemos juntos? {receiver}, escuta e depois adiciona um detalhe que {subj_actor} pode ter esquecido.", seconds: 0 },
+{ id: "r1-conexao-02", rank: 1, seductionFlow: true, learningTags: ["confidenceBuild","desireSignal","femaleResponds"], title: "O que te conquista", text: "{actor}, diga três coisas simples de {receiver} que te conquistam (um sorriso, um gesto, uma risada). {receiver} escuta e diz qual faz mais efeito.", seconds: 0 },
+{ id: "r1-conexao-03", rank: 1, seductionFlow: true, learningTags: ["safePacing","adaptiveTone","femaleResponds"], title: "Zona de conforto", text: "{actor}, responda: com {receiver}, qual é o seu nível de conforto? Fale de um detalhe que {subj_rec} faz que te deixa tranquilo(a).", seconds: 0 },
+{ id: "r1-conexao-04", rank: 1, seductionFlow: true, learningTags: ["confidenceBuild","desireSignal","slowBuild"], title: "Quando começou", text: "{actor}, conte quando {subj_rec} {receiver} te pareceu realmente desejável. {receiver} escuta e depois explica o que mais te marcou nesse dia.", seconds: 0 },
+{ id: "r1-conexao-05", rank: 1, seductionFlow: true, learningTags: ["femaleChoice","bodyMap","playful"], title: "Presentes para dar", text: "{actor}, diga três presentes sensoriais que gostaria de dar a {receiver} hoje (um beijo no pescoço, uma massagem, um sussurro). {receiver} escolhe qual quer primeiro.", seconds: 0 },
+{ id: "r1-conexao-06", rank: 1, seductionFlow: true, learningTags: ["desireSignal","languagePreference","whisper"], title: "Segredo favoritista", text: "{actor}, confessa um detalhe específico de {receiver} que ninguém mais sabe que te deixa louco(a). {receiver} agora tem permissão de usar isso como arma.", seconds: 0 },
+{ id: "r1-conexao-07", rank: 1, seductionFlow: true, learningTags: ["femaleChoice","limits","desireSignal"], title: "O que você quer hoje", text: "{actor}, diga em voz baixa uma vontade clara que tem com {receiver} para hoje. {receiver} pode dizer \"sim\", \"não\" ou \"talvez depois\".", seconds: 0 },
+{ id: "r1-conexao-08", rank: 1, seductionFlow: true, learningTags: ["whisper","slowBuild","safePacing"], title: "Respiração lenta", text: "Aproximem-se. {actor}, diga muito perto do ouvido de {receiver} a coisa mais carinhosa que pensa {pron_rec}. {receiver} só respira e aproveita.", seconds: 60 },
+{ id: "r1-conexao-09", rank: 1, seductionFlow: true, learningTags: ["femaleLeads","limits","languagePreference"], title: "Desejos invertidos", text: "{receiver}, diga uma vontade que nunca confessou. {actor} escuta sem julgar e depois diz se topa ou prefere explorar outra coisa.", seconds: 0 },
+{ id: "r1-conexao-10", rank: 1, seductionFlow: true, learningTags: ["whisper","bodyMap","slowBuild"], title: "Toque invisível", text: "{actor}, de olhos fechados, toque o rosto de {receiver} com as pontas dos dedos e descreva o que sente. {receiver} fica em silêncio.", seconds: 45 },
+{ id: "r1-conexao-11", rank: 1, seductionFlow: true, learningTags: ["connection","affection","listening"], title: "Sentir-se amado", text: "{actor}, responda: qual foi o momento em que você mais se sentiu amado(a) por {receiver}? {receiver}, escuta e depois diz o que achou bonito nessa resposta.", seconds: 0 },
+{ id: "r1-conexao-12", rank: 1, seductionFlow: true, learningTags: ["trust","affection","confidenceBuild"], title: "Segurança boa", text: "{actor}, diga uma coisa que {receiver} faz que te passa segurança. {receiver}, escuta e depois conta uma coisa que {actor} faz que também te tranquiliza.", seconds: 0 },
+{ id: "r1-conexao-13", rank: 1, seductionFlow: true, learningTags: ["appreciation","connection","confidenceBuild"], title: "Detalhe especial", text: "{actor}, diga qual detalhe de {receiver} você acha especial. {receiver}, escuta e depois fala um detalhe de {actor} que também chama sua atenção.", seconds: 0 },
+{ id: "r1-conexao-14", rank: 1, seductionFlow: true, learningTags: ["memory","connection","slowBuild"], title: "Virou importante", text: "{actor}, conte quando percebeu que {receiver} tinha se tornado alguém importante. {receiver}, escuta e depois conta se lembra desse período.", seconds: 0 },
+{ id: "r1-conexao-15", rank: 1, seductionFlow: true, learningTags: ["communication","listening","connection"], title: "Boa conversa", text: "{actor}, diga o que faz uma conversa com {receiver} ficar gostosa e leve. {receiver}, escuta e depois conta qual tipo de conversa mais gosta de ter com {actor}.", seconds: 0 },
+{ id: "r1-conexao-16", rank: 1, seductionFlow: true, learningTags: ["memory","connection","playful"], title: "Lembrança favorita", text: "{actor}, conte qual é sua lembrança favorita com {receiver}. {receiver}, escuta e depois adiciona um detalhe que também marcou você.", seconds: 0 },
+{ id: "r1-conexao-17", rank: 1, seductionFlow: true, learningTags: ["playful","memory","connection"], title: "Dia engraçado", text: "{actor}, conte qual foi o dia mais engraçado que vocês já viveram juntos. {receiver}, escuta e depois conta sua versão desse momento.", seconds: 0 },
+{ id: "r1-conexao-18", rank: 1, seductionFlow: true, learningTags: ["memory","slowBuild","connection"], title: "Reviver um momento", text: "{actor}, escolha um momento com {receiver} que gostaria de reviver. {receiver}, escuta e depois diz se escolheria o mesmo ou outro.", seconds: 0 },
+{ id: "r1-conexao-19", rank: 1, seductionFlow: true, learningTags: ["memory","sensory","connection"], title: "Lembra nós dois", text: "{actor}, diga uma música, lugar, comida ou cheiro que lembra vocês dois. {receiver}, escuta e depois diz uma lembrança que veio na cabeça.", seconds: 0 },
+{ id: "r1-conexao-20", rank: 1, seductionFlow: true, learningTags: ["appreciation","memory","affection"], title: "Pequena atitude", text: "{actor}, conte uma pequena atitude de {receiver} que marcou você. {receiver}, escuta e depois conta uma atitude de {actor} que também ficou guardada.", seconds: 0 },
+{ id: "r1-conexao-21", rank: 1, seductionFlow: true, learningTags: ["dreams","future","connection"], title: "Sonho juntos", text: "{actor}, diga um sonho que gostaria de realizar com {receiver}. {receiver}, escuta e depois conta qual parte desse sonho parece mais legal.", seconds: 0 },
+{ id: "r1-conexao-22", rank: 1, seductionFlow: true, learningTags: ["future","connection","slowBuild"], title: "Cena do futuro", text: "{actor}, imagine uma cena simples de vocês dois no futuro e descreva. {receiver}, escuta e depois acrescenta um detalhe nessa cena.", seconds: 0 },
+{ id: "r1-conexao-23", rank: 1, seductionFlow: true, learningTags: ["future","playful","connection"], title: "Lugar especial", text: "{actor}, diga um lugar que gostaria de conhecer com {receiver}. {receiver}, escuta e depois escolhe uma coisa que vocês fariam lá.", seconds: 0 },
+{ id: "r1-conexao-24", rank: 1, seductionFlow: true, learningTags: ["routine","future","connection"], title: "Hábito gostoso", text: "{actor}, sugira um hábito simples que vocês poderiam criar juntos. {receiver}, escuta e depois diz se toparia começar essa semana.", seconds: 0 },
+{ id: "r1-conexao-25", rank: 1, seductionFlow: true, learningTags: ["routine","care","connection"], title: "Rotina mais leve", text: "{actor}, diga uma coisa simples que deixaria a rotina de vocês mais leve. {receiver}, escuta e depois sugere outra ideia pequena.", seconds: 0 },
+{ id: "r1-conexao-26", rank: 1, seductionFlow: true, learningTags: ["care","affection","safePacing"], title: "Carinho preferido", text: "{actor}, conte qual gesto de carinho no dia a dia mais gosta de receber de {receiver}. {receiver}, escuta e depois conta o seu também.", seconds: 0 },
+{ id: "r1-conexao-27", rank: 1, seductionFlow: true, learningTags: ["affection","languagePreference","connection"], title: "Amor em atitude", text: "{actor}, diga uma atitude simples de {receiver} que para você demonstra amor. {receiver}, escuta e depois fala uma atitude de {actor} que tem esse efeito.", seconds: 0 },
+{ id: "r1-conexao-28", rank: 1, seductionFlow: true, learningTags: ["appreciation","languagePreference","confidenceBuild"], title: "Elogio bom", text: "{actor}, diga um elogio que gosta de receber de {receiver}. {receiver}, escuta e depois faz esse elogio olhando para {actor}.", seconds: 0 },
+{ id: "r1-conexao-29", rank: 1, seductionFlow: true, learningTags: ["playful","dateNight","connection"], title: "Encontro barato", text: "{actor}, descreva um encontro perfeito com {receiver} sem gastar muito. {receiver}, escuta e depois escolhe a melhor parte da ideia.", seconds: 0 },
+{ id: "r1-conexao-30", rank: 1, seductionFlow: true, learningTags: ["playful","music","connection"], title: "Música-tema", text: "{actor}, escolha uma música que combina com vocês dois. {receiver}, escuta e depois diz se concorda ou escolheria outra.", seconds: 0 },
+{ id: "r1-conexao-31", rank: 1, seductionFlow: true, learningTags: ["smell","sensory","memory"], title: "Cheiro que provoca", text: "{actor}, diga qual cheiro de {receiver} mais te provoca. {receiver}, escuta e depois conta qual cheiro de {actor} também te pega.", seconds: 0 },
+{ id: "r1-conexao-32", rank: 1, seductionFlow: true, learningTags: ["voice","desireSignal","whisper"], title: "Voz que arrepia", text: "{actor}, diga que tom de voz de {receiver} te arrepia. {receiver}, responda usando exatamente esse tom de voz.", seconds: 45 },
+{ id: "r1-conexao-33", rank: 1, seductionFlow: true, learningTags: ["touch","bodyMap","slowBuild"], title: "Toque favorito", text: "{actor}, descreva como gosta de ser tocado(a) por {receiver}. {receiver}, escuta e depois descreve como gosta de ser tocado(a) também.", seconds: 0 },
+{ id: "r1-conexao-34", rank: 1, seductionFlow: true, learningTags: ["morning","routine","connection"], title: "Manhã perfeita", text: "{actor}, descreva como seria uma manhã perfeita com {receiver}. {receiver}, escuta e depois acrescenta um detalhe que faria essa manhã ainda melhor.", seconds: 0 },
+{ id: "r1-conexao-35", rank: 1, seductionFlow: true, learningTags: ["jealousy","playful","desireSignal"], title: "Ciúme gostoso", text: "{actor}, confesse: teve alguma vez que sentiu um ciúme gostoso de {receiver}? {receiver}, escuta e diz se já sentiu o mesmo.", seconds: 0 },
+{ id: "r1-couple-ff-03", rank: 1, mode: "couple", insight: true, seductionFlow: true, insightTarget: "receiver", learningTags: ["whisper","desireSignal","slowBuild"], actorPreset: "feminine", receiverPreset: "feminine", title: "Confissão entre elas", text: "{actor}, chegue no ouvido de {receiver} e confesse o que mais te atrai no corpo dela, sem tocar ainda. {receiver} só escuta e respira.", seconds: 60 },
+{ id: "r1-couple-mm-03", rank: 1, mode: "couple", insight: true, seductionFlow: true, insightTarget: "receiver", learningTags: ["whisper","desireSignal","confidenceBuild"], actorPreset: "masculine", receiverPreset: "masculine", title: "Provocação no ouvido", text: "{actor}, fale bem perto do ouvido de {receiver} o que pretende fazer com ele mais tarde, mantendo as mãos só na cintura {pron_rec}.", seconds: 60 },
 { id: "r1-couple-mh-02", rank: 1, mode: "couple", requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Sussurro no pescoço", text: "{actor}, abrace {receiver} por trás, beije o pescoço dela lentamente e sussurre o que você mais gosta de olhar no corpo dela quando ela está de costas.", seconds: 60 },
 
-{ id: "r7-couple-mh-02", rank: 7, mode: "couple", requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Controle por cima", text: "{actor}, sente-se sobre {receiver} para a penetração. Você dita a velocidade e a profundidade por 2 minutos. Ele não pode usar as mãos para te guiar, apenas aproveitar o seu ritmo.", seconds: 120 },
-
-{ id: "r4-couple-ff-01", rank: 4, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Pernas entrelaçadas", text: "{actor}, entrelace suas pernas nas de {receiver}. Acaricie os seios dela com uma mão enquanto a outra desliza por cima da calcinha, sentindo o calor e a umidade aumentarem.", seconds: 120 },
-
-{ id: "r4-couple-ff-02", rank: 4, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Seios contra seios", text: "{actor}, tire a parte de cima e cole seus seios nos seios de {receiver}. Esfreguem devagar, sentindo os mamilos roçarem.", seconds: 90 },
-
-{ id: "r4-couple-ff-03", rank: 4, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Beijo com mão na nuca", text: "{actor}, segure a nuca de {receiver} e conduza um beijo intenso. A outra mão desce pelas costas até a lombar, arranhando de leve.", seconds: 90 },
-
-{ id: "r4-couple-ff-04", rank: 4, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Calcinha de lado", text: "{actor}, afaste a calcinha de {receiver} e passe a ponta dos dedos nos lábios externos, sem entrar. Depois solte o tecido e beije por cima.", seconds: 90 },
-
-{ id: "r6-couple-ff-01", rank: 6, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Sincronia de prazer", text: "{actor}, posicione-se sobre {receiver}. Enquanto ela usa a boca na sua bucetinha, use seus dedos para masturbar a bucetinha dela, ditando o ritmo sem pressa.", seconds: 180 },
-
+// ═══════════════════════════════════════════════════════════════
+// RANK 2 — TOQUE & MASSAGEM
+// ═══════════════════════════════════════════════════════════════
+{ id: "r2-01", rank: 2, title: "Ponta dos dedos", text: "{actor}, percorra os braços, ombros e nuca de {receiver} usando apenas a ponta dos dedos.", seconds: 90 },
+{ id: "r2-02", rank: 2, title: "Massagem lenta", text: "{actor}, faça uma massagem lenta nos ombros de {receiver}. A pressão deve seguir a respiração {pron_rec}.", seconds: 120 },
+{ id: "r2-03", rank: 2, title: "Calor das mãos", text: "{actor}, aqueça as mãos e toque a cintura, costas e coxas de {receiver}, sem pressa e sem invadir limites.", seconds: 90 },
+{ id: "r2-04", rank: 2, title: "Vendar e adivinhar", text: "{receiver} fecha os olhos. {actor} toca três pontos do corpo e deixa {receiver} adivinhar onde foi.", seconds: 90 },
+{ id: "r2-05", rank: 2, title: "Pele contra pele", text: "Sentem-se próximos. {actor} guia as mãos de {receiver} pelos lugares em que quer receber carinho.", seconds: 120 },
+{ id: "r2-06", rank: 2, title: "Sem pressa", text: "{actor}, toque {receiver} por cima da roupa por dois minutos, alternando leveza, pressão e pausa.", seconds: 120 },
+{ id: "r2-07", rank: 2, title: "Trajeto quente", text: "{actor}, trace um caminho com as mãos da nuca até a lombar de {receiver}, repetindo cada vez mais devagar.", seconds: 90 },
+{ id: "r2-08", rank: 2, title: "Troca de controle", text: "{receiver} escolhe onde quer receber toque. {actor} obedece por um minuto, {actor_attentive} aos sinais.", seconds: 60 },
+{ id: "r2-09", rank: 2, title: "Massagem de costas", text: "{actor}, massageie as costas de {receiver} do pescoço até a lombar, alternando pressão firme, pausa e ponta dos dedos.", seconds: 150 },
+{ id: "r2-10", rank: 2, title: "Massagem nas coxas", text: "{actor}, massageie as coxas de {receiver} por cima da roupa, subindo devagar e recuando antes de chegar perto demais.", seconds: 120 },
+{ id: "r2-11", rank: 2, title: "Massagem guiada", text: "{receiver}, guie as mãos de {actor} e diga onde quer mais pressão, onde quer leveza e onde ainda não quer toque.", seconds: 120 },
+{ id: "r2-var-01", rank: 2, mode: "couple", title: "Respiração nas mãos", text: "{actor}, segure as mãos de {receiver}, aproxime da sua boca e respire quente nos dedos {pron_rec}. Depois deslize as mãos por braços e ombros, sem pressa.", seconds: 90 },
+{ id: "r2-var-02", rank: 2, mode: "couple", title: "Ombros no colo", text: "{receiver}, sente entre as pernas de {actor}. {actor}, massageie nuca, ombros e clavículas, alternando pressão firme com pausas longas para sentir a reação.", seconds: 120 },
+{ id: "r2-var-03", rank: 2, mode: "couple", title: "Três tipos de toque", text: "{actor}, escolha três toques: ponta dos dedos, palma quente e pressão firme. Use cada um em uma área diferente do corpo de {receiver}, sempre por cima da roupa.", seconds: 120 },
+{ id: "r2-var-04", rank: 2, mode: "couple", title: "Toalha quente", text: "{actor}, aqueça uma toalha ou pano nas mãos e pressione contra costas, barriga ou coxas de {receiver}. Tire devagar e substitua pelo toque da sua pele.", seconds: 120 },
+{ id: "r2-var-05", rank: 2, mode: "couple", title: "Barreira de tecido", text: "{actor}, cubra uma parte do corpo de {receiver} com um tecido fino e toque apenas por cima dele. {receiver} diz quando quer mais pressão ou mais leveza.", seconds: 120 },
+{ id: "r2-var-06", rank: 2, mode: "couple", title: "Massagem em silêncio", text: "Por dois minutos, ninguém fala. {actor} massageia {receiver} por cima da roupa e só muda de lugar quando {receiver} respirar mais fundo.", seconds: 120 },
+{ id: "r2-var-07", rank: 2, mode: "couple", title: "Escolha de pressão", text: "{receiver}, escolha leve, médio ou firme. {actor}, aplique essa pressão em três pontos do corpo {pron_rec} e pergunte se aumenta ou mantém.", seconds: 90 },
+{ id: "r2-var-08", rank: 2, mode: "couple", title: "Carinho sem beijo", text: "{actor}, fique perto o bastante para quase beijar {receiver}, mas use só as mãos por cima da roupa. A boca provoca, mas não encosta.", seconds: 90 },
+{ id: "r2-verdade-01", rank: 2, title: "Verdade: Fantasias", text: "{actor}, responda com honestidade: qual é uma fantasia que teria vergonha de contar? {receiver} escuta com respeito e depois compartilha a própria.", seconds: 0 },
+{ id: "r2-verdade-02", rank: 2, title: "Verdade: Ciúmes", text: "{actor}, seja honesto(a): houve um momento em que sentiu ciúmes de algo relacionado a {receiver}? Descreva sem julgamento.", seconds: 0 },
+{ id: "r2-verdade-03", rank: 2, title: "Verdade: Desejo", text: "{actor}, responda com sinceridade: em que momento desta semana {subj_rec} desejou mais {direct_rec}?", seconds: 0 },
+{ id: "r2-consequencia-01", rank: 2, title: "Consequência: Massagem especial", text: "{receiver}, como punição leve, {actor} vai massagear seus pés, tornozelos e panturrilhas por cinco minutos enquanto vocês conversam.", seconds: 300 },
+{ id: "r2-consequencia-02", rank: 2, title: "Consequência: Sussurro contínuo", text: "{actor}, como consequência, sussurre no ouvido de {receiver} por dois minutos. {receiver} não pode falar, só ouvir e aproveitar.", seconds: 120 },
+{ id: "r2-consequencia-03", rank: 2, title: "Consequência: Toque coberto", text: "{receiver}, {actor} vai massagear seus ombros, nuca e braços com as pontas dos dedos, coberto por uma toalha ou pano.", seconds: 180 },
+{ id: "r2-new-01", rank: 2, title: "Privação de visão", text: "{actor}, vende os olhos de {receiver}. Por 2 minutos, provoque apenas com sussurros e respiração perto do ouvido, sem nenhum toque.", seconds: 120 },
 { id: "r2-couple-ff-02", rank: 2, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Mapeamento suave", text: "{actor}, de olhos fechados, use as pontas dos dedos para mapear as curvas de {receiver} por cima da roupa. {receiver} deve guiar suas mãos apenas com a respiração.", seconds: 90 },
-
-{ id: "r7-couple-ff-02", rank: 7, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Clímax espelhado", text: "Posicionem-se de forma que ambas possam estimular uma a outra (usando mãos ou tribadismo). Foquem no contato visual e tentem sincronizar a respiração até chegarem ao limite juntas.", seconds: 180 },
-
-{ id: "r4-couple-mm-01", rank: 4, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Atrito por cima", text: "{actor}, fique de frente para {receiver} apenas de cueca. Pressione seu volume contra o dele e esfreguem-se lentamente, segurando a nuca um do outro com firmeza.", seconds: 120 },
-
-{ id: "r4-couple-mm-02", rank: 4, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Peito contra peito", text: "{actor}, tire a camiseta e cole seu peito no peito de {receiver}. Sintam o calor e a tensão muscular enquanto se olham.", seconds: 60 },
-
-{ id: "r4-couple-mm-03", rank: 4, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Mordida no trapézio", text: "{actor}, morda o trapézio de {receiver} (entre pescoço e ombro) com firmeza. Segure a nuca {pron_rec} enquanto morde.", seconds: 60 },
-
-{ id: "r4-couple-mm-04", rank: 4, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Cueca de lado", text: "{actor}, afaste a cueca de {receiver} e passe a ponta dos dedos na base do pau {pron_rec}, sem envolver ainda. Depois solte o tecido e pressione por cima.", seconds: 90 },
-
-{ id: "r6-couple-mm-01", rank: 6, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Oral com domínio", text: "{actor}, posicione-se para fazer sexo oral em {receiver}. Chupe o pau dele mantendo contato visual, enquanto usa uma mão para massagear a base e as bolas com força gostosa.", seconds: 150 },
-
 { id: "r2-couple-mm-02", rank: 2, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Tensão no peitoral", text: "{actor}, passe as mãos firmemente pelo peitoral e abdômen de {receiver}, sentindo a tensão muscular. Aproxime a boca, mas dê apenas beijos secos por 1 minuto.", seconds: 60 },
 
-{ id: "r7-couple-mm-02", rank: 7, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Ritmo intenso", text: "Durante a penetração, {actor} dita um ritmo mais selvagem e firme por 2 minutos. {receiver} comunica o limite se precisar, mas o objetivo é buscar o ápice de intensidade.", seconds: 120 },
-
-{ id: "r3-solo-f-01", rank: 3, mode: "solo", actorPreset: "feminine", title: "Toque nos seios", text: "{actor}, deslize os dedos pelos seus seios e desça até a barriga. Aperte os próprios mamilos levemente enquanto imagina a boca de alguém sugando ali.", seconds: 90 },
-
-{ id: "r5-solo-f-01", rank: 5, mode: "solo", actorPreset: "feminine", title: "Foco no clitóris com pausa", text: "{actor}, afaste a calcinha e comece a masturbar seu clitóris com movimentos circulares. Quando estiver quase no limite, pare completamente por 10 segundos para acumular tesão antes de voltar.", seconds: 150 },
-
-{ id: "r6-solo-f-02", rank: 6, mode: "solo", actorPreset: "feminine", title: "Exploração interna", text: "{actor}, use um ou dois dedos lubrificados para explorar seu interior enquanto a outra mão estimula o clitóris. Alterne o foco entre a penetração lenta e a fricção rápida do lado de fora.", seconds: 180 },
-
-{ id: "r3-solo-m-01", rank: 3, mode: "solo", actorPreset: "masculine", title: "Provocação na base", text: "{actor}, passe a mão pelo seu abdômen e desça até a marca da cueca. Provoque a si mesmo apertando a base do seu pau por cima do tecido, sentindo pulsar sem colocar a mão dentro.", seconds: 90 },
-
-{ id: "r5-solo-m-01", rank: 5, mode: "solo", actorPreset: "masculine", title: "Fricção com saliva", text: "{actor}, libere seu pau e comece uma masturbação firme usando bastante saliva. Alterne entre movimentos longos em toda a extensão e fricção rápida apenas na cabeça.", seconds: 150 },
-
-{ id: "r6-solo-m-02", rank: 6, mode: "solo", insight: true, insightTarget: "actor", actorPreset: "masculine", title: "Limite do orgasmo", text: "{actor}, masturbe-se até o exato ponto de quase gozar (edging). Solte imediatamente, respire fundo por 10 segundos para deixar o tesão abaixar um pouco, e retome o processo.", seconds: 180 },
-
-{ id: "r2-new-01", rank: 2, title: "Privação de visão", text: "{actor}, vende os olhos de {receiver}. Por 2 minutos, provoque apenas com sussurros e respiração perto do ouvido, sem nenhum toque.", seconds: 120 },
-
-{ id: "r2-new-02", rank: 2, title: "Áudio proibido", text: "{actor}, pegue o celular e grave um áudio de 30 segundos gemendo o nome de {receiver}. Mande no chat de vocês para {subj_rec} ouvir agora.", seconds: 0 },
-
-{ id: "r2-new-03", rank: 2, title: "Gelo na nuca", text: "{actor}, pegue um cubo de gelo e passe lentamente pela nuca e pelas costas de {receiver}, acompanhando o caminho da água com beijos.", seconds: 60 },
-
-{ id: "r2-new-04", rank: 2, title: "Submissão verbal", text: "{receiver}, durante os próximos 3 minutos, você só pode responder a {actor} dizendo 'Sim, senhor(a)' ou 'Não, senhor(a)'. {actor}, faça perguntas provocantes.", seconds: 180 },
-
-{ id: "r2-new-05", rank: 2, title: "Janela perigosa", text: "Vão para perto de uma janela ou porta entreaberta. Fiquem abraçados por 1 minuto se beijando com a leve adrenalina de poderem ser ouvidos.", seconds: 60 },
-
-{ id: "r2-new-06", rank: 2, title: "Vibração distante", text: "Se tiverem um vibrador, {actor} liga o aparelho e encosta em diferentes partes do corpo (braços, pescoço, barriga) de {receiver}, apenas para criar expectativa.", seconds: 90 },
-
-{ id: "r3-new-01", rank: 3, title: "Mãos presas", text: "{actor}, use uma gravata, cinto ou as próprias mãos para prender firmemente os pulsos de {receiver} acima da cabeça. Provoque o pescoço e a barriga por 2 minutos.", seconds: 120 },
-
-{ id: "r3-new-02", rank: 3, title: "Vídeo de si mesmo", text: "{actor}, posicione o celular e grave 1 minuto tocando a si mesmo de forma provocativa, enquanto {receiver} apenas assiste pela tela (ou ao vivo, sem poder tocar).", seconds: 60 },
-
-{ id: "r3-new-03", rank: 3, title: "Óleo quente", text: "{actor}, esfregue óleo de massagem nas mãos até esquentar bastante (ou use vela de massagem) e deslize firmemente pelas nádegas e coxas de {receiver}.", seconds: 120 },
-
-{ id: "r3-new-04", rank: 3, title: "Ajoelhe-se", text: "{actor}, peça para {receiver} ficar de joelhos na sua frente. Segure o rosto {pron_rec} com as duas mãos e dite como será o resto da noite.", seconds: 0 },
-
-{ id: "r3-new-05", rank: 3, title: "Marcando território", text: "{actor}, dê um chupão leve na parte interna da coxa ou na base do pescoço de {receiver}, deixando uma pequena marca de propriedade.", seconds: 45 },
-
-{ id: "r3-new-06", rank: 3, title: "Tapas de leve", text: "{actor}, enquanto beija {receiver}, dê pequenos e ardidos tapas nas nádegas {pron_rec}, alternando com apertões fortes na pele.", seconds: 90 },
-
-{ id: "r3-new-07", rank: 3, title: "Textura surpresa", text: "{actor}, vende {receiver}. Use três texturas diferentes (um tecido de seda, algo metálico frio, e seus próprios cabelos) para acariciar o peito e barriga {pron_rec}.", seconds: 120 },
-
-{ id: "r4-new-01", rank: 4, title: "Implorando por toque", text: "{receiver}, afaste as pernas e exiba {rec_intimacy_article}, mas você está proibido(a) de se tocar. Você deve implorar verbalmente para que {actor} toque você.", seconds: 60 },
-
-{ id: "r4-new-02", rank: 4, title: "Tapas ritmados", text: "{actor}, coloque {receiver} de bruços ou de quatro. Dê 10 tapas estalados e firmes em cada nádega, deixando a pele vermelha e quente.", seconds: 0 },
-
-{ id: "r4-new-03", rank: 4, title: "Adoração de pés", text: "{actor}, passe 2 minutos beijando, massageando e adorando os pés e tornozelos de {receiver}, demonstrando total reverência ao corpo {pron_rec}.", seconds: 120 },
-
-{ id: "r4-new-04", rank: 4, title: "Gelo na virilha", text: "{actor}, passe um cubo de gelo ao redor de {rec_intimacy_article} de {receiver} e pela virilha, alternando imediatamente com o calor do seu hálito.", seconds: 90 },
-
-{ id: "r4-new-05", rank: 4, title: "Punição no espelho", text: "{actor}, posicione {receiver} de frente para o espelho. Fique por trás, segure o pescoço {pron_rec} (sem apertar a traqueia) e esfregue seu {actor_intimacy} contra {rec_intimacy_article} por trás.", seconds: 120 },
-
-{ id: "r4-new-06", rank: 4, title: "Controle de respiração", text: "{actor}, coloque dois dedos levemente sobre os lábios de {receiver}, forçando {subj_rec} a respirar apenas pelo nariz enquanto você estimula {rec_intimacy_article}.", seconds: 90 },
-
-{ id: "r5-new-01", rank: 5, title: "Brinquedo e domínio", text: "{actor}, se tiverem um vibrador, use-o {rec_intimacy_locative} de {receiver}. Sempre que {subj_rec} estiver quase chegando lá, desligue o aparelho por 10 segundos.", seconds: 180 },
-
-{ id: "r5-new-02", rank: 5, title: "Orgasmo negado (Edging)", text: "{actor}, masturbe {receiver} intensamente. Quando {subj_rec} der o sinal de que vai gozar, PARE tudo imediatamente. Deixe {subj_rec} sofrer de tesão por 1 minuto antes de retomar.", seconds: 180 },
-
-{ id: "r5-new-03", rank: 5, title: "Arranhões", text: "{actor}, deite {receiver} de bruços. Enquanto faz uma massagem forte nas coxas, use as unhas para arranhar as costas {pron_rec} com força suficiente para arrepiar, mas sem machucar.", seconds: 90 },
-
-{ id: "r5-new-04", rank: 5, title: "Fones de ouvido (Surdez)", text: "{receiver}, coloque fones de ouvido com música muito alta e feche os olhos. {actor}, você tem 3 minutos para usar as mãos e a boca onde quiser, surpreendendo {receiver} que não pode prever nada.", seconds: 180 },
-
-{ id: "r5-new-05", rank: 5, title: "Restrição de pernas", text: "{actor}, use as próprias pernas ou o peso do corpo para prender completamente as pernas de {receiver} abertas. Estimule {rec_intimacy_article} com as mãos enquanto {subj_rec} não pode se mover.", seconds: 120 },
-
-{ id: "r5-new-06", rank: 5, title: "Adoração de joelhos", text: "{actor}, fique de joelhos e passe 3 minutos apenas beijando, lambendo e adorando {rec_intimacy_article} de {receiver}, tratando como um altar.", seconds: 180 },
-
-{ id: "r6-new-01", rank: 6, title: "Puxão de cabelo e garganta", text: "{actor}, durante o oral, segure firmemente o cabelo de {receiver} na nuca, forçando a cabeça levemente para trás. Controle o ritmo com dominação clara.", seconds: 150 },
-
-{ id: "r6-new-02", rank: 6, title: "Exploração traseira", text: "Se consentido: {actor}, use bastante lubrificante e um dedo (ou plug pequeno) para massagear a entrada anal de {receiver} simultaneamente ao estímulo do clitóris/pau.", seconds: 150 },
-
-{ id: "r6-new-03", rank: 6, title: "Orgasmo sob comando", text: "{actor}, leve {receiver} até o limite extremo com a boca ou vibrador. {receiver} está TERMINANTEMENTE PROIBIDO(A) de gozar até que você diga 'Goza pra mim agora'.", seconds: 240 },
-
-{ id: "r6-new-04", rank: 6, title: "Castigo e Recompensa", text: "{actor}, dê tapas fortes e ritmados nas nádegas de {receiver}. Para cada tapa, compense com uma lambida lenta e profunda {rec_intimacy_locative}.", seconds: 180 },
-
-{ id: "r6-new-05", rank: 6, title: "Câmera ligada", text: "{actor}, posicione o celular gravando. Façam sexo oral de frente para a câmera. Façam expressões para a lente como se estivessem se exibindo para alguém.", seconds: 180 },
-
-{ id: "r6-new-06", rank: 6, title: "Submissão forçada", text: "{actor}, pressione os ombros de {receiver} contra a cama com firmeza, subindo sobre {subj_rec}. Faça oral ditando um ritmo agressivo enquanto mantém o corpo {pron_rec} imobilizado.", seconds: 150 },
-
-{ id: "r7-new-01", rank: 7, title: "Orgasmo Arruinado", text: "{actor}, leve {receiver} ao clímax durante a penetração ou oral. No exato milissegundo em que o orgasmo começar a disparar, PARE O ESTÍMULO TOTALMENTE. Deixe o orgasmo acontecer 'no vazio'.", seconds: 0 },
-
-{ id: "r7-new-02", rank: 7, title: "Animalesco", text: "Penetração agressiva. {actor}, morda a nuca e o ombro de {receiver}, agarre a cintura com força (deixando marcas de dedo) e dite um ritmo selvagem até um de vocês pedir pausa.", seconds: 180 },
-
-{ id: "r7-new-03", rank: 7, title: "Double Penetration (Fictício/Brinquedo)", text: "Se consentido: Durante a penetração vaginal, {actor} (ou a própria {receiver}) usa um ou dois dedos bem lubrificados para penetração anal simultânea.", seconds: 180 },
-
-{ id: "r7-new-04", rank: 7, title: "Facefuck / Deepthroat", text: "{actor}, posicione-se e use a boca de {receiver} ativamente. Você controla os movimentos de quadril, ditando a profundidade do oral por 2 minutos contínuos.", seconds: 120 },
-
-{ id: "r7-new-05", rank: 7, title: "Uso de Plug", text: "Se tiverem um plug anal, {actor} insere em {receiver} com bastante lubrificante. Em seguida, inicie a penetração tradicional, aproveitando a sensação de 'aperto' duplo.", seconds: 240 },
-
-{ id: "r7-new-06", rank: 7, title: "Transe do Orgasmo", text: "{actor}, use um vibrador potente (se disponível) somado à penetração. Mantenha o estímulo contínuo até que {receiver} tenha orgasmos múltiplos ou implore para parar.", seconds: 300 },
-
-{ id: "r4-solo-f-new-01", rank: 4, mode: "solo", actorPreset: "feminine", title: "Mamilos doloridos", text: "{actor}, belisque seus próprios mamilos com força e puxe-os levemente para frente. Sinta a dor virar tesão na sua bucetinha antes de se tocar lá embaixo.", seconds: 90 },
-
-{ id: "r5-solo-f-new-02", rank: 5, mode: "solo", actorPreset: "feminine", title: "Plug e Clitóris", text: "Se tiver um plug ou brinquedo, insira-o. Com a outra mão, foque apenas em masturbar seu clitóris o mais rápido que conseguir por 2 minutos.", seconds: 120 },
-
-{ id: "r6-solo-f-new-03", rank: 6, mode: "solo", actorPreset: "feminine", title: "Exibição no quarto", text: "{actor}, coloque o celular gravando você na cama de pernas abertas. Masturbe-se olhando para a câmera, dizendo em voz alta o que você quer que façam com você.", seconds: 180 },
-
-{ id: "r7-solo-f-new-04", rank: 7, mode: "solo", actorPreset: "feminine", title: "Edging Solo Severo", text: "{actor}, traga a si mesma ao limite do orgasmo três vezes seguidas usando seus dedos ou vibrador. Você só tem permissão para gozar na quarta vez.", seconds: 300 },
-
-{ id: "r4-solo-m-new-01", rank: 4, mode: "solo", actorPreset: "masculine", title: "Bolas puxadas", text: "{actor}, masturbe o seu pau enquanto puxa a base do seu saco escrotal levemente para baixo, sentindo tudo ficar mais rígido e dolorido de tesão.", seconds: 90 },
-
-{ id: "r5-solo-m-new-02", rank: 5, mode: "solo", actorPreset: "masculine", title: "Estímulo de períneo", text: "{actor}, masturbe-se usando bastante lubrificante. Use dois dedos da outra mão para pressionar firmemente o seu períneo (entre as bolas e o ânus) a cada vez que o prazer subir.", seconds: 120 },
-
-{ id: "r6-solo-m-new-03", rank: 6, mode: "solo", actorPreset: "masculine", title: "Humilhação leve no espelho", text: "{actor}, masturbe-se de frente para o espelho. Sussurre para si mesmo palavras sujas sobre o quanto você está necessitado e desesperado para gozar.", seconds: 150 },
-
-{ id: "r7-solo-m-new-04", rank: 7, mode: "solo", actorPreset: "masculine", title: "Gozo Arruinado Solo", text: "{actor}, masturbe-se o mais rápido que puder. No segundo em que o primeiro espasmo do gozo começar, TIRE A MÃO TOTALMENTE. Sinta a frustração do orgasmo arruinado.", seconds: 300 },
-
-{ id: "loop-couple-03", rank: 6, mode: "couple", loop: true, title: "RECUO: volta para as mãos", text: "Recuo estratégico. Parem o que estavam fazendo. {actor}, use só as mãos em {receiver} por dois minutos, lento, lendo cada reação antes de subir o ritmo de novo.", seconds: 120 },
-
-{ id: "loop-couple-04", rank: 7, mode: "couple", loop: true, title: "RECUO: beijo e respiração", text: "Interrompam o ápice. Fiquem colados, testa com testa, e voltem a se beijar devagar sincronizando a respiração por dois minutos antes de retomar.", seconds: 120 },
-
-{ id: "loop-couple-05", rank: 6, mode: "couple", loop: true, title: "RECUO: provocar e negar", text: "{actor}, provoque {receiver} com boca e mãos perto de {rec_intimacy_article}, mas recue toda vez que {subj_rec} chegar perto demais. A meta é deixar {art_rec} {receiver} implorando.", seconds: 150 },
-
-{ id: "loop-couple-06", rank: 7, mode: "couple", loop: true, title: "RECUO: troca de posição", text: "Saiam da posição atual. {receiver} escolhe uma nova posição mais lenta e {actor} reinicia com calma, sem pressa de voltar à intensidade.", seconds: 120 },
-
-{ id: "loop-solo-03", rank: 6, mode: "solo", loop: true, title: "RECUO SOLO: tira a mão", text: "{actor}, largue {own_intimacy} agora. Por um minuto, só pele: peito, barriga, coxas e respiração. Deixe o tesão baixar de propósito antes de voltar.", seconds: 120 },
-
-{ id: "loop-solo-04", rank: 7, mode: "solo", loop: true, title: "RECUO SOLO: respira e segura", text: "{actor}, pare no limite e conte dez respirações fundas sem tocar {own_intimacy}. Só retome quando o corpo tiver desacelerado.", seconds: 120 },
-
-{ id: "r5-recv-01", rank: 5, mode: "couple", title: "O ritmo é seu", text: "{receiver}, diga exatamente a pressão, a velocidade e o lugar onde quer a mão de {actor}. {actor} obedece sem improvisar por noventa segundos.", seconds: 90 },
-
-{ id: "r5-recv-02", rank: 5, mode: "couple", title: "Mão guiada de novo", text: "{receiver}, segure o pulso de {actor} e conduza a mão {pron_actor} pelo seu corpo no ritmo que te agrada, parando onde quiser mais demora.", seconds: 90 },
-
-{ id: "r6-recv-01", rank: 6, mode: "couple", title: "Você comanda a boca", text: "{receiver}, guie a cabeça de {actor} com as mãos e dite o ritmo do oral: mais devagar, mais fundo, ou pausa. {actor} só executa.", seconds: 150 },
-
-{ id: "r6-recv-02", rank: 6, mode: "couple", title: "Mapa falado", text: "{receiver}, descreva em voz alta onde quer a língua de {actor} a cada quinze segundos. {actor} muda de lugar exatamente quando {subj_rec} mandar.", seconds: 120 },
-
-{ id: "r7-recv-01", rank: 7, mode: "couple", title: "Posição e ritmo seus", text: "{receiver}, escolha a posição e dite a velocidade e a profundidade da penetração. {actor} obedece cada ajuste por dois minutos, sem antecipar.", seconds: 120 },
-
-{ id: "r7-recv-02", rank: 7, mode: "couple", insight: true, insightTarget: "receiver", title: "Você decide o clímax", text: "{receiver}, diga se quer acelerar para o clímax ou prolongar mais um pouco. {actor} segue a sua decisão sem discutir.", seconds: 150 },
-
-{ id: "r1-couple-ff-03", rank: 1, mode: "couple", insight: true, seductionFlow: true, insightTarget: "receiver", learningTags: ["whisper", "desireSignal", "slowBuild"], actorPreset: "feminine", receiverPreset: "feminine", title: "Confissão entre elas", text: "{actor}, chegue no ouvido de {receiver} e confesse o que mais te atrai no corpo dela, sem tocar ainda. {receiver} só escuta e respira.", seconds: 60 },
-
-{ id: "r3-couple-ff-03", rank: 3, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Beijo descendo", text: "{actor}, comece a beijar a boca de {receiver} e desça lentamente pelo pescoço e colo, mordendo de leve onde {subj_rec} reagir mais.", seconds: 90 },
-
-{ id: "r5-couple-ff-03", rank: 5, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Dedos no ritmo dela", text: "{actor}, masturbe {rec_intimacy_article} de {receiver} com os dedos, começando devagar e acelerando só quando {subj_rec} pedir. Pause se {subj_rec} chegar perto demais.", seconds: 120 },
-
-{ id: "r1-couple-mm-03", rank: 1, mode: "couple", insight: true, seductionFlow: true, insightTarget: "receiver", learningTags: ["whisper", "desireSignal", "confidenceBuild"], actorPreset: "masculine", receiverPreset: "masculine", title: "Provocação no ouvido", text: "{actor}, fale bem perto do ouvido de {receiver} o que pretende fazer com ele mais tarde, mantendo as mãos só na cintura {pron_rec}.", seconds: 60 },
-
-{ id: "r3-couple-mm-03", rank: 3, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Boca e mordida", text: "{actor}, beije {receiver} com firmeza, segure a nuca dele e alterne beijo intenso com mordidas leves no lábio e no pescoço.", seconds: 90 },
-
-{ id: "r5-couple-mm-03", rank: 5, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "masculine", receiverPreset: "masculine", title: "Punho no ritmo dele", text: "{actor}, masturbe {rec_intimacy_article} de {receiver} com ritmo firme e bastante saliva, lendo a reação {pron_rec} para acelerar ou segurar antes do limite.", seconds: 120 },
-
-{ id: "r2-var-01", rank: 2, mode: "couple", title: "Respiração nas mãos", text: "{actor}, segure as mãos de {receiver}, aproxime da sua boca e respire quente nos dedos {pron_rec}. Depois deslize as mãos {pron_actor} por braços e ombros, sem pressa.", seconds: 90 },
-
-{ id: "r2-var-02", rank: 2, mode: "couple", title: "Ombros no colo", text: "{receiver}, sente entre as pernas de {actor}. {actor}, massageie nuca, ombros e clavículas, alternando pressão firme com pausas longas para sentir a reação.", seconds: 120 },
-
-{ id: "r2-var-03", rank: 2, mode: "couple", title: "Três tipos de toque", text: "{actor}, escolha três toques: ponta dos dedos, palma quente e pressão firme. Use cada um em uma área diferente do corpo de {receiver}, sempre por cima da roupa.", seconds: 120 },
-
-{ id: "r2-var-04", rank: 2, mode: "couple", title: "Toalha quente", text: "{actor}, aqueça uma toalha ou pano nas mãos e pressione contra costas, barriga ou coxas de {receiver}. Tire devagar e substitua pelo toque da sua pele.", seconds: 120 },
-
-{ id: "r2-var-05", rank: 2, mode: "couple", title: "Barreira de tecido", text: "{actor}, cubra uma parte do corpo de {receiver} com um tecido fino e toque apenas por cima dele. {receiver} diz quando quer mais pressão ou mais leveza.", seconds: 120 },
-
-{ id: "r2-var-06", rank: 2, mode: "couple", title: "Massagem em silêncio", text: "Por dois minutos, ninguém fala. {actor} massageia {receiver} por cima da roupa e só muda de lugar quando {receiver} respirar mais fundo.", seconds: 120 },
-
-{ id: "r2-var-07", rank: 2, mode: "couple", title: "Escolha de pressão", text: "{receiver}, escolha leve, médio ou firme. {actor}, aplique essa pressão em três pontos do corpo {pron_rec} e pergunte se aumenta ou mantém.", seconds: 90 },
-
-{ id: "r2-var-08", rank: 2, mode: "couple", title: "Carinho sem beijo", text: "{actor}, fique perto o bastante para quase beijar {receiver}, mas use só as mãos por cima da roupa. A boca provoca, mas não encosta.", seconds: 90 },
-
-{ id: "r3-var-01", rank: 3, mode: "couple", title: "Beijo em contagem", text: "{actor}, beije {receiver} em ciclos: cinco segundos leve, cinco segundos firme, cinco segundos parado com a boca quase encostada. Repita até o timer zerar.", seconds: 90 },
-
-{ id: "r3-var-02", rank: 3, mode: "couple", title: "Boca e respiração", text: "{actor}, encoste a boca perto da boca de {receiver}, respire junto e só beije quando {subj_rec} puxar você para mais perto.", seconds: 90 },
-
-{ id: "r3-var-03", rank: 3, mode: "couple", title: "Pescoço guiado", text: "{receiver}, guie com a mão onde quer beijos no pescoço, nuca ou ombro. {actor} obedece e pausa sempre que a respiração mudar.", seconds: 120 },
-
-{ id: "r3-var-04", rank: 3, mode: "couple", title: "Colo e beijo", text: "{actor}, puxe {receiver} para perto pelo colo ou cintura e conduza um beijo lento, sem pressa de descer as mãos.", seconds: 90 },
-
-{ id: "r3-var-05", rank: 3, mode: "couple", title: "Mordida com pergunta", text: "{actor}, dê uma mordida leve no lábio, pescoço ou ombro de {receiver}. Depois pergunte: mais leve, mais forte ou de novo?", seconds: 75 },
-
-{ id: "r3-var-06", rank: 3, mode: "couple", title: "Beijo negado", text: "{actor}, comece três beijos e interrompa antes de completar. No quarto, deixe {receiver} decidir se merece beijo lento ou beijo intenso.", seconds: 90 },
-
-{ id: "r3-var-07", rank: 3, mode: "couple", title: "Trilha de beijos", text: "{actor}, faça uma trilha curta de beijos da testa à boca de {receiver}, depois da boca ao pescoço, parando onde {subj_rec} reagir mais.", seconds: 90 },
-
-{ id: "r3-var-08", rank: 3, mode: "couple", title: "Troca de comando", text: "{receiver}, comande o tipo de beijo: lento, molhado, mordido ou provocante. {actor} executa por quinze segundos e espera o próximo comando.", seconds: 120 },
-
-{ id: "r1-solo-var-01", rank: 1, mode: "solo", title: "Pulso e cintura", text: "{actor}, mantenha a roupa no corpo. Use uma mão no pulso e outra na cintura, respirando fundo até sentir o corpo acordar antes de qualquer toque mais ousado.", seconds: 60 },
-
-{ id: "r1-solo-var-02", rank: 1, mode: "solo", title: "Calor por cima", text: "{actor}, pressione a palma da mão {underwear_outer} por cima da roupa, sem movimento no começo. Depois faça círculos lentos e pare antes de acelerar.", seconds: 75 },
-
-{ id: "r1-solo-var-03", rank: 1, mode: "solo", title: "Espreguiçar safado", text: "{actor}, deite ou sente confortável e espreguice o corpo devagar, passando as mãos por pescoço, peito, barriga e coxas, sem tirar nenhuma peça.", seconds: 75 },
-
-{ id: "r2-solo-var-01", rank: 2, mode: "solo", title: "Mapa sem pressa", text: "{actor}, faça um mapa do próprio corpo com a ponta dos dedos: pescoço, peito, barriga, quadril e coxas. Desvie de {own_intimacy} até o final.", seconds: 90 },
-
-{ id: "r2-solo-var-02", rank: 2, mode: "solo", title: "Pressão alternada", text: "{actor}, alterne pressão firme e toque quase imperceptível em {chest_underwear}, barriga e parte interna das coxas. Só encoste {underwear_outer} nos últimos dez segundos.", seconds: 100 },
-
-{ id: "r2-solo-var-03", rank: 2, mode: "solo", insight: true, insightTarget: "actor", title: "Leitura do corpo", text: "{actor}, confira se já está {arousal_actor}. Se estiver, mantenha a provocação por cima da peça. Se não, volte para respiração, mamilos e coxas.", seconds: 90 },
-
-{ id: "r3-solo-var-01", rank: 3, mode: "solo", title: "Boca nos dedos", text: "{actor}, molhe os dedos na boca e passe pelo pescoço, peito e barriga. A mão pode chegar perto de {own_intimacy}, mas ainda não começa de verdade.", seconds: 90 },
-
-{ id: "r3-solo-var-02", rank: 3, mode: "solo", title: "Por dentro, sem pressa", text: "{actor}, coloque a mão {underwear_inside} e segure o calor por alguns segundos. Faça movimentos mínimos, quase parados, só para aumentar a vontade.", seconds: 100 },
-
-{ id: "r3-solo-var-03", rank: 3, mode: "solo", title: "Beijo imaginado", text: "{actor}, imagine alguém beijando sua boca e seu pescoço. Use essa cena para guiar as mãos pelo corpo, deixando {own_intimacy} esperando.", seconds: 100 },
-
-{ id: "r4-solo-var-01", rank: 4, mode: "solo", title: "Uma peça lenta", text: "{actor}, tire uma peça de roupa em três etapas: segura, provoca e só então tira. Depois toque a pele recém-exposta por trinta segundos.", seconds: 90 },
-
-{ id: "r4-solo-var-02", rank: 4, mode: "solo", title: "Ficar no limite", text: "{actor}, fique só com a roupa íntima ou no limite confortável para você. Toque tudo ao redor de {own_intimacy}, mas não entregue o toque direto ainda.", seconds: 100 },
-
-{ id: "r5-solo-var-01", rank: 5, mode: "solo", insight: true, insightTarget: "actor", title: "Mão com check", text: "{actor}, toque {own_intimacy} com ritmo médio e confira se está {arousal_actor}. Se estiver, acelere por vinte segundos; se não, diminua e provoque ao redor.", seconds: 120 },
-
-{ id: "r5-solo-var-02", rank: 5, mode: "solo", title: "Trinta firme, dez parado", text: "{actor}, masturbe {own_intimacy} por trinta segundos com ritmo firme. Pare dez segundos com a mão longe e repita até acabar.", seconds: 120 },
-
-{ id: "r5-solo-var-03", rank: 5, mode: "solo", title: "Ritmo escolhido", text: "{actor}, escolha um ritmo: lento e sujo, médio e constante ou rápido e curto. Mantenha por um minuto e mude só se o corpo pedir demais.", seconds: 90 },
-
-{ id: "r6-solo-var-01", rank: 6, mode: "solo", phaseVariant: "edge", title: "Quase e recua", text: "{actor}, leve {own_intimacy} até quase perder o controle. Quando chegar perto demais, tire a mão por quinze segundos e volte mais devagar.", seconds: 150 },
-
-{ id: "r6-solo-var-02", rank: 6, mode: "solo", phaseVariant: "direct", insight: true, insightTarget: "actor", title: "Direto no ponto", text: "{actor}, se já estiver {arousal_actor}, toque {own_intimacy} com ritmo direto e constante. Se não estiver, volte para coxas, peito e respiração por trinta segundos.", seconds: 150 },
-
-{ id: "r7-solo-var-01", rank: 7, mode: "solo", title: "Clímax curto", text: "{actor}, decida agora: gozar nos próximos dois minutos ou segurar mais uma rodada. Se escolher gozar, acelere sem culpa; se escolher segurar, pare no limite.", seconds: 120 },
-
-{ id: "r7-solo-var-02", rank: 7, mode: "solo", loop: true, title: "Último recuo", text: "{actor}, chegue bem perto do clímax e recue uma última vez. Respire por vinte segundos sem tocar {own_intimacy}; depois escolha se finaliza ou prolonga.", seconds: 150 }
-
-];
-
-
-
-const ADAPTIVE_CHALLENGES = [
-
-{ id: "r1-couple-mutual-01", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["maleStarts", "femaleResponds", "whisper", "adaptiveTone"], title: "Sussurro com resposta", text: "{actor}, chegue no ouvido de {receiver} e sussurre uma vontade curta. {receiver}, responda escolhendo: \"mais leve\", \"tom mais safado\" ou \"continua\". {actor}, adapte o tom até o timer zerar.", seconds: 90 },
-
-{ id: "r1-couple-mutual-02", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleLeads", "femaleChoice", "safePacing"], requiresFemale: true, title: "Ela destrava o ritmo", text: "{female_partner}, escolha o ritmo da conversa: leve, safado ou provocante. {other_partner}, siga exatamente esse tom e só aumente se ela pedir mais.", seconds: 90 },
-
-{ id: "r1-couple-mutual-03", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["question", "femaleResponds", "mutualTurn"], title: "Pergunta que abre", text: "{actor}, pergunte a {receiver}: \"onde você quer que eu comece, sem tocar ainda?\". {receiver}, responda com uma parte do corpo e uma intensidade. Depois invertam.", seconds: 120 },
-
-{ id: "r1-couple-mutual-04", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleChoice", "safePacing", "slowBuild"], requiresFemale: true, title: "Sem pressão", text: "{other_partner}, diga a {female_partner} três coisas que quer fazer devagar nela, mas deixe ela cortar, mudar ou escolher a mais gostosa. O controle do tom é dela.", seconds: 120 },
-
-{ id: "r1-couple-mutual-05", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["mutualTurn", "toneScale"], title: "Vontade em escala", text: "Cada um fala uma vontade em três versões: leve, média e bem safada. O outro escolhe qual versão combina com o clima agora.", seconds: 120 },
-
-{ id: "r1-couple-mutual-06", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleLeads", "femaleChoice", "whisper"], requiresFemale: true, title: "Ela escolhe a frase", text: "{female_partner}, peça uma frase para ouvir: romântica, suja ou mandona. {other_partner}, diga no ouvido dela e observe a reação antes de continuar.", seconds: 90 },
-
-{ id: "r1-couple-mutual-07", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["mutualTurn", "limits", "femaleResponds"], title: "Confissão alternada", text: "{actor} começa com uma confissão curta. {receiver} responde com uma vontade ou limite para hoje. Alternem sem tocar, só aproximando o corpo.", seconds: 120 },
-
-{ id: "r1-couple-mutual-08", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["safePacing", "femaleChoice", "adaptiveTone"], requiresFemale: true, title: "Sinal verde", text: "{other_partner}, provoque {female_partner} com uma frase de cada vez. {female_partner}, diga \"verde\" para continuar, \"amarelo\" para suavizar ou \"vermelho\" para trocar de assunto.", seconds: 120 },
-
-{ id: "r1-couple-mutual-09", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleLeads", "bodyMap", "whisper"], requiresFemale: true, title: "Mapa escolhido por ela", text: "{female_partner}, escolha três lugares do corpo onde quer receber atenção depois. {other_partner}, repita cada escolha no ouvido dela, sem tocar ainda.", seconds: 90 },
-
-{ id: "r1-couple-mutual-10", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["mutualTurn", "playful", "slowBuild"], title: "Troca sem pressa", text: "Fiquem frente a frente. Um diz \"hoje eu quero...\" e o outro completa com \"então eu deixo você...\". Alternem, subindo o nível só se os dois rirem ou se aproximarem.", seconds: 120 },
-
-{ id: "r1-couple-mutual-11", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleLeads", "languagePreference", "adaptiveTone"], requiresFemale: true, title: "Escolha de palavras", text: "{female_partner}, escolha duas palavras que te excitam e uma que corta o clima. {other_partner}, use só as duas boas para provocar, sem repetir a palavra ruim.", seconds: 90 },
-
-{ id: "r1-couple-mutual-12", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["maleStarts", "femaleResponds", "bodySignal", "whisper"], title: "Aproxima e recua", text: "{actor}, aproxime a boca do ouvido de {receiver}, diga uma frase curta e recue. {receiver}, se quiser mais, puxe {actor} pela roupa ou pela mão. Depois invertam.", seconds: 120 },
-
-{ id: "r1-couple-mutual-13", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["maleStarts", "femaleWhispers", "femaleResponds", "whisper"], requiresFemale: true, title: "Ela sussurra de volta", text: "{other_partner}, comece com um sussurro curto no ouvido de {female_partner}. {female_partner}, responda sussurrando uma coisa que você quer sentir, mesmo que seja leve. {other_partner} só continua no tom que você devolver.", seconds: 120 },
-
-{ id: "r1-couple-mutual-14", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleWhispers", "femaleLeads", "safePacing"], requiresFemale: true, title: "Sussurro dela manda", text: "{female_partner}, chegue perto e sussurre uma instrução simples: mais perto, mais lento, tom mais safado ou só continua. {other_partner}, obedeça sem discutir e sem tocar ainda.", seconds: 90 },
-
-{ id: "r1-couple-mutual-15", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleWhispers", "desireSignal", "adaptiveTone"], requiresFemale: true, title: "Vontade no ouvido", text: "{other_partner}, diga no ouvido de {female_partner}: \"me fala uma vontade pequena\". {female_partner}, responda sussurrando só uma palavra ou uma frase curta. Ele transforma isso em provocação por um minuto.", seconds: 120 },
-
-{ id: "r1-couple-mutual-16", rank: 1, mode: "couple", turnMode: "mutual", insight: true, seductionFlow: true, learningTags: ["femaleChoice", "femaleWhispers", "confidenceBuild"], requiresFemale: true, title: "Ela escolhe o limite", text: "{female_partner}, sussurre até onde quer que a sedução vá agora: só fala, beijo leve ou mão por cima da roupa depois. {other_partner}, repita a escolha dela e mantenha esse limite.", seconds: 120 },
-
-{ id: "r2-adaptive-new-01", rank: 2, mode: "couple", turnMode: "mutual", insight: true, learningTags: ["domSub", "permission"], title: "Pedindo por favor", text: "Regra pelos próximos 3 minutos: {receiver} não pode tocar em {actor} sem pedir explicitamente: 'Posso tocar você, por favor?'. {actor} tem total liberdade para negar, provocar ou autorizar.", seconds: 180 },
-
-{ id: "r4-adaptive-new-02", rank: 4, mode: "couple", turnMode: "mutual", insight: true, learningTags: ["impact", "feedback"], title: "Ajuste de impacto", text: "{actor}, dê um tapa de força média nas nádegas de {receiver}. {receiver}, avalie: 'mais forte', 'assim está ótimo', ou 'mais fraco'. Continuem ajustando a intensidade por 2 minutos.", seconds: 120 },
-
-{ id: "r5-adaptive-new-03", rank: 5, mode: "couple", turnMode: "mutual", insight: true, learningTags: ["toyPlay", "edging"], title: "Controle do vibrador/brinquedo", text: "{actor}, assuma o controle do vibrador ou dildo de {receiver}. Aproxime o estímulo do limite e pare. Repita esse ciclo 3 vezes, escutando a respiração {pron_rec} para saber a hora exata de interromper.", seconds: 240 },
-
-{ id: "r6-adaptive-new-04", rank: 6, mode: "couple", turnMode: "mutual", insight: true, learningTags: ["voyeurism", "dirtyTalk"], title: "Apresentação suja", text: "{actor}, sente-se e assista. {receiver}, masturbe-se na frente de {actor} enquanto narra em voz alta o que você está sentindo e quão molhado(a)/duro(a) você está.", seconds: 180 }
+// ═══════════════════════════════════════════════════════════════
+// RANK 3 — RITUAIS & ROTINA
+// ═══════════════════════════════════════════════════════════════
+{ id: "r3-rituais-01", rank: 3, mode: "couple", title: "Respiração sincronizada", text: "Sentem-se de frente, joelhos se tocando. Fecham os olhos e respirem juntos por 2 minutos. {actor} conduz o ritmo, {receiver} acompanha.", seconds: 120 },
+{ id: "r3-rituais-02", rank: 3, mode: "couple", title: "Beijo de 6 segundos", text: "A cada 30 segundos, troquem um beijo de exatamente 6 segundos. Nem mais, nem menos. Entre os beijos, só se olhem. Repitam por 3 minutos.", seconds: 180 },
+{ id: "r2-rituais-01", rank: 3, mode: "couple", title: "Banho de mãos", text: "{actor}, lave as mãos de {receiver} com água morna, devagar, massageando cada dedo. Depois seque com uma toalha macia e beije as palmas.", seconds: 120 },
+{ id: "r2-rituais-02", rank: 3, mode: "couple", title: "Preparar o ninho", text: "Juntos, arrumem a cama, apaguem luzes fortes, acendam velas ou abajur. {actor}, coloque uma música que combine com o clima. Depois sentem frente a frente.", seconds: 180 },
+{ id: "r4-rituais-01", rank: 3, mode: "couple", title: "Despir o outro em silêncio", text: "Tirem a roupa um do outro, uma peça por vez, em completo silêncio. Cada peça removida, parem e se olhem por 10 segundos antes de continuar.", seconds: 180 },
+{ id: "r4-rituais-02", rank: 3, mode: "couple", title: "Explorar com a ponta dos dedos", text: "{actor}, percorra o corpo de {receiver} com a ponta dos dedos, como se lesse braille. Cada cicatriz, dobra, curva. 3 minutos de descoberta silenciosa.", seconds: 180 },
+{ id: "r5-rituais-01", rank: 3, mode: "couple", title: "Aquecer com a boca", text: "{actor}, aqueça cada parte do corpo de {receiver} com a boca: sopro quente, depois beijo, depois língua. Comece pelos pés e suba devagar.", seconds: 240 },
+{ id: "r5-rituais-02", rank: 3, mode: "couple", title: "Lubrificar o corpo", text: "Se tiverem óleo ou lubrificante, {actor} espalhe nas mãos e deslize pelo corpo de {receiver} como se estivesse lustrando uma joia rara. Cada centímetro importa.", seconds: 180 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 4 — BEIJOS
+// ═══════════════════════════════════════════════════════════════
+{ id: "r3-01", rank: 4, title: "Beijo cronometrado", text: "{actor}, beije {receiver} por dois minutos, mudando o ritmo a cada trinta segundos.", seconds: 120 },
+{ id: "r3-02", rank: 4, title: "Nuca e pausa", text: "{actor}, beije a nuca de {receiver}; sempre que {subj_rec} reagir, pare por três segundos antes de continuar.", seconds: 90 },
+{ id: "r3-03", rank: 4, title: "Boca sem mãos", text: "Beijem-se sem usar as mãos. Quem tocar primeiro deve sussurrar exatamente o que estava querendo fazer.", seconds: 90 },
+{ id: "r3-04", rank: 4, title: "Mordida leve", text: "{actor}, alterne beijo e mordida leve nos lábios de {receiver}, mantendo o contato visual entre as pausas.", seconds: 75 },
+{ id: "r3-05", rank: 4, title: "Do ombro à boca", text: "{actor}, comece pelo ombro de {receiver} e suba com beijos lentos até encontrar a boca.", seconds: 90 },
+{ id: "r3-06", rank: 4, title: "Ritmo espelhado", text: "{receiver} escolhe um ritmo de beijo por vinte segundos. {actor} repete e intensifica por mais vinte.", seconds: 80 },
+{ id: "r3-07", rank: 4, title: "Beijo interrompido", text: "{actor}, comece um beijo intenso e interrompa no melhor momento para dizer o que quer em seguida.", seconds: 60 },
+{ id: "r3-08", rank: 4, title: "Cintura presa", text: "{actor}, segure a cintura de {receiver} e conduza um beijo lento, firme e colado.", seconds: 90 },
+{ id: "r3-var-01", rank: 4, mode: "couple", title: "Beijo em contagem", text: "{actor}, beije {receiver} em ciclos: cinco segundos leve, cinco segundos firme, cinco segundos parado com a boca quase encostada. Repita até o timer zerar.", seconds: 90 },
+{ id: "r3-var-02", rank: 4, mode: "couple", title: "Boca e respiração", text: "{actor}, encoste a boca perto da boca de {receiver}, respire junto e só beije quando {subj_rec} puxar você para mais perto.", seconds: 90 },
+{ id: "r3-var-03", rank: 4, mode: "couple", title: "Pescoço guiado", text: "{receiver}, guie com a mão onde quer beijos no pescoço, nuca ou ombro. {actor} obedece e pausa sempre que a respiração mudar.", seconds: 120 },
+{ id: "r3-var-04", rank: 4, mode: "couple", title: "Colo e beijo", text: "{actor}, puxe {receiver} para perto pelo colo ou cintura e conduza um beijo lento, sem pressa de descer as mãos.", seconds: 90 },
+{ id: "r3-var-05", rank: 4, mode: "couple", title: "Mordida com pergunta", text: "{actor}, dê uma mordida leve no lábio, pescoço ou ombro de {receiver}. Depois pergunte: mais leve, mais forte ou de novo?", seconds: 75 },
+{ id: "r3-var-06", rank: 4, mode: "couple", title: "Beijo negado", text: "{actor}, comece três beijos e interrompa antes de completar. No quarto, deixe {receiver} decidir se merece beijo lento ou beijo intenso.", seconds: 90 },
+{ id: "r3-var-07", rank: 4, mode: "couple", title: "Trilha de beijos", text: "{actor}, faça uma trilha curta de beijos da testa à boca de {receiver}, depois da boca ao pescoço, parando onde {subj_rec} reagir mais.", seconds: 90 },
+{ id: "r3-var-08", rank: 4, mode: "couple", title: "Troca de comando", text: "{receiver}, comande o tipo de beijo: lento, molhado, mordido ou provocante. {actor} executa por quinze segundos e espera o próximo comando.", seconds: 120 },
+{ id: "r3-solo-f-01", rank: 4, mode: "solo", actorPreset: "feminine", title: "Toque nos seios", text: "{actor}, deslize os dedos pelos seus seios e desça até a barriga. Aperte os próprios mamilos levemente enquanto imagina a boca de alguém sugando ali.", seconds: 90 },
+{ id: "r3-solo-m-01", rank: 4, mode: "solo", actorPreset: "masculine", title: "Provocação na base", text: "{actor}, passe a mão pelo seu abdômen e desça até a marca da cueca. Provoque a si mesmo apertando a base do seu pau por cima do tecido, sentindo pulsar sem colocar a mão dentro.", seconds: 90 },
+{ id: "r3-couple-ff-03", rank: 4, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Beijo descendo", text: "{actor}, comece a beijar a boca de {receiver} e desça lentamente pelo pescoço e colo, mordendo de leve onde {subj_rec} reagir mais.", seconds: 90 },
+{ id: "r3-couple-mm-03", rank: 4, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Boca e mordida", text: "{actor}, beije {receiver} com firmeza, segure a nuca dele e alterne beijo intenso com mordidas leves no lábio e no pescoço.", seconds: 90 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 5 — DESAFIOS & BRINCADEIRAS
+// ═══════════════════════════════════════════════════════════════
+{ id: "r2-desafios-01", rank: 5, mode: "couple", title: "Áudio gemido", text: "{actor}, grave um áudio de 15 segundos imitando o gemido de {receiver} e mande no WhatsApp agora. {receiver}, escute e dê uma nota.", seconds: 0 },
+{ id: "r2-desafios-02", rank: 5, mode: "couple", title: "Cantada ridícula", text: "{actor}, mande um áudio para {receiver} com a cantada mais ridícula e engraçada que conseguir inventar. {receiver}, responda com outra pior ainda.", seconds: 0 },
+{ id: "r2-desafios-03", rank: 5, mode: "couple", title: "Imitação de voz", text: "{actor}, grave um áudio imitando a voz de {receiver} quando está com tesão. Depois {receiver} imita {actor}. Comparem e riam juntos.", seconds: 0 },
+{ id: "r2-desafios-04", rank: 5, mode: "couple", title: "Imitar o beijo", text: "{actor}, imite o jeito que {receiver} beija — exatamente igual, exagerando os trejeitos. {receiver}, depois imite {actor}. Divirtam-se com as imitações.", seconds: 60 },
+{ id: "r2-desafios-05", rank: 5, mode: "couple", title: "Mímica do desejo", text: "{actor}, faça uma mímica representando algo que quer fazer com {receiver} hoje. {receiver} tenta adivinhar. Se acertar em 30 segundos, {actor} realiza.", seconds: 30 },
+{ id: "r2-desafios-06", rank: 5, mode: "couple", title: "Quem pisca primeiro", text: "Fiquem frente a frente, olhos nos olhos, a 10 cm de distância. Quem piscar primeiro, concede um desejo ao outro. Vale fazer careta para provocar.", seconds: 60 },
+{ id: "r2-desafios-07", rank: 5, mode: "couple", title: "Elogio competitivo", text: "Alternem elogios. {actor} começa: você fica lindo(a) quando... {receiver} responde com outro. Quem repetir um elogio ou demorar mais de 5 segundos, perde.", seconds: 90 },
+{ id: "r2-desafios-08", rank: 5, mode: "couple", title: "Verdade ou desafio rápido", text: "Joguem 3 rodadas de verdade ou desafio. Cada um escolhe uma vez. Comecem leves e aumentem a ousadia a cada rodada.", seconds: 0 },
+{ id: "r2-desafios-09", rank: 5, mode: "couple", title: "Cantar uma cantada", text: "{actor}, cante uma música romântica para {receiver} como se estivesse num karaokê brega. Vale desafinar, exagerar, fazer gestos. {receiver} filma se quiser.", seconds: 60 },
+{ id: "r3-desafios-01", rank: 5, mode: "couple", title: "Foto imitando pose", text: "{actor}, tire uma foto agora imitando uma pose sexy que {receiver} já fez. Mande no chat. {receiver}, retribua imitando {actor}.", seconds: 0 },
+{ id: "r3-desafios-02", rank: 5, mode: "couple", title: "Dublagem erótica", text: "{actor}, escolha uma cena de filme romântico e duble por cima com uma versão bem safada. {receiver} filma e depois trocam.", seconds: 60 },
+{ id: "r3-desafios-03", rank: 5, mode: "couple", title: "Imitar a dança", text: "{actor}, imite como {receiver} dança quando está se soltando. Exagere, seja engraçado. {receiver} avalia: igualzinho, mais ou menos, ou precisa melhorar.", seconds: 45 },
+{ id: "r3-desafios-04", rank: 5, mode: "couple", title: "Espelho humano", text: "Fiquem frente a frente. {actor} faz movimentos sensuais lentos e {receiver} imita como se fosse um espelho. Depois de 1 minuto, troquem.", seconds: 120 },
+{ id: "r3-desafios-05", rank: 5, mode: "couple", title: "Beijo às cegas", text: "Vendem-se. Tentem se beijar sem usar as mãos para se encontrar. Cada tentativa frustrada vale uma risada. Quando conseguirem, mantenham por 30 segundos.", seconds: 120 },
+{ id: "r3-desafios-06", rank: 5, mode: "couple", title: "Verdade: fantasia secreta", text: "{actor}, confesse uma fantasia que nunca contou. {receiver}, se gostar, diga como a realizariam juntos. Se não, escolha um desafio leve como punição.", seconds: 0 },
+{ id: "r3-desafios-07", rank: 5, mode: "couple", title: "Dança da chuva erótica", text: "{actor}, invente uma dança da chuva para pedir ao universo uma noite de prazer. Pode ser ridícula. {receiver} avalia: a chuva vem ou não vem?", seconds: 45 },
+{ id: "r3-desafios-08", rank: 5, mode: "couple", title: "Sotaque safado", text: "{actor}, diga frases de desejo para {receiver} usando um sotaque diferente (português, argentino, caipira). {receiver} tenta não rir. Se rir, tira uma peça.", seconds: 60 },
+{ id: "r4-desafios-01", rank: 5, mode: "couple", title: "Selfie proibida", text: "Tirem uma selfie juntos fazendo a cara mais safada que conseguirem. Não vale rir. Quem rir primeiro tira uma peça de roupa.", seconds: 45 },
+{ id: "r4-desafios-02", rank: 5, mode: "couple", title: "Strip imitando", text: "{actor}, faça um strip tease imitando o jeito que {receiver} faria. {receiver} julga: está parecido ou precisa de aula particular?", seconds: 90 },
+{ id: "r4-desafios-03", rank: 5, mode: "couple", title: "Desfile canino", text: "{actor}, desfile de quatro pela cama como se fosse um gato ou cachorro sedutor. {receiver} avalia: nota de 0 a 10. Depois troquem.", seconds: 60 },
+{ id: "r4-desafios-04", rank: 5, mode: "couple", title: "Quem tira mais rápido", text: "Corrida! Quem tirar a própria roupa mais rápido vence. O perdedor fica devendo uma massagem de 5 minutos depois.", seconds: 0 },
+{ id: "r4-desafios-05", rank: 5, mode: "couple", title: "Desafio: tirar com a boca", text: "{actor}, tire uma peça de roupa de {receiver} usando apenas a boca. Se conseguir em 1 minuto, {receiver} tira uma sua do mesmo jeito.", seconds: 60 },
+{ id: "r4-desafios-06", rank: 5, mode: "couple", title: "Poesia ridícula", text: "{actor}, recite uma poesia inventada na hora exaltando as qualidades de {receiver}. Quanto mais exagerada e engraçada, melhor.", seconds: 60 },
+{ id: "r5-desafios-01", rank: 5, mode: "couple", title: "Gemido falso", text: "{actor}, solte um gemido bem falso e exagerado como se estivesse num filme ruim. {receiver}, tente fazer pior. Quem rir primeiro perde.", seconds: 30 },
+{ id: "r5-desafios-02", rank: 5, mode: "couple", title: "Quem beija melhor", text: "{actor}, beije {receiver} do jeito mais gostoso que conseguir. {receiver}, dê uma nota e depois mostre como faria melhor. Repitam até um admitir derrota.", seconds: 180 },
+{ id: "r5-desafios-03", rank: 5, mode: "couple", title: "Verdade ou toque", text: "{actor}, escolha: verdade ou toque? Se verdade, responda uma pergunta íntima. Se toque, receba um toque de 30 segundos onde {receiver} escolher.", seconds: 0 },
+{ id: "r5-desafios-04", rank: 5, mode: "couple", title: "Strip narrado", text: "{actor}, tire a roupa narrando cada movimento como se fosse um locutor de futebol: 'Ela vai tirar a blusa... é agora... tirou!'. {receiver} vibra ou vaia.", seconds: 90 },
+{ id: "r6-desafios-01", rank: 5, mode: "couple", title: "Imitar filme adulto", text: "{actor}, imite o jeito exagerado de atores de filmes adultos: diálogos, gemidos, expressões. {receiver} entra na cena e improvisa junto.", seconds: 120 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 6 — SENSORIAL (Temperatura, texturas, sopro, gelo)
+// ═══════════════════════════════════════════════════════════════
+{ id: "r2-new-03", rank: 6, title: "Gelo na nuca", text: "{actor}, pegue um cubo de gelo e passe lentamente pela nuca e pelas costas de {receiver}, acompanhando o caminho da água com beijos.", seconds: 60 },
+{ id: "r2-new-06", rank: 6, title: "Vibração distante", text: "Se tiverem um vibrador, {actor} liga o aparelho e encosta em diferentes partes do corpo (braços, pescoço, barriga) de {receiver}, apenas para criar expectativa.", seconds: 90 },
+{ id: "r3-new-03", rank: 6, title: "Óleo quente", text: "{actor}, esfregue óleo de massagem nas mãos até esquentar bastante (ou use vela de massagem) e deslize firmemente pelas nádegas e coxas de {receiver}.", seconds: 120 },
+{ id: "r3-new-07", rank: 6, title: "Textura surpresa", text: "{actor}, vende {receiver}. Use três texturas diferentes (um tecido de seda, algo metálico frio, e seus próprios cabelos) para acariciar o peito e barriga {pron_rec}.", seconds: 120 },
+{ id: "r4-06", rank: 6, title: "Quente e frio", text: "{actor}, alterne sopro frio e beijo quente em uma zona sensível escolhida por {receiver}.", seconds: 90 },
+{ id: "r4-new-04", rank: 6, title: "Gelo na virilha", text: "{actor}, passe um cubo de gelo ao redor de {rec_intimacy_article} de {receiver} e pela virilha, alternando imediatamente com o calor do seu hálito.", seconds: 90 },
+{ id: "r4-couple-f-02", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Água gelada no peito", text: "{actor}, beba água bem gelada e chupe o biquinho do peito de {receiver}, alternando língua fria, sucção e sopro quente.", seconds: 90 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 7 — STRIP & EXIBIÇÃO
+// ═══════════════════════════════════════════════════════════════
+{ id: "r3-strip-01", rank: 7, title: "Strip: Começar", text: "{actor}, é hora de começar a se desnudar. Retire uma peça por vez e o coloque(a) de um lado, mantendo o contato visual com {receiver} durante o processo.", seconds: 0 },
+{ id: "r3-strip-02", rank: 7, requiresFemale: true, actorPreset: "feminine", title: "Strip: Ela sinaliza", text: "{actor}, escolha qual peça quer que {receiver} retire primeiro: superior, inferior ou acessório. {receiver} obedece lentamente.", seconds: 0 },
+{ id: "r3-strip-03", rank: 7, title: "Strip: Beijo a cada camada", text: "{actor}, retire uma peça de {receiver} lentamente e beije a pele que fica exposta antes de tirar a próxima.", seconds: 0 },
+{ id: "r3-strip-04", rank: 7, title: "Strip: Ele escolhe", text: "{actor}, retire uma peça de {receiver} e coloque em você. Depois tire uma sua e ofereça para {receiver} calçar se quiser.", seconds: 0 },
+{ id: "r3-strip-05", rank: 7, title: "Strip: Provocação coberta", text: "{receiver}, retire uma peça mas mantenha a outra por cima. {actor} observa enquanto {subj_rec} se move lentamente.", seconds: 0 },
+{ id: "r3-strip-06", rank: 7, title: "Strip: Tudo menos a roupa", text: "{actor}, retire tudo que está cobrindo você. Fique em frente a {receiver} por um minuto sem se cobrir nem pedir desculpas.", seconds: 60 },
+{ id: "r4-strip-01", rank: 7, title: "Strip: Íntimo exposto", text: "{receiver}, retire a roupa externa e fique só de roupa íntima. {actor} pode observar e tocar por cima da peça enquanto {subj_rec} se sente confortável.", seconds: 0 },
+{ id: "r4-strip-02", rank: 7, title: "Strip: Toque coberto", text: "{receiver}, {actor} vai remover sua roupa externa mas deixar {art_rec} {receiver} coberto(a) pela roupa íntima. Toque suavemente por cima.", seconds: 120 },
+{ id: "r4-strip-03", rank: 7, title: "Strip: Quase tudo", text: "{actor}, tire sua roupa quase toda. Retire tudo exceto a roupa de baixo e deixe {receiver} observar seu corpo quase inteiro.", seconds: 0 },
+{ id: "r4-strip-04", rank: 7, title: "Strip: Desnudo completo", text: "Quem ainda estiver de roupa íntima, agora retira também. Fiquem nus um para o outro por alguns momentos, observando e respirando juntos.", seconds: 60 },
+{ id: "r4-strip-05", rank: 7, title: "Strip: Corpos juntos", text: "{actor}, aproxime seu corpo completamente desnudo do de {receiver}. Fiquem colados pele com pele, lentamente, deixando que o contato fale.", seconds: 90 },
+{ id: "r4-01", rank: 7, title: "Uma peça a menos", text: "{actor}, escolha uma peça de roupa de {receiver} para retirar devagar, mantendo contato visual.", seconds: 90 },
+{ id: "r4-03", rank: 7, title: "Strip silencioso", text: "{actor}, retire uma peça sua sem falar. {receiver} só pode observar até o cronômetro acabar.", seconds: 90 },
+{ id: "r4-09", rank: 7, title: "Striptease guiado", text: "{actor}, faça um striptease lento para {receiver}. {receiver} só pode mandar com palavras curtas: mais devagar, vira, chega perto ou para.", seconds: 150 },
+{ id: "r4-10", rank: 7, title: "Roupa saindo no olhar", text: "{receiver}, retire uma peça de roupa devagar mantendo os olhos em {actor}. {actor} observa sem tocar até o timer zerar.", seconds: 120 },
+{ id: "r4-11", rank: 7, title: "Strip alternado", text: "Alternem: cada um tira uma peça ou ajusta a roupa para provocar mais. Ninguém toca na bucetinha ou no pau ainda; é só desejo acumulando.", seconds: 150 },
+{ id: "r4-07", rank: 7, title: "Espelho", text: "Fiquem diante de um espelho. {actor} descreve em voz baixa o que deseja ver acontecer em seguida.", seconds: 60 },
+{ id: "r4-new-05", rank: 7, title: "Punição no espelho", text: "{actor}, posicione {receiver} de frente para o espelho. Fique por trás, segure o pescoço {pron_rec} (sem apertar a traqueia) e esfregue seu {actor_intimacy} contra {rec_intimacy_article} por trás.", seconds: 120 },
+{ id: "r2-new-05", rank: 7, title: "Janela perigosa", text: "Vão para perto de uma janela ou porta entreaberta. Fiquem abraçados por 1 minuto se beijando com a leve adrenalina de poderem ser ouvidos.", seconds: 60 },
+{ id: "r3-new-02", rank: 7, title: "Vídeo de si mesmo", text: "{actor}, posicione o celular e grave 1 minuto tocando a si mesmo de forma provocativa, enquanto {receiver} apenas assiste pela tela (ou ao vivo, sem poder tocar).", seconds: 60 },
+{ id: "r6-new-05", rank: 7, title: "Câmera ligada", text: "{actor}, posicione o celular gravando. Façam sexo oral de frente para a câmera. Façam expressões para a lente como se estivessem se exibindo para alguém.", seconds: 180 },
+{ id: "r4-couple-ff-01", rank: 7, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Pernas entrelaçadas", text: "{actor}, entrelace suas pernas nas de {receiver}. Acaricie os seios dela com uma mão enquanto a outra desliza por cima da calcinha, sentindo o calor e a umidade aumentarem.", seconds: 120 },
+{ id: "r4-couple-ff-02", rank: 7, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Seios contra seios", text: "{actor}, tire a parte de cima e cole seus seios nos seios de {receiver}. Esfreguem devagar, sentindo os mamilos roçarem.", seconds: 90 },
+{ id: "r4-couple-ff-03", rank: 7, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Beijo com mão na nuca", text: "{actor}, segure a nuca de {receiver} e conduza um beijo intenso. A outra mão desce pelas costas até a lombar, arranhando de leve.", seconds: 90 },
+{ id: "r4-couple-ff-04", rank: 7, mode: "couple", actorPreset: "feminine", receiverPreset: "feminine", title: "Calcinha de lado", text: "{actor}, afaste a calcinha de {receiver} e passe a ponta dos dedos nos lábios externos, sem entrar. Depois solte o tecido e beije por cima.", seconds: 90 },
+{ id: "r4-couple-mm-01", rank: 7, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Atrito por cima", text: "{actor}, fique de frente para {receiver} apenas de cueca. Pressione seu volume contra o dele e esfreguem-se lentamente, segurando a nuca um do outro com firmeza.", seconds: 120 },
+{ id: "r4-couple-mm-02", rank: 7, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Peito contra peito", text: "{actor}, tire a camiseta e cole seu peito no peito de {receiver}. Sintam o calor e a tensão muscular enquanto se olham.", seconds: 60 },
+{ id: "r4-couple-mm-03", rank: 7, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Mordida no trapézio", text: "{actor}, morda o trapézio de {receiver} (entre pescoço e ombro) com firmeza. Segure a nuca {pron_rec} enquanto morde.", seconds: 60 },
+{ id: "r4-couple-mm-04", rank: 7, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Cueca de lado", text: "{actor}, afaste a cueca de {receiver} e passe a ponta dos dedos na base do pau {pron_rec}, sem envolver ainda. Depois solte o tecido e pressione por cima.", seconds: 90 },
+{ id: "r4-couple-mh-01", rank: 7, mode: "couple", requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Esfregada no colo", text: "{actor}, sente no colo de {receiver} ainda com roupas de baixo. Esfregue seu quadril no volume dele lentamente, sussurrando o quanto ele está duro, por 90 segundos.", seconds: 90 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 8 — FANTASIA & ROLEPLAY
+// ═══════════════════════════════════════════════════════════════
+{ id: "r4-fantasia-01", rank: 8, mode: "couple", title: "Estranhos no bar", text: "Fingam que acabaram de se conhecer. {actor}, chegue em {receiver} como se estivesse cantando {pron_rec} pela primeira vez. Sem beijar ainda, só conversa provocante.", seconds: 120 },
+{ id: "r4-fantasia-02", rank: 8, mode: "couple", title: "Entrevista picante", text: "{actor}, você é um entrevistador e {receiver} está concorrendo a uma vaga. Faça perguntas cada vez mais íntimas. {receiver}, responda no personagem.", seconds: 120 },
+{ id: "r5-fantasia-01", rank: 8, mode: "couple", title: "Massagista e cliente", text: "{actor}, você é massagista profissional. Trate {receiver} como cliente: profissional no começo, mas vá deixando o toque mais íntimo até cruzar a linha.", seconds: 240 },
+{ id: "r5-fantasia-02", rank: 8, mode: "couple", title: "Professor e aluna(o)", text: "{actor}, você é professor(a) e {receiver} é aluno(a) que precisa de aulas particulares. Corrija {pron_rec} com firmeza, aproxime-se mais do que devia.", seconds: 180 },
+{ id: "r6-fantasia-01", rank: 8, mode: "couple", title: "Chefe e funcionária(o)", text: "{actor}, você é chefe de {receiver}. Chame {pron_rec} para uma conversa no escritório. Use sua autoridade para fazer exigências cada vez mais ousadas.", seconds: 240 },
+{ id: "r6-fantasia-02", rank: 8, mode: "couple", title: "Herói e donzela(o)", text: "{receiver}, você salvou {actor} de um perigo e agora ele(a) quer te agradecer. {actor}, insista em agradecer com o corpo, sem aceitar recusas educadas.", seconds: 240 },
+{ id: "r7-fantasia-01", rank: 8, mode: "couple", title: "Festa de máscaras", text: "Improvisem máscaras com as mãos ou um pano. Façam sexo sem revelar o rosto, como estranhos mascarados que nunca mais vão se encontrar.", seconds: 300 },
+{ id: "r7-fantasia-02", rank: 8, mode: "couple", title: "A última noite", text: "Finjam que essa é a última noite juntos. Cada toque, cada beijo, cada movimento é uma despedida. Intensidade máxima, sem pressa de acabar.", seconds: 300 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 9 — ESTIMULAÇÃO MANUAL
+// ═══════════════════════════════════════════════════════════════
+{ id: "r5-01", rank: 9, title: "Mão guiada", text: "{receiver} guia a mão de {actor} para receber estímulo manual no ritmo que preferir.", seconds: 120 },
+{ id: "r5-02", rank: 9, title: "Olhos presos", text: "{actor}, estimule {receiver} com a mão mantendo contato visual. Pausas são parte do jogo.", seconds: 120 },
+{ id: "r5-03", rank: 9, title: "Ritmo dos sinais", text: "{actor}, use estímulo manual e só mude velocidade quando {receiver} pedir com uma palavra ou gesto.", seconds: 150 },
+{ id: "r5-04", rank: 9, title: "Mútuo", text: "Toquem-se ao mesmo tempo por dois minutos, ajustando pressão e ritmo sem tirar os olhos um do outro.", seconds: 120 },
+{ id: "r5-05", rank: 9, title: "Controle de pausa", text: "{actor}, aproxime {receiver} do limite do prazer manualmente e pause por cinco segundos antes de continuar.", seconds: 120 },
+{ id: "r5-06", rank: 9, title: "Duas velocidades", text: "{actor}, alterne trinta segundos lentos e trinta segundos intensos de estímulo manual.", seconds: 120 },
+{ id: "r5-07", rank: 9, title: "Pedido direto", text: "{receiver}, diga exatamente como quer receber toque. {actor} segue a instrução por noventa segundos.", seconds: 90 },
+{ id: "r5-08", rank: 9, title: "Sem finalizar", text: "{actor}, estimule {receiver} manualmente, mas pare sempre que sentir que o clímax está chegando.", seconds: 150 },
+{ id: "r5-couple-01", rank: 9, mode: "couple", insight: true, title: "Mão suja e olho fixo", text: "{actor}, use a mão em {receiver} do jeito mais safado que {subj_rec} aguentar, olhando nos olhos. Se {art_rec} {receiver} estiver {arousal_rec}, aumente o ritmo; se não, volte para beijos e coxas.", seconds: 180 },
+{ id: "r5-couple-02", rank: 9, mode: "couple", title: "Confere e obedece", text: "{actor}, pergunte sem vergonha: \"quer minha mão onde?\". {receiver} responde e você obedece por dois minutos, alternando pressão, pausa e provocação.", seconds: 120 },
+{ id: "r5-couple-f-01", rank: 9, mode: "couple", receiverPreset: "feminine", title: "Beliscão leve no peito", text: "{actor}, chupe um bico do peito de {receiver} com força gostosa enquanto belisca o outro peito com os dedos, provocando até {subj_rec} se contorcer.", seconds: 120 },
+{ id: "r5-couple-f-02", rank: 9, mode: "couple", insight: true, receiverPreset: "feminine", title: "Dedada rápida com saliva", text: "{actor}, molhe bem os dedos com saliva e masturbe a bucetinha de {receiver} com movimentos rápidos e firmes, parando se {subj_rec} pedir ajuste.", seconds: 120 },
+{ id: "r5-couple-any-01", rank: 9, mode: "couple", title: "Lamber virilha até o umbigo", text: "{actor}, lamba com vontade a dobra da virilha de {receiver}, suba devagar pela barriga e termine sugando o umbigo {pron_rec}.", seconds: 100 },
+{ id: "r5-couple-any-02", rank: 9, mode: "couple", title: "Esfregar na coxa", text: "{actor}, sente na coxa de {receiver} e esfregue seu {actor_intimacy} direto na pele, com força suficiente para sentir o atrito e deixar tudo mais molhado.", seconds: 150 },
+{ id: "r5-new-01", rank: 9, title: "Brinquedo e domínio", text: "{actor}, se tiverem um vibrador, use-o {rec_intimacy_locative} de {receiver}. Sempre que {subj_rec} estiver quase chegando lá, desligue o aparelho por 10 segundos.", seconds: 180 },
+{ id: "r5-new-02", rank: 9, title: "Orgasmo negado (Edging)", text: "{actor}, masturbe {receiver} intensamente. Quando {subj_rec} der o sinal de que vai gozar, PARE tudo imediatamente. Deixe {subj_rec} sofrer de tesão por 1 minuto antes de retomar.", seconds: 180 },
+{ id: "r5-recv-01", rank: 9, mode: "couple", title: "O ritmo é seu", text: "{receiver}, diga exatamente a pressão, a velocidade e o lugar onde quer a mão de {actor}. {actor} obedece sem improvisar por noventa segundos.", seconds: 90 },
+{ id: "r5-recv-02", rank: 9, mode: "couple", title: "Mão guiada de novo", text: "{receiver}, segure o pulso de {actor} e conduza a mão pelo seu corpo no ritmo que te agrada, parando onde quiser mais demora.", seconds: 90 },
+{ id: "r4-couple-01", rank: 9, mode: "couple", insight: true, title: "Check: está molhada ou duro?", text: "{actor}, confira com calma se {art_rec} {receiver} já está {arousal_rec}. Se sim, continue com a boca mais perto de {rec_intimacy_article}. Se não, volte para pescoço, mamilos, barriga e coxas por dois minutos.", seconds: 120 },
+{ id: "r5-couple-ff-03", rank: 9, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Dedos no ritmo dela", text: "{actor}, masturbe {rec_intimacy_article} de {receiver} com os dedos, começando devagar e acelerando só quando {subj_rec} pedir. Pause se {subj_rec} chegar perto demais.", seconds: 120 },
+{ id: "r5-couple-mm-03", rank: 9, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "masculine", receiverPreset: "masculine", title: "Punho no ritmo dele", text: "{actor}, masturbe {rec_intimacy_article} de {receiver} com ritmo firme e bastante saliva, lendo a reação {pron_rec} para acelerar ou segurar antes do limite.", seconds: 120 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 10 — SEXO ORAL
+// ═══════════════════════════════════════════════════════════════
+{ id: "r6-01", rank: 10, title: "Oral guiado", text: "{receiver} guia {actor} com palavras curtas para receber prazer oral do jeito mais confortável.", seconds: 120 },
+{ id: "r6-02", rank: 10, title: "Temperatura", text: "{actor}, use beijo, sopro e variação de temperatura {rec_intimacy_locative} de {receiver}.", seconds: 120 },
+{ id: "r6-03", rank: 10, title: "Ritmo constante", text: "{actor}, mantenha prazer oral em ritmo constante por dois minutos; {receiver} só pode orientar com a voz.", seconds: 120 },
+{ id: "r6-04", rank: 10, title: "Controle do receptor", text: "{receiver}, escolha posição e ritmo. {actor} oferece prazer oral respeitando cada ajuste.", seconds: 150 },
+{ id: "r6-05", rank: 10, title: "Pausa provocante", text: "{actor}, aproxime-se com a boca, pause, beije ao redor e só continue quando {receiver} pedir claramente.", seconds: 120 },
+{ id: "r6-06", rank: 10, title: "Alternância", text: "Alternem quem recebe prazer oral a cada minuto, mantendo cuidado, higiene e consentimento explícito.", seconds: 180 },
+{ id: "r6-07", rank: 10, title: "Mãos e boca", text: "{actor}, combine mãos e boca em {receiver}, seguindo o ritmo que arrancar a reação mais clara.", seconds: 120 },
+{ id: "r6-08", rank: 10, title: "Quase lá", text: "{actor}, conduza {receiver} perto do clímax com prazer oral e pare por cinco segundos antes de retomar.", seconds: 150 },
+{ id: "r6-couple-01", rank: 10, mode: "couple", insight: true, title: "Boca sem educação", text: "{actor}, coloque a boca {rec_intimacy_locative} de {receiver} e use língua, saliva e pressão sem pressa. Se {art_rec} {receiver} estiver {arousal_rec}, mantenha o ritmo; se não, volte a provocar ao redor até {subj_rec} pedir.", seconds: 240 },
+{ id: "r6-couple-02", rank: 10, mode: "couple", title: "Língua e comando", text: "{receiver}, diga exatamente onde quer a língua de {actor}. {actor}, obedeça por quatro minutos, alternando sucção, lambida lenta e pausa cruel.", seconds: 240 },
+{ id: "r6-couple-m-01", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Foco nas bolas", text: "{actor}, arrede a cueca de {receiver} de lado e lamba bem as bolas e o corpo do pau {pron_rec}. Pare a boca antes de chegar na cabeça para deixar {art_rec} {receiver} no limite.", seconds: 180 },
+{ id: "r6-couple-f-01", rank: 10, mode: "couple", insight: true, receiverPreset: "feminine", title: "Sopro quente na bucetinha", text: "{actor}, abra bem as pernas de {receiver}, encoste a boca perto da bucetinha {pron_rec} e solte sopros quentes, bem lentos, até sentir o corpo {pron_rec} reagir.", seconds: 120 },
+{ id: "r6-couple-m-02", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Sopro quente no pau", text: "{actor}, encoste a boca perto do pau de {receiver} e sopre quente desde a base até a cabeça, sem chupar ainda.", seconds: 120 },
+{ id: "r6-couple-m-03", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Água gelada na cabeça", text: "{actor}, beba água bem gelada e dê um beijo frio na cabeça do pau de {receiver}. Depois esquente com a língua e repita.", seconds: 120 },
+{ id: "r6-couple-f-02", rank: 10, mode: "couple", insight: true, receiverPreset: "feminine", title: "Beijo no clitóris", text: "{actor}, ache o clitóris de {receiver} com os dedos e dê um beijo molhado e focado bem em cima dele, sem pressa de sair dali.", seconds: 120 },
+{ id: "r6-couple-f-03", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Bucetinha em círculos", text: "{actor}, lamba os lábios externos da bucetinha de {receiver} rodando a língua no sentido horário, mantendo a pressão constante.", seconds: 120 },
+{ id: "r6-couple-f-04", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Bucetinha anti-horário", text: "{actor}, agora lamba os lábios externos da bucetinha de {receiver} no sentido anti-horário, devagar e molhado.", seconds: 120 },
+{ id: "r6-couple-f-05", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Vertical externo", text: "{actor}, lamba os lábios externos da bucetinha de {receiver} subindo e descendo com a língua sem parar.", seconds: 120 },
+{ id: "r6-couple-f-06", rank: 10, mode: "couple", insight: true, receiverPreset: "feminine", title: "Vertical interno", text: "{actor}, abra a bucetinha de {receiver} com as mãos e lamba os lábios internos de cima para baixo, focando na parte mais molhada.", seconds: 120 },
+{ id: "r6-couple-f-07", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Figura 8 no clitóris", text: "{actor}, faça um movimento de figura 8 com a língua ao redor do clitóris de {receiver}, sem pressa, deixando {subj_rec} sentir cada curva.", seconds: 120 },
+{ id: "r6-couple-f-08", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Alfabeto no clitóris", text: "{actor}, escreva o alfabeto com a ponta da língua no clitóris de {receiver}. Cada letra é uma sensação nova. Vá até o fim ou até {subj_rec} pedir para parar.", seconds: 150 },
+{ id: "r6-couple-f-09", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Oral com mão no peito", text: "{actor}, enquanto chupa a bucetinha de {receiver}, estenda uma mão para cima e agarre o peito {pron_rec}, esfregando o mamilo no mesmo ritmo da boca.", seconds: 120 },
+{ id: "r6-couple-f-10", rank: 10, mode: "couple", insight: true, receiverPreset: "feminine", title: "Língua penetrando", text: "{actor}, alterne entre lamber o clitóris de {receiver} e enfiar a língua dentro da bucetinha {pron_rec}. Vá e volte no ritmo que {subj_rec} responder melhor.", seconds: 120 },
+{ id: "r6-couple-f-11", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Lábios internos espalhados", text: "{actor}, espalhe bem os lábios da bucetinha de {receiver} com os dedos para expor o clitóris. Lamba direto nele com pressão constante, sem nada atrapalhar.", seconds: 120 },
+{ id: "r6-couple-m-04", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Só a cabecinha", text: "{actor}, coloque só a cabeça do pau de {receiver} na boca e gire a língua em volta do freio, sem engolir mais do que isso.", seconds: 120 },
+{ id: "r6-couple-m-05", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Engolir em sequência", text: "{actor}, chupe o pau de {receiver} em sequência: cinco segundos fundo, tira para lamber, quinze segundos fundo, pausa curta, e vinte segundos no limite confortável. Sem forçar garganta.", seconds: 180 },
+{ id: "r6-couple-any-01", rank: 10, mode: "couple", title: "Saliva quente", text: "{actor}, coloque bastante saliva {rec_intimacy_locative} de {receiver} e espalhe com a mão com pressão firme antes de começar a chupar.", seconds: 120 },
+{ id: "r6-couple-any-03", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Caminho do períneo", text: "{actor}, desça a ponta da língua depois da bucetinha de {receiver} e lamba o períneo com firmeza. Só avance para anal nela se isso já foi combinado e ela pedir mais.", seconds: 120 },
+{ id: "r6-couple-any-04", rank: 10, mode: "couple", title: "Facesit com controle", text: "{actor}, sente no rosto de {receiver} para {subj_rec} lamber seu {actor_intimacy}. Mantenham espaço para respirar e combinem um sinal de pausa.", seconds: 150 },
+{ id: "r6-couple-fm-01", rank: 10, mode: "couple", actorPreset: "feminine", receiverPreset: "masculine", title: "Espanhola agressiva", text: "{actor}, encaixe o pau de {receiver} entre os peitos e esfregue com força de cima para baixo, usando saliva para deixar a cabeça bem molhada.", seconds: 180 },
+{ id: "r6-couple-any-05", rank: 10, mode: "couple", insight: true, receiverPreset: "feminine", title: "Dedo no bumbum no oral", text: "{actor}, enquanto chupa {rec_intimacy_article} de {receiver}, se ela curtir anal, use um dedo lubrificado para massagear só a bordinha do cu {pron_rec}, sem insistir se houver qualquer desconforto.", seconds: 150 },
+{ id: "r6-couple-any-06", rank: 10, mode: "couple", title: "69 de lado", text: "Fiquem de lado em posição de 69 e chupem um ao outro com bastante saliva até o timer zerar. Quem precisar pausar toca duas vezes no corpo do outro.", seconds: 180 },
+{ id: "r6-couple-m-06", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Massagem embaixo do saco", text: "{actor}, enquanto chupa o pau de {receiver}, use uma mão para apertar o saco {pron_rec} e a outra para massagear firme a raiz do pau embaixo das bolas.", seconds: 150 },
+{ id: "r6-couple-m-07", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Surpresa no períneo", text: "{actor}, faça uma surpresa a {receiver} massageando o períneo, a área entre o ânus e a raiz do saco. Use um toque firme para {subj_rec} se conectar com essa zona tão sensível.", seconds: 120 },
+{ id: "r6-couple-m-08", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Polegar na cabeça", text: "{actor}, segure o pau de {receiver} com firmeza e provoque com movimentos lentos para cima e para baixo. Massageie a cabeça com a superfície do polegar. Quando sentir que está perto demais, espalhe a energia sexual com as mãos por todo o corpo {pron_rec}.", seconds: 180 },
+{ id: "r6-couple-m-09", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Alongar em direções opostas", text: "{actor}, brinque com o pau e as bolas de {receiver}, esticando em direções opostas para aumentar o fluxo sanguíneo. Faça isso com calma, é para aumentar o prazer, não a pressa.", seconds: 120 },
+{ id: "r6-couple-m-10", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Toque gentil nas bolas", text: "{actor}, dedique um tempo só para as bolas de {receiver}. Segure, agite e puxe suavemente, com um toque gentil e respeitoso. Transforme isso numa experiência estimulante e quase curativa.", seconds: 120 },
+{ id: "r6-couple-m-11", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Brincar com a palma", text: "{actor}, deixe o pau de {receiver} saltar na palma da sua mão. Envolva-o e acaricie de diferentes ângulos. Observe a respiração {pron_rec} e como o corpo reage a cada novo estímulo.", seconds: 120 },
+{ id: "r6-couple-m-12", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Esfregar rápido e ponto M", text: "{actor}, coloque o pau de {receiver} entre as mãos e esfregue rápido, deixando o óleo ou lubrificante escorrer. Estimule bastante a cabeça. Localize o ponto do milhão de dólares no períneo e pressione firme para reverter a vontade de gozar e prolongar o prazer.", seconds: 150 },
+{ id: "r6-couple-m-13", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Anel e torção", text: "{actor}, faça um anel com os dedos ao redor do pau de {receiver} e trabalhe da raiz até a ponta. Use movimentos de torção bem na cabeça, sem pressa de ir embora dali.", seconds: 120 },
+{ id: "r6-couple-m-14", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Respirem juntos", text: "{actor}, para fazer {receiver} aguentar mais, varie a velocidade do toque e aplique técnicas diferentes a cada momento. Respirem juntos e distribuam essa energia dos genitais até o coração. Mantenha-se presente.", seconds: 150 },
+{ id: "r6-couple-m-15", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Efeito vibratório final", text: "{actor}, crie um efeito vibratório com as mãos no pau de {receiver} e bombeie a ponta contra a base. Repita as melhores técnicas de antes e não deixe nenhuma parte dos genitais sem atenção. Espalhe o toque para o resto do corpo {pron_rec}.", seconds: 180 },
+{ id: "r6-couple-hm-01", rank: 10, mode: "couple", requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Dedos e boca em sincronia", text: "{actor}, posicione-se entre as pernas de {receiver}. Use seus dedos e boca simultaneamente no clitóris e nos lábios internos, acompanhando o ritmo da respiração dela.", seconds: 150 },
+{ id: "r6-couple-ff-01", rank: 10, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Sincronia de prazer", text: "{actor}, posicione-se sobre {receiver}. Enquanto ela usa a boca na sua bucetinha, use seus dedos para masturbar a bucetinha dela, ditando o ritmo sem pressa.", seconds: 180 },
+{ id: "r6-couple-mm-01", rank: 10, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Oral com domínio", text: "{actor}, posicione-se para fazer sexo oral em {receiver}. Chupe o pau dele mantendo contato visual, enquanto usa uma mão para massagear a base e as bolas com força gostosa.", seconds: 150 },
+{ id: "r6-recv-01", rank: 10, mode: "couple", title: "Você comanda a boca", text: "{receiver}, guie a cabeça de {actor} com as mãos e dite o ritmo do oral: mais devagar, mais fundo, ou pausa. {actor} só executa.", seconds: 150 },
+{ id: "r6-recv-02", rank: 10, mode: "couple", title: "Mapa falado", text: "{receiver}, descreva em voz alta onde quer a língua de {actor} a cada quinze segundos. {actor} muda de lugar exatamente quando {subj_rec} mandar.", seconds: 120 },
+{ id: "r4-couple-m-01", rank: 10, mode: "couple", receiverPreset: "masculine", title: "Mordida por cima da cueca", text: "{actor}, dê mordidas leves no pau de {receiver} por cima da cueca, só para deixar {art_rec} {receiver} pulsando de tesão sem tirar nada do lugar.", seconds: 90 },
+{ id: "r4-couple-f-01", rank: 10, mode: "couple", receiverPreset: "feminine", title: "Arredar a calcinha", text: "{actor}, arrede a calcinha de {receiver} de lado e dê um beijo bem molhado na virilha {pron_rec}. Depois solte o tecido e deixe {art_rec} {receiver} querendo mais.", seconds: 90 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 11 — PODER & PROVOCAÇÃO
+// ═══════════════════════════════════════════════════════════════
+{ id: "r2-new-04", rank: 11, title: "Submissão verbal", text: "{receiver}, durante os próximos 3 minutos, você só pode responder a {actor} dizendo 'Sim, senhor(a)' ou 'Não, senhor(a)'. {actor}, faça perguntas provocantes.", seconds: 180 },
+{ id: "r3-new-01", rank: 11, title: "Mãos presas", text: "{actor}, use uma gravata, cinto ou as próprias mãos para prender firmemente os pulsos de {receiver} acima da cabeça. Provoque o pescoço e a barriga por 2 minutos.", seconds: 120 },
+{ id: "r3-new-04", rank: 11, title: "Ajoelhe-se", text: "{actor}, peça para {receiver} ficar de joelhos na sua frente. Segure o rosto {pron_rec} com as duas mãos e dite como será o resto da noite.", seconds: 0 },
+{ id: "r3-new-05", rank: 11, title: "Marcando território", text: "{actor}, dê um chupão leve na parte interna da coxa ou na base do pescoço de {receiver}, deixando uma pequena marca de propriedade.", seconds: 45 },
+{ id: "r3-new-06", rank: 11, title: "Tapas de leve", text: "{actor}, enquanto beija {receiver}, dê pequenos e ardidos tapas nas nádegas {pron_rec}, alternando com apertões fortes na pele.", seconds: 90 },
+{ id: "r4-02", rank: 11, title: "Mãos combinadas", text: "{actor}, segure os pulsos de {receiver} por um minuto e provoque com beijos e carícias nos limites acordados.", seconds: 60 },
+{ id: "r4-04", rank: 11, title: "Comando de posição", text: "{actor}, peça que {receiver} mude de posição na cama ou no sofá e conduza dois minutos de provocação.", seconds: 120 },
+{ id: "r4-05", rank: 11, title: "Amarra leve", text: "Se ambos quiserem, usem lenço ou gravata para limitar uma das mãos de {receiver}; {actor} controla o ritmo.", seconds: 120 },
+{ id: "r4-08", rank: 11, title: "Obediência curta", text: "{actor}, dê três comandos sensuais simples. {receiver} cumpre um por vez e pode ajustar qualquer limite.", seconds: 0 },
+{ id: "r4-couple-any-01", rank: 11, mode: "couple", title: "Puxão por trás", text: "{actor}, coloque {receiver} de costas ou de quatro, puxe o cabelo {pron_rec} com firmeza combinada e morda a nuca de um jeito ardido.", seconds: 75 },
+{ id: "r4-new-01", rank: 11, title: "Implorando por toque", text: "{receiver}, afaste as pernas e exiba {rec_intimacy_article}, mas você está proibido(a) de se tocar. Você deve implorar verbalmente para que {actor} toque você.", seconds: 60 },
+{ id: "r4-new-02", rank: 11, title: "Tapas ritmados", text: "{actor}, coloque {receiver} de bruços ou de quatro. Dê 10 tapas estalados e firmes em cada nádega, deixando a pele vermelha e quente.", seconds: 0 },
+{ id: "r4-new-06", rank: 11, title: "Controle de respiração", text: "{actor}, coloque dois dedos levemente sobre os lábios de {receiver}, forçando {subj_rec} a respirar apenas pelo nariz enquanto você estimula {rec_intimacy_article}.", seconds: 90 },
+{ id: "r5-new-03", rank: 11, title: "Arranhões", text: "{actor}, deite {receiver} de bruços. Enquanto faz uma massagem forte nas coxas, use as unhas para arranhar as costas {pron_rec} com força suficiente para arrepiar, mas sem machucar.", seconds: 90 },
+{ id: "r5-new-04", rank: 11, title: "Fones de ouvido (Surdez)", text: "{receiver}, coloque fones de ouvido com música muito alta e feche os olhos. {actor}, você tem 3 minutos para usar as mãos e a boca onde quiser, surpreendendo {receiver} que não pode prever nada.", seconds: 180 },
+{ id: "r5-new-05", rank: 11, title: "Restrição de pernas", text: "{actor}, use as próprias pernas ou o peso do corpo para prender completamente as pernas de {receiver} abertas. Estimule {rec_intimacy_article} com as mãos enquanto {subj_rec} não pode se mover.", seconds: 120 },
+{ id: "r6-couple-any-02", rank: 11, mode: "couple", title: "Tapa na bunda no oral", text: "{actor}, enquanto chupa {rec_intimacy_article} de {receiver}, dê tapas firmes e combinados na bunda {pron_rec}, deixando a pele quente.", seconds: 150 },
+{ id: "r6-new-01", rank: 11, title: "Puxão de cabelo e garganta", text: "{actor}, durante o oral, segure firmemente o cabelo de {receiver} na nuca, forçando a cabeça levemente para trás. Controle o ritmo com dominação clara.", seconds: 150 },
+{ id: "r6-new-03", rank: 11, title: "Orgasmo sob comando", text: "{actor}, leve {receiver} até o limite extremo com a boca ou vibrador. {receiver} está TERMINANTEMENTE PROIBIDO(A) de gozar até que você diga 'Goza pra mim agora'.", seconds: 240 },
+{ id: "r6-new-04", rank: 11, title: "Castigo e Recompensa", text: "{actor}, dê tapas fortes e ritmados nas nádegas de {receiver}. Para cada tapa, compense com uma lambida lenta e profunda {rec_intimacy_locative}.", seconds: 180 },
+{ id: "r6-new-06", rank: 11, title: "Submissão forçada", text: "{actor}, pressione os ombros de {receiver} contra a cama com firmeza, subindo sobre {subj_rec}. Faça oral ditando um ritmo agressivo enquanto mantém o corpo {pron_rec} imobilizado.", seconds: 150 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 12 — PENETRAÇÃO & CLÍMAX
+// ═══════════════════════════════════════════════════════════════
+{ id: "r7-01", rank: 12, title: "Posição favorita", text: "Escolham a posição de penetração favorita do casal. {actor} conduz o primeiro minuto e {receiver} conduz o segundo.", seconds: 120 },
+{ id: "r7-02", rank: 12, title: "Lento profundo", text: "Iniciem penetração em ritmo lento, com foco em respiração, olhar e controle do clímax.", seconds: 150 },
+{ id: "r7-03", rank: 12, title: "Troca de comando", text: "Durante três minutos, troquem quem dita ritmo, profundidade e pausa a cada trinta segundos.", seconds: 180 },
+{ id: "r7-04", rank: 12, title: "Beirada", text: "Escolham uma posição estável na beirada da cama ou sofá e mantenham ritmo firme com comunicação clara.", seconds: 120 },
+{ id: "r7-05", rank: 12, title: "Controle de orgasmo", text: "Aproximem-se do clímax e pausem juntos por dez segundos antes de continuar.", seconds: 150 },
+{ id: "r7-06", rank: 12, title: "Ritmo selvagem combinado", text: "Com consentimento explícito, aumentem a intensidade por um minuto e voltem ao ritmo lento no minuto seguinte.", seconds: 120 },
+{ id: "r7-07", rank: 12, title: "Clímax de um", text: "Escolham quem será o foco. A outra pessoa dedica três minutos para conduzir o prazer até onde for desejado.", seconds: 180 },
+{ id: "r7-08", rank: 12, title: "Final sincronizado", text: "Tentem sincronizar respiração, movimento e pausa até chegar ao clímax juntos ou encerrar no ponto mais intenso.", seconds: 180 },
+{ id: "r7-couple-01", rank: 12, mode: "couple", insight: true, title: "Penetração com leitura do corpo", text: "Antes de penetrar, {actor} confere se {art_rec} {receiver} está {arousal_rec}. Se sim, avancem e mantenham contato visual. Se não, parem tudo e voltem para boca, mão e coxas até o corpo liberar.", seconds: 300 },
+{ id: "r7-couple-02", rank: 12, mode: "couple", title: "Ritmo sujo controlado", text: "Escolham uma posição confortável para penetração. Quem estiver por cima dita o ritmo por um minuto; depois o outro manda, com ordens curtas e safadas.", seconds: 300 },
+{ id: "r7-couple-any-01", rank: 12, mode: "couple", title: "Mordida na perna", text: "Durante a penetração mais selvagem, quem estiver com a boca livre dá uma mordida firme na coxa ou na batata da perna do outro, no auge do rala e rola.", seconds: 180 },
+{ id: "r7-new-01", rank: 12, title: "Orgasmo Arruinado", text: "{actor}, leve {receiver} ao clímax durante a penetração ou oral. No exato milissegundo em que o orgasmo começar a disparar, PARE O ESTÍMULO TOTALMENTE. Deixe o orgasmo acontecer 'no vazio'.", seconds: 0 },
+{ id: "r7-new-02", rank: 12, title: "Animalesco", text: "Penetração agressiva. {actor}, morda a nuca e o ombro de {receiver}, agarre a cintura com força (deixando marcas de dedo) e dite um ritmo selvagem até um de vocês pedir pausa.", seconds: 180 },
+{ id: "r7-new-03", rank: 12, title: "Double Penetration (Fictício/Brinquedo)", text: "Se consentido: Durante a penetração vaginal, {actor} (ou a própria {receiver}) usa um ou dois dedos bem lubrificados para penetração anal simultânea.", seconds: 180 },
+{ id: "r7-new-04", rank: 12, title: "Facefuck / Deepthroat", text: "{actor}, posicione-se e use a boca de {receiver} ativamente. Você controla os movimentos de quadril, ditando a profundidade do oral por 2 minutos contínuos.", seconds: 120 },
+{ id: "r7-new-05", rank: 12, title: "Uso de Plug", text: "Se tiverem um plug anal, {actor} insere em {receiver} com bastante lubrificante. Em seguida, inicie a penetração tradicional, aproveitando a sensação de 'aperto' duplo.", seconds: 240 },
+{ id: "r7-new-06", rank: 12, title: "Transe do Orgasmo", text: "{actor}, use um vibrador potente (se disponível) somado à penetração. Mantenha o estímulo contínuo até que {receiver} tenha orgasmos múltiplos ou implore para parar.", seconds: 300 },
+{ id: "r7-recv-01", rank: 12, mode: "couple", title: "Posição e ritmo seus", text: "{receiver}, escolha a posição e dite a velocidade e a profundidade da penetração. {actor} obedece cada ajuste por dois minutos, sem antecipar.", seconds: 120 },
+{ id: "r7-recv-02", rank: 12, mode: "couple", insight: true, insightTarget: "receiver", title: "Você decide o clímax", text: "{receiver}, diga se quer acelerar para o clímax ou prolongar mais um pouco. {actor} segue a sua decisão sem discutir.", seconds: 150 },
+{ id: "r7-couple-ff-02", rank: 12, mode: "couple", insight: true, insightTarget: "receiver", actorPreset: "feminine", receiverPreset: "feminine", title: "Clímax espelhado", text: "Posicionem-se de forma que ambas possam estimular uma a outra (usando mãos ou tribadismo). Foquem no contato visual e tentem sincronizar a respiração até chegarem ao limite juntas.", seconds: 180 },
+{ id: "r7-couple-mm-02", rank: 12, mode: "couple", actorPreset: "masculine", receiverPreset: "masculine", title: "Ritmo intenso", text: "Durante a penetração, {actor} dita um ritmo mais selvagem e firme por 2 minutos. {receiver} comunica o limite se precisar, mas o objetivo é buscar o ápice de intensidade.", seconds: 120 },
+{ id: "r7-couple-mh-02", rank: 12, mode: "couple", requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Controle por cima", text: "{actor}, sente-se sobre {receiver} para a penetração. Você dita a velocidade e a profundidade por 2 minutos. Ele não pode usar as mãos para te guiar, apenas aproveitar o seu ritmo.", seconds: 120 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 13 — SURPRESA (Coringas)
+// ═══════════════════════════════════════════════════════════════
+{ id: "r5-surprise-01", rank: 13, insight: true, requiresFemale: true, receiverPreset: "feminine", title: "Surpresa: Massagem no busto", text: "{receiver}, fique de frente para {actor}. {actor} vai massagear seus seios por 45 segundos, prestando atenção aos seus sinais.", seconds: 45 },
+{ id: "r5-surprise-02", rank: 13, insight: true, requiresFemale: true, actorPreset: "feminine", title: "Surpresa: Toque coberto", text: "{actor}, coloque a mão por dentro da calcinha e comece a brincar com {own_intimacy} enquanto {receiver} observa por 60 segundos.", seconds: 60 },
+{ id: "r5-surprise-03", rank: 13, insight: true, actorPreset: "masculine", title: "Surpresa: Masturbação coberta", text: "{actor}, masturbe seu próprio pau por cima da cueca enquanto {receiver} observa. Deixe {subj_rec} ver cada movimento por 30 segundos.", seconds: 30 },
+{ id: "r5-surprise-04", rank: 13, insight: true, title: "Surpresa: Dedo na boca", text: "{actor}, coloque o seu dedo (ou o dedo de {receiver}) dentro da boca de {receiver} e chupe lentamente por 45 segundos.", seconds: 45 },
+{ id: "r6-surprise-01", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na boca", text: "{actor}, passe o pau na boca de {receiver} como se fosse um batom, suavemente, durante 30 segundos.", seconds: 30 },
+{ id: "r6-surprise-02", rank: 13, insight: true, receiverPreset: "feminine", title: "Surpresa: Chupa mamilo esquerdo", text: "{actor}, chupe o mamilo esquerdo de {receiver} com intensidade crescente durante 30 segundos.", seconds: 30 },
+{ id: "r6-surprise-03", rank: 13, insight: true, receiverPreset: "feminine", title: "Surpresa: Chupa mamilo direito", text: "{actor}, agora o mamilo direito. Chupe enquanto {receiver} segura sua cabeça durante 30 segundos.", seconds: 30 },
+{ id: "r6-surprise-04", rank: 13, insight: true, receiverPreset: "feminine", title: "Surpresa: Ambos os mamilos", text: "{actor}, alterne entre os dois mamilos de {receiver}, variando a pressão. {receiver} diz \"mais\" ou \"menos\" durante 45 segundos.", seconds: 45 },
+{ id: "r6-surprise-05", rank: 13, insight: true, title: "Surpresa: Beijo quente", text: "{actor}, dê um beijo longo e delicado {rec_intimacy_locative}. Deixe a boca explorar lentamente durante 45 segundos.", seconds: 45 },
+{ id: "r6-surprise-06", rank: 13, insight: true, title: "Surpresa: Língua lenta", text: "{actor}, passe a língua {rec_intimacy_locative} de forma exploratória. {receiver} pode guiar com as mãos durante 60 segundos.", seconds: 60 },
+{ id: "r6-surprise-07", rank: 13, insight: true, requiresFemale: true, actorPreset: "feminine", title: "Surpresa: Biqueinho como batom", text: "{actor}, use seu biqueinho e passe nos lábios de {receiver} como se fosse um batom, deixando o contato tomar conta durante 30 segundos.", seconds: 30 },
+{ id: "r6-surprise-08", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Surpresa: Peito no pau", text: "{actor}, passe seus seios no pau de {receiver} enquanto {subj_rec} está duro durante 45 segundos.", seconds: 45 },
+{ id: "r6-surprise-09", rank: 13, insight: true, title: "Surpresa: Chupa o dedo", text: "{actor}, coloque o seu dedo dentro da boca de {receiver} e deixe {subj_rec} chupar enquanto vocês se olham durante 45 segundos.", seconds: 45 },
+{ id: "r6-surprise-10", rank: 13, insight: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na língua", text: "{actor}, passe o pau na língua de {receiver}. Deixe {subj_rec} sentir a textura durante 20 segundos.", seconds: 20 },
+{ id: "r6-surprise-11", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "feminine", receiverPreset: "masculine", title: "Surpresa: Tapa no pau", text: "{actor}, bata o pau de {receiver} na sua boca (suavemente) 5 vezes. Deixe {subj_rec} sentir a brincadeira.", seconds: 0 },
+{ id: "r6-surprise-12", rank: 13, insight: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pau na língua (intenso)", text: "{actor}, bata o pau na língua de {receiver} ritmicamente durante 30 segundos. {receiver} fica receptiva.", seconds: 30 },
+{ id: "r7-surprise-01", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Posição escolhida", text: "{receiver}, escolha a posição para serem penetrados (por cima, por trás, deitados). {actor} entra e encontra o ritmo que ela pedir por 180 segundos.", seconds: 180 },
+{ id: "r7-surprise-02", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Aceleração progressiva", text: "{actor}, penetra devagar no início. A cada minuto, aumente a velocidade. {receiver} diz \"fica assim\" quando quer que mantenha o ritmo durante 180 segundos.", seconds: 180 },
+{ id: "r7-surprise-03", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Pressão combinada", text: "{actor}, durante a penetração, pressione o clitóris de {receiver} com o polegar enquanto mantém um ritmo constante durante 120 segundos.", seconds: 120 },
+{ id: "r7-surprise-04", rank: 13, insight: true, requiresMixedPair: true, actorPreset: "masculine", receiverPreset: "feminine", title: "Surpresa: Ritmo de sua escolha", text: "{receiver}, dita o ritmo durante a penetração. {actor} obedece cada comando: \"mais rápido\", \"mais profundo\", \"pare\", \"continua\" durante 150 segundos.", seconds: 150 },
+{ id: "r4-new-03", rank: 13, title: "Adoração de pés", text: "{actor}, passe 2 minutos beijando, massageando e adorando os pés e tornozelos de {receiver}, demonstrando total reverência ao corpo {pron_rec}.", seconds: 120 },
+{ id: "r5-new-06", rank: 13, title: "Adoração de joelhos", text: "{actor}, fique de joelhos e passe 3 minutos apenas beijando, lambendo e adorando {rec_intimacy_article} de {receiver}, tratando como um altar.", seconds: 180 },
+{ id: "r6-new-02", rank: 13, title: "Exploração traseira", text: "Se consentido: {actor}, use bastante lubrificante e um dedo (ou plug pequeno) para massagear a entrada anal de {receiver} simultaneamente ao estímulo do clitóris/pau.", seconds: 150 },
+
+// ═══════════════════════════════════════════════════════════════
+// RANK 14 — AFTERCARE
+// ═══════════════════════════════════════════════════════════════
+{ id: "r8-aftercare-01", rank: 14, mode: "couple", title: "Abraço do depois", text: "Fiquem abraçados em silêncio por 2 minutos. Depois, cada um diz uma coisa que mais gostou no que aconteceu.", seconds: 120 },
+{ id: "r8-aftercare-02", rank: 14, mode: "couple", title: "Água e cuidado", text: "{actor}, traga água para {receiver}. Enquanto {subj_rec} bebe, faça carinho no cabelo e no rosto {pron_rec}. Depois troquem.", seconds: 120 },
+{ id: "r8-aftercare-03", rank: 14, mode: "couple", title: "Toalha quente", text: "Se possível, {actor} umedeça uma toalha com água morna e limpe o corpo de {receiver} com delicadeza, como se estivesse cuidando de alguém precioso.", seconds: 180 },
+{ id: "r8-aftercare-04", rank: 14, mode: "couple", title: "Check-in emocional", text: "Perguntem um ao outro: como você está se sentindo agora? Tem algo que faria diferente? O que foi mais gostoso? Respondam com honestidade.", seconds: 0 },
+{ id: "r8-aftercare-05", rank: 14, mode: "couple", title: "Coberta e conchinha", text: "{actor}, cubra {receiver} com lençol ou coberta. Fiquem de conchinha por 3 minutos. {actor} faz carinho nas costas {pron_rec} até {subj_rec} relaxar completamente.", seconds: 180 },
+{ id: "r8-aftercare-06", rank: 14, mode: "couple", title: "Banho juntos", text: "Vão para o banho juntos. Lavem o corpo um do outro com calma, sem intenção sexual. Cuidem dos cabelos, costas, pés. Depois se sequem mutuamente.", seconds: 300 },
+{ id: "r8-aftercare-07", rank: 14, mode: "couple", title: "Agradecimento", text: "Olhem-se nos olhos e digam um ao outro: obrigado por confiar em mim, obrigado por se entregar, obrigado por estar aqui.", seconds: 0 },
+{ id: "r8-aftercare-08", rank: 14, mode: "couple", title: "Música de encerramento", text: "Coloquem uma música calma. Fiquem deitados juntos, sem falar, só escutando e sentindo a presença um do outro até a música acabar.", seconds: 240 },
+
+// ═══════════════════════════════════════════════════════════════
+// LOOPS DE RECUO (mantidos como rank 12 para contexto de clímax)
+// ═══════════════════════════════════════════════════════════════
+{ id: "loop-couple-01", rank: 12, mode: "couple", loop: true, title: "RECUO: da penetração para a boca", text: "Recuo estratégico. Se já estavam penetrando, parem agora. {actor}, volte com a boca para {rec_intimacy_article} de {receiver}; {receiver}, diga se quer mais língua, mais pressão ou mais pausa.", seconds: 180 },
+{ id: "loop-couple-02", rank: 12, mode: "couple", loop: true, title: "RECUO: deixa implorar", text: "Interrompam o ritmo antes do clímax. {actor}, provoque {receiver} com boca e mão, mas pare sempre que {subj_rec} ficar perto demais. A meta é deixar {art_rec} {receiver} implorando.", seconds: 180 },
+{ id: "loop-couple-03", rank: 12, mode: "couple", loop: true, title: "RECUO: volta para as mãos", text: "Recuo estratégico. Parem o que estavam fazendo. {actor}, use só as mãos em {receiver} por dois minutos, lento, lendo cada reação antes de subir o ritmo de novo.", seconds: 120 },
+{ id: "loop-couple-04", rank: 12, mode: "couple", loop: true, title: "RECUO: beijo e respiração", text: "Interrompam o ápice. Fiquem colados, testa com testa, e voltem a se beijar devagar sincronizando a respiração por dois minutos antes de retomar.", seconds: 120 },
+{ id: "loop-couple-05", rank: 12, mode: "couple", loop: true, title: "RECUO: provocar e negar", text: "{actor}, provoque {receiver} com boca e mãos perto de {rec_intimacy_article}, mas recue toda vez que {subj_rec} chegar perto demais. A meta é deixar {art_rec} {receiver} implorando.", seconds: 150 },
+{ id: "loop-couple-06", rank: 12, mode: "couple", loop: true, title: "RECUO: troca de posição", text: "Saiam da posição atual. {receiver} escolhe uma nova posição mais lenta e {actor} reinicia com calma, sem pressa de voltar à intensidade.", seconds: 120 },
+
+// ═══════════════════════════════════════════════════════════════
+// SOLO CHALLENGES (ranks ajustados proporcionalmente)
+// ═══════════════════════════════════════════════════════════════
+{ id: "r1-solo-01", rank: 1, mode: "solo", title: "Mão por cima", text: "{actor}, comece direto: faça carinho {underwear_outer}, sem tirar a peça. Use pressão leve, depois firme, até o corpo pedir mais.", seconds: 75 },
+{ id: "r1-solo-02", rank: 1, mode: "solo", title: "Esquenta rápido", text: "{actor}, esfregue a palma da mão {underwear_outer}. Nada de discurso: só ritmo, calor e respiração mais pesada.", seconds: 75 },
+{ id: "r1-solo-03", rank: 1, mode: "solo", title: "Pressão por cima", text: "{actor}, pressione {bottom_underwear} contra {own_intimacy} usando a palma da mão. Segura firme por alguns segundos, solta e repete.", seconds: 90 },
+{ id: "r1-solo-04", rank: 1, mode: "solo", title: "Sem tirar nada", text: "{actor}, mantenha a roupa no corpo e provoque {own_intimacy} só por cima da peça. Se ficar bom, aumenta o ritmo sem pedir licença.", seconds: 90 },
+{ id: "r2-solo-01", rank: 2, mode: "solo", title: "Pele acesa", text: "{actor}, passe as mãos pelo peito, barriga e coxas, desviando de {own_intimacy}. A regra é deixar o corpo pedir mais antes de obedecer.", seconds: 120 },
+{ id: "r2-solo-02", rank: 2, mode: "solo", insight: true, insightTarget: "actor", title: "Check de calor", text: "{actor}, confira se você já está {arousal_actor}. Se sim, mantenha a provocação por mais um minuto. Se não, volte para pescoço, mamilos e coxas até o corpo responder.", seconds: 90 },
+{ id: "r2-solo-03", rank: 2, mode: "solo", title: "Por cima da peça", text: "{actor}, faça carinho {underwear_outer}. Alterne círculos lentos, pressão com a palma e fricção curta, sem tirar a roupa íntima.", seconds: 120 },
+{ id: "r2-solo-04", rank: 2, mode: "solo", title: "Busto, barriga e coxa", text: "{actor}, explore {chest_underwear}, barriga e parte interna das coxas. Depois volte para {bottom_underwear} por cima, mais firme.", seconds: 120 },
+{ id: "r2-solo-05", rank: 2, mode: "solo", title: "Automassagem quente", text: "{actor}, faça uma massagem lenta no pescoço, peito, barriga e coxas. Evite {own_intimacy} por enquanto e deixe a vontade crescer.", seconds: 150 },
+{ id: "r2-solo-06", rank: 2, mode: "solo", title: "Massagem por cima", text: "{actor}, massageie {bottom_underwear} por cima da roupa íntima com a palma da mão, sem entrar ainda. Pressão firme, ritmo lento.", seconds: 120 },
+{ id: "r3-solo-01", rank: 4, mode: "solo", title: "Boca e dedos", text: "{actor}, chupe os próprios dedos devagar, molhe bem a boca e arraste essa umidade pelo pescoço, peito e barriga sem tocar em {own_intimacy}.", seconds: 90 },
+{ id: "r3-solo-02", rank: 4, mode: "solo", title: "Beijo imaginário", text: "{actor}, imagine a boca de alguém te beijando sem pudor." seconds: 120 }
 
 ];
 
