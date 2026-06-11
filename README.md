@@ -88,6 +88,7 @@ roleta-sensorial/
 │   ├── screenshot-wheel.png
 │   └── screenshot-result.png
 └── README.md
+```
 
 ---
 
