@@ -1575,3 +1575,21 @@ button:focus-visible {
   outline-offset: 2px;
   border-color: var(--color-gold);
 }
+
+/* Ajustes para os novos botões do timer */
+.timer-actions .btn {
+  min-height: 40px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+
+.timer-actions .btn:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.timer-actions .btn:not(:disabled):hover {
+  border-color: rgba(216, 179, 109, 0.55);
+  box-shadow: 0 0 16px rgba(216, 179, 109, 0.12);
+}
