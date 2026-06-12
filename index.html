@@ -224,11 +224,18 @@
           <span>Curva da noite</span>
           <select id="rank-override">
             <option value="">Automático</option>
-            <option value="4">Pular para Rank 4</option>
-            <option value="5">Pular para Rank 5</option>
-            <option value="6">Pular para Rank 6</option>
-            <option value="7">Liberar Rank 7</option>
-          </select>
+            <option value="4">Pular para Beijos</option>
+            <option value="5">Pular para Desafios</option>
+            <option value="6">Pular para Sensorial</option>
+            <option value="7">Pular para Strip</option>
+            <option value="8">Pular para Fantasia</option>
+            <option value="9">Pular para Manual</option>
+            <option value="10">Pular para Oral</option>
+            <option value="11">Pular para Poder</option>
+            <option value="12">Pular para Clímax</option>
+            <option value="13">Pular para Surpresa</option>
+            <option value="14">Pular para Aftercare</option>
+</select>
         </label>
 
         <div class="safe-word">
@@ -307,9 +314,12 @@
 
         <div id="timer-box" class="timer-box" hidden>
           <div id="timer-display" class="timer-display">00:00</div>
-          <button id="timer-control" class="btn btn-secondary" type="button">Iniciar</button>
+          <div class="timer-actions" style="display:flex; gap:8px; justify-content:center;">
+            <button id="timer-start" class="btn btn-secondary" type="button">Iniciar</button>
+    <button id="timer-pause" class="btn btn-secondary" type="button" disabled>Pausar</button>
+    <button id="timer-restart" class="btn btn-secondary" type="button">Reiniciar</button>
         </div>
-
+      </div>
         <div class="challenge-feedback" aria-label="Avaliar pergunta">
           <div class="feedback-actions">
             <button id="previous-result" class="feedback-icon feedback-back" type="button" aria-label="Voltar para pergunta anterior" title="Voltar pergunta">
