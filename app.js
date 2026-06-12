@@ -958,24 +958,27 @@ function updateSessionRank(options = {}) {
 
 function calculateNaturalRank() {
   const minutesElapsed = getMinutesElapsed();
+  const spins = state.spinCount;
 
-  // Garante que a sessão sempre comece no rank 1
-  if (state.spinCount < 2) return 1;
+  if (minutesElapsed >= 80 || spins >= 42) return 14;
+  if (minutesElapsed >= 70 || spins >= 38) return 13;
+  if (minutesElapsed >= 60 || spins >= 34) return 12;
+  if (minutesElapsed >= 50 || spins >= 30) return 11;
+  if (minutesElapsed >= 42 || spins >= 26) return 10;
+  if (minutesElapsed >= 35 || spins >= 22) return 9;
+  if (minutesElapsed >= 28 || spins >= 19) return 8;
+  if (minutesElapsed >= 22 || spins >= 16) return 7;
+  if (minutesElapsed >= 18 || spins >= 13) return 6;
+  if (minutesElapsed >= 14 || spins >= 10) return 5;
+  if (minutesElapsed >= 10 || spins >= 7) return 4;
+  if (minutesElapsed >= 6 || spins >= 5) return 3;
+  if (minutesElapsed >= 3 || spins >= 3) return 2;
 
-  if (minutesElapsed >= 80 || state.spinCount >= 35) return 14;
-  if (minutesElapsed >= 70 || state.spinCount >= 30) return 13;
-  if (minutesElapsed >= 60 || state.spinCount >= 26) return 12;
-  if (minutesElapsed >= 50 || state.spinCount >= 22) return 11;
-  if (minutesElapsed >= 42 || state.spinCount >= 18) return 10;
-  if (minutesElapsed >= 35 || state.spinCount >= 15) return 9;
-  if (minutesElapsed >= 28 || state.spinCount >= 12) return 8;
-  if (minutesElapsed >= 22 || state.spinCount >= 10) return 7;
-  if (minutesElapsed >= 18 || state.spinCount >= 8) return 6;
-  if (minutesElapsed >= 14 || state.spinCount >= 6) return 5;
-  if (minutesElapsed >= 10 || state.spinCount >= 4) return 4;
-  if (minutesElapsed >= 6 || state.spinCount >= 3) return 3;
-  if (minutesElapsed >= 3 || state.spinCount >= 1) return 2;
   return 1;
+}
+
+function getMaxAllowedChallengeRank() {
+  return state.currentRank;
 }
 
 function applyLearningPacing(rank) {
@@ -1115,8 +1118,14 @@ function selectChallengeForCurrentTurn() {
 }
 
 function getEligibleChallengeEntries(pool = getChallengePool(), used = new Set(state.usedChallengeIds)) {
+  const maxAllowedRank = getMaxAllowedChallengeRank();
+
   return pool
-    .filter((challenge) => !challenge.loop && !used.has(challenge.id))
+    .filter((challenge) =>
+      !challenge.loop &&
+      !used.has(challenge.id) &&
+      challenge.rank <= maxAllowedRank
+    )
     .map((challenge) => ({
       challenge,
       weight: getChallengeWeight(challenge)
@@ -1286,24 +1295,24 @@ function getChallengeFeedbackTags(challenge) {
 }
 
 function getNextAvailableChallengeEntries(pool = getChallengePool(), used = new Set(state.usedChallengeIds), options = {}) {
-  const maxRank = state.currentRank < 12 ? 13 : 14;
+  const maxRank = getMaxAllowedChallengeRank();
+
   const available = pool
-    .filter((challenge) => !challenge.loop && !used.has(challenge.id) && challenge.rank <= maxRank)
+    .filter((challenge) =>
+      !challenge.loop &&
+      !used.has(challenge.id) &&
+      challenge.rank <= maxRank
+    )
     .sort((a, b) => a.rank - b.rank);
-  const nextRank = available.find((challenge) => challenge.rank >= state.currentRank)?.rank
-    || available[0]?.rank;
 
-  if (!nextRank) return [];
+  if (!available.length) return [];
 
-  if (options.promote !== false && nextRank > state.currentRank) {
-    state.currentRank = nextRank;
-    state.lastWeights = WEIGHT_MATRIX[state.currentRank] || WEIGHT_MATRIX[1];
-    applyRankTheme();
-    pulseRankChange();
-  }
+  const sameRank = available.filter((challenge) => challenge.rank === state.currentRank);
+  const lowerRank = available.filter((challenge) => challenge.rank < state.currentRank);
 
-  return available
-    .filter((challenge) => challenge.rank === nextRank)
+  const candidates = sameRank.length ? sameRank : lowerRank;
+
+  return candidates
     .map((challenge) => ({ challenge, weight: 1 }));
 }
 
