@@ -3074,19 +3074,19 @@ function getNextRankHint() {
 
   const next = state.currentRank + 1;
   const thresholds = {
-    2: { minutes: 3, spins: 1 },
-    3: { minutes: 6, spins: 3 },
-    4: { minutes: 10, spins: 4 },
-    5: { minutes: 14, spins: 6 },
-    6: { minutes: 18, spins: 8 },
-    7: { minutes: 22, spins: 10 },
-    8: { minutes: 28, spins: 12 },
-    9: { minutes: 35, spins: 15 },
-    10: { minutes: 42, spins: 18 },
-    11: { minutes: 50, spins: 22 },
-    12: { minutes: 60, spins: 26 },
-    13: { minutes: 70, spins: 30 },
-    14: { minutes: 80, spins: 35 }
+    2: { minutes: 3, spins: 3 },
+    3: { minutes: 6, spins: 5 },
+    4: { minutes: 10, spins: 7 },
+    5: { minutes: 14, spins: 10 },
+    6: { minutes: 18, spins: 13 },
+    7: { minutes: 22, spins: 16 },
+    8: { minutes: 28, spins: 19 },
+    9: { minutes: 35, spins: 22 },
+    10: { minutes: 42, spins: 26 },
+    11: { minutes: 50, spins: 30 },
+    12: { minutes: 60, spins: 34 },
+    13: { minutes: 70, spins: 38 },
+    14: { minutes: 80, spins: 42 }
   };
   const target = thresholds[next];
   if (!target) return "Explore as categorias livremente.";
