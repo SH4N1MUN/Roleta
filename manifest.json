@@ -88,6 +88,29 @@
       "purpose": "maskable"
     }
   ],
+  "screenshots": [
+    {
+      "src": "./docs/screenshot-entry.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela de entrada da Roleta Erótica"
+    },
+    {
+      "src": "./docs/screenshot-wheel.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Roleta girando com as 14 seções sensoriais"
+    },
+    {
+      "src": "./docs/screenshot-result.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Desafio revelado com timer e botões de controle"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Nova sessão",
