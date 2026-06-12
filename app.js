@@ -1001,10 +1001,16 @@ function updateSessionRank(options = {}) {
   const continuityCeiling = getContinuityRankCeiling(continuity.clothing);
   const requestedRank = state.overrideRank || arousalPacedRank;
 
-  if (requestedRank > state.currentRank && !canAdvanceRank()) {
-    state.currentRank = state.currentRank;
+  const desiredRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 14);
+
+  if (state.overrideRank) {
+    state.currentRank = desiredRank;
+  } else if (desiredRank > previous && !canAdvanceRank()) {
+    state.currentRank = previous;
+  } else if (desiredRank > previous) {
+    state.currentRank = Math.min(previous + 1, desiredRank);
   } else {
-    state.currentRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 14);
+    state.currentRank = desiredRank;
   }
 
   state.lastWeights = computeRankWeights();
@@ -3110,17 +3116,29 @@ function closeSessionDrawer() {
   dom.sessionDrawer.setAttribute("aria-hidden", "true");
 }
 
-function getNextRankHint() {
-  if (state.overrideRank) return `Curva manual: categoria ${state.overrideRank} em cena.`;
-  if (shouldEnterClosingMode()) return getClosingModeHint();
-  if (!canAdvanceRank()) {
-    const turns = getTurnsByPartnerInCurrentRank();
-    const pending = state.partners
-      .filter((p) => (turns[p.name] || 0) < 2)
-      .map((p) => p.name)
-      .join(" e ");
-    if (pending) return `Aguardando mais desafios para ${pending} antes de subir.`;
+if (!canAdvanceRank()) {
+  const requiredTurns = getRequiredTurnsForCurrentRank();
+  const turns = getTurnsByPartnerInCurrentRank();
+
+  const pending = state.partners
+    .filter((p) => (turns[p.name] || 0) < requiredTurns)
+    .map((p) => p.name)
+    .join(" e ");
+
+  if (pending) {
+    return `Aguardando mais desafio(s) para ${pending} antes de subir.`;
   }
+}
+
+function getRequiredTurnsForCurrentRank() {
+  if (state.gameMode !== "couple" || state.partners.length < 2) return 0;
+
+  if (state.progressionMode === "short") return 1;
+
+  if (state.currentRank <= 4) return 2;
+
+  return 1;
+}
 
   const arousalHint = getArousalPacingHint();
   if (arousalHint) return arousalHint;
@@ -3829,10 +3847,10 @@ function everyonePlayedAtLeastInCurrentRank(minTurns = 2) {
 }
 
 function canAdvanceRank() {
-  if (state.currentRank <= 4) {
-    return everyonePlayedAtLeastInCurrentRank(2);
-  }
-  return everyonePlayedAtLeastInCurrentRank(1);
+  const requiredTurns = getRequiredTurnsForCurrentRank();
+  if (!requiredTurns) return true;
+
+  return everyonePlayedAtLeastInCurrentRank(requiredTurns);
 }
 
 function recentlyUsedThemeTag(tag, depth = 3) {
