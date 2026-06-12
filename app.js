@@ -19,6 +19,54 @@ const BACKGROUND_TRACK_SRC = "assets/audio/background.mp3";
 const BACKGROUND_TRACK_TITLE = "Smooth Dark Type Beat - Tower Beatz";
 const DEFAULT_MUSIC_VOLUME = 0.42;
 
+const PROGRESSION_PRESETS = {
+  short: {
+    2: { minutes: 2, spins: 2 },
+    3: { minutes: 4, spins: 4 },
+    4: { minutes: 7, spins: 6 },
+    5: { minutes: 10, spins: 8 },
+    6: { minutes: 14, spins: 10 },
+    7: { minutes: 18, spins: 12 },
+    8: { minutes: 23, spins: 15 },
+    9: { minutes: 30, spins: 18 },
+    10: { minutes: 38, spins: 22 },
+    11: { minutes: 46, spins: 26 },
+    12: { minutes: 55, spins: 30 },
+    13: { minutes: 65, spins: 34 },
+    14: { minutes: 75, spins: 38 }
+  },
+  standard: {
+    2: { minutes: 3, spins: 1 },
+    3: { minutes: 6, spins: 3 },
+    4: { minutes: 10, spins: 4 },
+    5: { minutes: 14, spins: 6 },
+    6: { minutes: 18, spins: 8 },
+    7: { minutes: 22, spins: 10 },
+    8: { minutes: 28, spins: 12 },
+    9: { minutes: 35, spins: 15 },
+    10: { minutes: 42, spins: 18 },
+    11: { minutes: 50, spins: 22 },
+    12: { minutes: 60, spins: 26 },
+    13: { minutes: 70, spins: 30 },
+    14: { minutes: 80, spins: 35 }
+  },
+  slow: {
+    2: { minutes: 5, spins: 2 },
+    3: { minutes: 10, spins: 4 },
+    4: { minutes: 16, spins: 6 },
+    5: { minutes: 22, spins: 9 },
+    6: { minutes: 30, spins: 12 },
+    7: { minutes: 38, spins: 15 },
+    8: { minutes: 48, spins: 18 },
+    9: { minutes: 60, spins: 22 },
+    10: { minutes: 72, spins: 26 },
+    11: { minutes: 84, spins: 30 },
+    12: { minutes: 96, spins: 34 },
+    13: { minutes: 108, spins: 38 },
+    14: { minutes: 120, spins: 42 }
+  }
+};
+
 const RANKS = [
   {
     rank: 1,
@@ -523,6 +571,7 @@ const state = {
   overrideRank: null,
   gameMode: "couple",
   heatBias: 0,
+  progressionMode: "standard",
   musicMuted: true,
   musicVolume: 0.18,
   learning: {
@@ -802,6 +851,7 @@ function loadStoredState() {
     state.challengeFeedback = normalizeChallengeFeedback(session.challengeFeedback);
     state.arousal = normalizeArousalState(session.arousal);
     state.preferences = normalizeSessionPreferences(session.preferences || storedPreferences, state.partners);
+    state.progressionMode = session.progressionMode || "standard";
     if (session.gameMode) state.gameMode = session.gameMode === "solo" ? "solo" : "couple";
   } else if (session) {
     state.sessionActive = false;
@@ -837,6 +887,7 @@ function saveSession() {
     rotation: state.rotation,
     gameMode: state.gameMode,
     heatBias: state.heatBias,
+    progressionMode: state.progressionMode,
     learning: state.learning,
     challengeFeedback: normalizeChallengeFeedback(state.challengeFeedback),
     arousal: normalizeArousalState(state.arousal),
@@ -856,6 +907,7 @@ function startFreshSession(options = {}) {
   state.currentRank = 1;
   state.overrideRank = null;
   state.heatBias = 0;
+  state.progressionMode = "standard";
   state.learning = createLearningProfile();
   state.challengeFeedback = createChallengeFeedbackProfile();
   state.arousal = {};
@@ -946,7 +998,13 @@ function updateSessionRank(options = {}) {
   const continuity = getSessionContinuity();
   const continuityCeiling = getContinuityRankCeiling(continuity.clothing);
   const requestedRank = state.overrideRank || arousalPacedRank;
-  state.currentRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 14);
+
+  if (requestedRank > state.currentRank && !canAdvanceRank()) {
+    state.currentRank = state.currentRank;
+  } else {
+    state.currentRank = clamp(Math.min(requestedRank, continuityCeiling), 1, 14);
+  }
+
   state.lastWeights = computeRankWeights();
 
   if (state.currentRank !== previous || options.forcePulse) {
@@ -958,21 +1016,15 @@ function updateSessionRank(options = {}) {
 
 function calculateNaturalRank() {
   const minutesElapsed = getMinutesElapsed();
-  const spins = state.spinCount;
+  const preset = PROGRESSION_PRESETS[state.progressionMode] || PROGRESSION_PRESETS.standard;
 
-  if (minutesElapsed >= 80 || spins >= 42) return 14;
-  if (minutesElapsed >= 70 || spins >= 38) return 13;
-  if (minutesElapsed >= 60 || spins >= 34) return 12;
-  if (minutesElapsed >= 50 || spins >= 30) return 11;
-  if (minutesElapsed >= 42 || spins >= 26) return 10;
-  if (minutesElapsed >= 35 || spins >= 22) return 9;
-  if (minutesElapsed >= 28 || spins >= 19) return 8;
-  if (minutesElapsed >= 22 || spins >= 16) return 7;
-  if (minutesElapsed >= 18 || spins >= 13) return 6;
-  if (minutesElapsed >= 14 || spins >= 10) return 5;
-  if (minutesElapsed >= 10 || spins >= 7) return 4;
-  if (minutesElapsed >= 6 || spins >= 5) return 3;
-  if (minutesElapsed >= 3 || spins >= 3) return 2;
+  for (let rank = 14; rank >= 2; rank--) {
+    const threshold = preset[rank];
+    if (!threshold) continue;
+    if (minutesElapsed >= threshold.minutes || state.spinCount >= threshold.spins) {
+      return rank;
+    }
+  }
 
   return 1;
 }
@@ -1151,6 +1203,7 @@ function getChallengeWeight(challenge) {
   multiplier *= getArousalMultiplier(challenge);
   multiplier *= getRankSixPhaseMultiplier(challenge);
   multiplier *= getChallengeFeedbackMultiplier(challenge);
+  multiplier *= getTagCooldownMultiplier(challenge);
 
   return base * multiplier;
 }
@@ -3057,56 +3110,39 @@ function closeSessionDrawer() {
 
 function getNextRankHint() {
   if (state.overrideRank) return `Curva manual: categoria ${state.overrideRank} em cena.`;
+  if (shouldEnterClosingMode()) return getClosingModeHint();
+  if (!canAdvanceRank()) {
+    const turns = getTurnsByPartnerInCurrentRank();
+    const pending = state.partners
+      .filter((p) => (turns[p.name] || 0) < 2)
+      .map((p) => p.name)
+      .join(" e ");
+    if (pending) return `Aguardando mais desafios para ${pending} antes de subir.`;
+  }
 
   const arousalHint = getArousalPacingHint();
   if (arousalHint) return arousalHint;
-
   const learningHint = getLearningPacingHint();
   if (learningHint) return learningHint;
+  if (state.currentRank >= 14) return "Categoria final: sessão encerrando, foco no aftercare.";
 
-  if (state.currentRank >= 14) {
-    return "Categoria final: sessão encerrando, foco no cuidado.";
+  const pool = getChallengePool();
+  const used = new Set(state.usedChallengeIds);
+  if (!getEligibleChallengeEntries(pool, used).length) {
+    const next = getNextAvailableChallengeEntries(pool, used, { promote: false })[0]?.challenge.rank;
+    if (next && next > state.currentRank) {
+      return `Aquecimento completo; a próxima cena sobe para categoria ${next}.`;
+    }
   }
 
   const next = state.currentRank + 1;
+  const preset = PROGRESSION_PRESETS[state.progressionMode] || PROGRESSION_PRESETS.standard;
+  const target = preset[next];
+  if (!target) return "Explore as categorias livremente.";
+  const remainingMinutes = Math.max(0, Math.ceil(target.minutes - getMinutesElapsed()));
+  const remainingSpins = Math.max(0, target.spins - state.spinCount);
 
-  const thresholds = {
-    2: { minutes: 3, spins: 3 },
-    3: { minutes: 6, spins: 5 },
-    4: { minutes: 10, spins: 7 },
-    5: { minutes: 14, spins: 10 },
-    6: { minutes: 18, spins: 13 },
-    7: { minutes: 22, spins: 16 },
-    8: { minutes: 28, spins: 19 },
-    9: { minutes: 35, spins: 22 },
-    10: { minutes: 42, spins: 26 },
-    11: { minutes: 50, spins: 30 },
-    12: { minutes: 60, spins: 34 },
-    13: { minutes: 70, spins: 38 },
-    14: { minutes: 80, spins: 42 }
-  };
-
-  const target = thresholds[next];
-
-  if (!target) {
-    return "Explore as categorias livremente.";
-  }
-
-  const remainingMinutes = Math.max(
-    0,
-    Math.ceil(target.minutes - getMinutesElapsed())
-  );
-
-  const remainingSpins = Math.max(
-    0,
-    target.spins - state.spinCount
-  );
-
-  if (remainingMinutes <= 0 || remainingSpins <= 0) {
-    return `Próxima categoria liberada no próximo giro.`;
-  }
-
-  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} giro(s).`;
+  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} cena(s).`;
 }
 
 function getLearningPacingHint() {
@@ -3737,7 +3773,6 @@ window.addEventListener("beforeunload", () => {
   saveSession();
 });
 
-// Atualiza dinamicamente os labels de limites com os nomes reais
 function updateProfileLabels() {
   const nameInput1 = document.getElementById('partner-one-name');
   const nameInput2 = document.getElementById('partner-two-name');
@@ -3750,9 +3785,134 @@ function updateProfileLabels() {
   if (label2) label2.textContent = `${name2} · limites`;
 }
 
-// Atualiza ao digitar
 document.addEventListener('input', (e) => {
   if (e.target.id === 'partner-one-name' || e.target.id === 'partner-two-name') {
     updateProfileLabels();
   }
 });
+
+/* NOVAS FUNÇÕES DE PROGRESSÃO E DIAGNÓSTICO */
+
+function setProgressionMode(mode) {
+  if (["short", "standard", "slow"].includes(mode)) {
+    state.progressionMode = mode;
+    saveSession();
+    updateSessionRank({ forcePulse: true });
+    renderAll();
+    showToast(`Ritmo ${mode === "short" ? "rápido" : mode === "slow" ? "lento" : "padrão"} ativado.`);
+  }
+}
+
+window.setProgressionMode = setProgressionMode;
+
+function getCurrentRankHistory() {
+  return state.history.filter((item) => item.rank === state.currentRank);
+}
+
+function getTurnsByPartnerInCurrentRank() {
+  return getCurrentRankHistory().reduce((acc, item) => {
+    const name = item.actor || "unknown";
+    acc[name] = (acc[name] || 0) + 1;
+    return acc;
+  }, {});
+}
+
+function everyonePlayedAtLeastInCurrentRank(minTurns = 2) {
+  if (state.gameMode !== "couple" || state.partners.length < 2) return true;
+  const turns = getTurnsByPartnerInCurrentRank();
+  return state.partners.every((partner) => {
+    const total = turns[partner.name] || 0;
+    return total >= minTurns;
+  });
+}
+
+function canAdvanceRank() {
+  if (state.currentRank <= 4) {
+    return everyonePlayedAtLeastInCurrentRank(2);
+  }
+  return everyonePlayedAtLeastInCurrentRank(1);
+}
+
+function recentlyUsedThemeTag(tag, depth = 3) {
+  return state.history
+    .slice(0, depth)
+    .some((item) => {
+      const itemTags = getChallengeThemeTagsFromHistory(item);
+      return itemTags.includes(tag);
+    });
+}
+
+function getChallengeThemeTagsFromHistory(historyItem) {
+  const text = `${historyItem.title || ""} ${historyItem.text || ""}`.toLowerCase();
+  const tags = [];
+  if (/(pergunta|responda|diga|confesse|fale|sussurr)/.test(text)) tags.push("talk");
+  if (/(beijo|beije|boca|lábio|pescoço|mordida)/.test(text)) tags.push("kiss");
+  if (/(massagem|massageie|carinho|toque|mãos|dedos)/.test(text)) tags.push("touch");
+  if (/(strip|roupa|peça|nua|nu\b|desnudo)/.test(text)) tags.push("strip");
+  if (/(oral|chupe|língua|lamber|lambida)/.test(text)) tags.push("oral");
+  if (/(masturb|dedo|mão|punho|manual)/.test(text)) tags.push("manual");
+  if (/(penetra|posição|clímax|gozar)/.test(text)) tags.push("climax");
+  if (/(tapa|mordid|pux|belisc|restrição|ordem)/.test(text)) tags.push("power");
+  if (/(gelo|água|sopro|temperatura|textura|vela)/.test(text)) tags.push("sensory");
+  if (/(jogo|desafio|imita|competi|brinca)/.test(text)) tags.push("game");
+  if (/(rotina|ritual|prepara|respira|banho)/.test(text)) tags.push("ritual");
+  if (/(fantasia|personagem| fingir |teatro|encena)/.test(text)) tags.push("fantasy");
+  return tags;
+}
+
+function getTagCooldownMultiplier(challenge) {
+  const tags = getChallengeThemeTagsFromHistory(challenge);
+  if (tags.length === 0) return 1;
+  if (tags.some((tag) => recentlyUsedThemeTag(tag, 3))) {
+    return 0.35;
+  }
+  return 1;
+}
+
+function shouldEnterClosingMode() {
+  return state.currentRank >= 14 || getMinutesElapsed() >= 80;
+}
+
+function getClosingModeHint() {
+  if (shouldEnterClosingMode()) {
+    return "Sessão em modo encerramento: cuidado, conversa e desaceleração.";
+  }
+  return null;
+}
+
+function debugRoulette() {
+  const pool = getChallengePool();
+  const used = new Set(state.usedChallengeIds);
+
+  const byRank = pool.reduce((acc, challenge) => {
+    const rank = challenge.rank || "sem rank";
+    if (!acc[rank]) {
+      acc[rank] = { total: 0, used: 0, remaining: 0 };
+    }
+    acc[rank].total += 1;
+    if (used.has(challenge.id)) {
+      acc[rank].used += 1;
+    } else {
+      acc[rank].remaining += 1;
+    }
+    return acc;
+  }, {});
+
+  console.group("🔍 Diagnóstico da Roleta");
+  console.table(byRank);
+  console.log({
+    currentRank: state.currentRank,
+    spinCount: state.spinCount,
+    elapsedMinutes: Math.round(getMinutesElapsed()),
+    progressionMode: state.progressionMode,
+    turnIndex: state.turnIndex,
+    currentTurn: state.partners[state.turnIndex]?.name,
+    overrideRank: state.overrideRank,
+    canAdvance: canAdvanceRank(),
+    closingMode: shouldEnterClosingMode(),
+    turnsInCurrentRank: getTurnsByPartnerInCurrentRank()
+  });
+  console.groupEnd();
+}
+
+window.debugRoulette = debugRoulette;
