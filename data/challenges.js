@@ -100,6 +100,12 @@ const CHALLENGES = [
 { id: "r4-rituais-02", rank: 3, mode: "couple", title: "Explorar com a ponta dos dedos", text: "{actor}, percorra o corpo de {receiver} com a ponta dos dedos, como se lesse braille. Cada cicatriz, dobra, curva. 3 minutos de descoberta silenciosa.", seconds: 180 },
 { id: "r5-rituais-01", rank: 3, mode: "couple", title: "Aquecer com a boca", text: "{actor}, aqueça cada parte do corpo de {receiver} com a boca: sopro quente, depois beijo, depois língua. Comece pelos pés e suba devagar.", seconds: 240 },
 { id: "r5-rituais-02", rank: 3, mode: "couple", title: "Lubrificar o corpo", text: "Se tiverem óleo ou lubrificante, {actor} espalhe nas mãos e deslize pelo corpo de {receiver} como se estivesse lustrando uma joia rara. Cada centímetro importa.", seconds: 180 },
+{ id: "r3-rituais-03", rank: 3, mode: "couple", title: "Olhar silencioso", text: "Sentem-se frente a frente, joelhos se tocando. Olhem-se nos olhos por 2 minutos em silêncio absoluto. Depois, cada um diz o que sentiu.", seconds: 120 },
+{ id: "r3-rituais-04", rank: 3, mode: "couple", title: "Temperatura da água", text: "{actor}, prepare duas bacias com água: uma morna e uma fria. Alterne os pés de {receiver} entre elas, massageando a cada troca.", seconds: 180 },
+{ id: "r3-rituais-05", rank: 3, mode: "couple", title: "Leitura de desejo", text: "{actor}, leia um trecho de um livro ou poema erótico para {receiver} em voz baixa. {receiver}, feche os olhos e apenas escute.", seconds: 120 },
+{ id: "r3-rituais-06", rank: 3, mode: "couple", title: "Sussurro de afirmação", text: "Um de frente para o outro. {actor}, sussurre três afirmações positivas sobre {receiver} (ex: você é lindo(a), você me excita, eu adoro seu cheiro).", seconds: 60 },
+{ id: "r3-rituais-07", rank: 3, mode: "couple", title: "Dança lenta", text: "Coloquem uma música lenta. Dancem juntos, colados, sem pressa. Sintam o corpo um do outro se movendo em sincronia.", seconds: 180 },
+{ id: "r3-rituais-08", rank: 3, mode: "couple", title: "Carta de desejo", text: "{actor}, escreva em um papel uma fantasia ou desejo. Dobre e entregue para {receiver} ler depois. Não comentem agora, só guardem.", seconds: 0 },
 
 // ═══════════════════════════════════════════════════════════════
 // RANK 4 — BEIJOS
@@ -167,6 +173,20 @@ const CHALLENGES = [
 { id: "r4-06", rank: 6, title: "Quente e frio", text: "{actor}, alterne sopro frio e beijo quente em uma zona sensível escolhida por {receiver}.", seconds: 90 },
 { id: "r4-new-04", rank: 6, title: "Gelo na virilha", text: "{actor}, passe um cubo de gelo ao redor de {rec_intimacy_article} de {receiver} e pela virilha, alternando imediatamente com o calor do seu hálito.", seconds: 90 },
 { id: "r4-couple-f-02", rank: 6, mode: "couple", receiverPreset: "feminine", title: "Água gelada no peito", text: "{actor}, beba água bem gelada e chupe o biquinho do peito de {receiver}, alternando língua fria, sucção e sopro quente.", seconds: 90 },
+{ id: "r4-sensorial-01", rank: 6, mode: "couple", title: "Gelo no pescoço", text: "{actor}, passe um cubo de gelo lentamente pelo pescoço e colo de {receiver}. Depois aqueça cada lugar com beijos e sopro quente.", seconds: 90 },
+{ id: "r4-sensorial-02", rank: 6, mode: "couple", title: "Tecido na pele", text: "{actor}, use um tecido macio (lenço, camisola, fronha) e deslize pelo corpo de {receiver} por cima da roupa. Depois repita na pele exposta.", seconds: 90 },
+{ id: "r4-sensorial-03", rank: 6, mode: "couple", title: "Óleo nas mãos", text: "{actor}, aqueça óleo de massagem nas mãos e espalhe pelos ombros, nuca e braços de {receiver}. O toque desliza, a pele responde.", seconds: 120 },
+{ id: "r4-sensorial-04", rank: 6, mode: "couple", title: "Sopro frio na nuca", text: "{actor}, beba água gelada e solte um sopro frio na nuca de {receiver}. Depois aqueça com a boca quase encostando, sem beijar ainda.", seconds: 60 },
+{ id: "r4-sensorial-05", rank: 6, mode: "couple", title: "Unhas nas costas", text: "{actor}, passe as unhas de leve pelas costas de {receiver}, descendo da nuca até a lombar. Arrepio é sinal de que está funcionando.", seconds: 75 },
+{ id: "r4-sensorial-06", rank: 6, mode: "couple", title: "Cabelo na pele", text: "{actor}, use as pontas do seu cabelo para roçar o rosto, pescoço e peito de {receiver}. Movimentos lentos, quase não encostando.", seconds: 90 },
+{ id: "r6-sensorial-01", rank: 6, mode: "couple", title: "Chuva morna", text: "Se tiverem chuveiro por perto, entrem juntos e deixem a água morna escorrer pelos corpos colados. Só sintam.", seconds: 180 },
+{ id: "r6-sensorial-02", rank: 6, mode: "couple", title: "Vela de massagem", text: "{actor}, acenda uma vela de massagem e deixe a cera morna pingar em gotas nas costas de {receiver}, massageando em seguida.", seconds: 120 },
+{ id: "r6-sensorial-03", rank: 6, mode: "couple", title: "Pena ou pincel", text: "{actor}, use uma pena, pincel macio ou ponta dos dedos para percorrer zonas sensíveis de {receiver} com toques quase imperceptíveis.", seconds: 120 },
+{ id: "r6-sensorial-04", rank: 6, mode: "couple", title: "Frio e calor nos mamilos", text: "{actor}, alterne um cubo de gelo e a ponta da língua quente nos mamilos de {receiver}. Devagar, sentindo cada reação.", seconds: 90 },
+{ id: "r6-sensorial-05", rank: 6, mode: "couple", title: "Vibração na coluna", text: "{actor}, se tiver um vibrador, percorra toda a coluna de {receiver} com ele ligado, descendo vértebra por vértebra.", seconds: 120 },
+{ id: "r6-sensorial-06", rank: 6, mode: "couple", title: "Toque com os lábios", text: "{actor}, percorra o corpo de {receiver} apenas com os lábios entreabertos, sem beijar de fato. Sinta o calor e o arrepio.", seconds: 120 },
+{ id: "r6-sensorial-07", rank: 6, mode: "couple", title: "Gelo no abdômen", text: "{actor}, deslize um cubo de gelo pelo abdômen de {receiver}, contornando o umbigo. Depois aqueça cada centímetro com a boca.", seconds: 90 },
+{ id: "r6-sensorial-08", rank: 6, mode: "couple", title: "Música no escuro", text: "Apaguem todas as luzes. Coloquem uma música instrumental. Fiquem deitados, apenas se tocando de leve, sem falar.", seconds: 180 },
 
 // ═══════════════════════════════════════════════════════════════
 // RANK 7 — STRIP & EXIBIÇÃO
@@ -213,6 +233,14 @@ const CHALLENGES = [
 { id: "r6-fantasia-02", rank: 8, mode: "couple", title: "Herói e donzela(o)", text: "{receiver}, você salvou {actor} de um perigo e agora ele(a) quer te agradecer. {actor}, insista em agradecer com o corpo, sem aceitar recusas educadas.", seconds: 240 },
 { id: "r7-fantasia-01", rank: 8, mode: "couple", title: "Festa de máscaras", text: "Improvisem máscaras com as mãos ou um pano. Façam sexo sem revelar o rosto, como estranhos mascarados que nunca mais vão se encontrar.", seconds: 300 },
 { id: "r7-fantasia-02", rank: 8, mode: "couple", title: "A última noite", text: "Finjam que essa é a última noite juntos. Cada toque, cada beijo, cada movimento é uma despedida. Intensidade máxima, sem pressa de acabar.", seconds: 300 },
+{ id: "r4-fantasia-03", rank: 8, mode: "couple", title: "Médico(a) e paciente", text: "{actor}, você é médico(a) e {receiver} precisa de um exame bem detalhado. Ausculte, apalpe, investigue cada parte do corpo com profissionalismo que vai se desfazendo.", seconds: 180 },
+{ id: "r4-fantasia-04", rank: 8, mode: "couple", title: "Instrutor(a) de yoga", text: "{actor}, você é instrutor(a) de yoga. Ajude {receiver} a fazer alongamentos, corrigindo a postura com toques firmes e demorados.", seconds: 180 },
+{ id: "r5-fantasia-03", rank: 8, mode: "couple", title: "Cliente no provador", text: "{actor}, você trabalha numa loja de roupas. {receiver} está no provador e pede sua ajuda para avaliar cada peça que experimenta.", seconds: 180 },
+{ id: "r5-fantasia-04", rank: 8, mode: "couple", title: "Espião(ã) capturado(a)", text: "{receiver}, você é um(a) espião(ã) capturado(a). {actor}, você é o interrogador. Use todos os métodos para arrancar informações.", seconds: 240 },
+{ id: "r6-fantasia-03", rank: 8, mode: "couple", title: "Estrela e fã", text: "{actor}, você é uma estrela de cinema. {receiver} é um fã que ganhou um encontro exclusivo. Assine autógrafos onde ele(a) quiser.", seconds: 180 },
+{ id: "r6-fantasia-04", rank: 8, mode: "couple", title: "Colegas de quarto", text: "Finjam que são colegas de quarto que nunca ficaram. A cama de um quebrou e agora precisam dividir a mesma cama esta noite.", seconds: 240 },
+{ id: "r7-fantasia-03", rank: 8, mode: "couple", title: "Cena de filme", text: "Recriem juntos uma cena de sexo de um filme que gostam, imitando diálogos e movimentos. Quanto mais exagerado, melhor.", seconds: 300 },
+{ id: "r7-fantasia-04", rank: 8, mode: "couple", title: "Deuses do Olimpo", text: "{actor}, você é um deus/deusa grego(a). {receiver} é um mortal que chamou sua atenção. Use seus poderes divinos de sedução.", seconds: 300 },
 
 // ═══════════════════════════════════════════════════════════════
 // RANK 9 — ESTIMULAÇÃO MANUAL
