@@ -1613,6 +1613,29 @@
     line-height: 0.95;
   }
 
+  /* ═══════════════════════════════════════════════════════════════
+     TIMER ACTIONS (novos botões independentes)
+     ═══════════════════════════════════════════════════════════════ */
+  .timer-actions {
+    display: flex;
+    gap: var(--space-xs);
+    justify-content: center;
+    width: 100%;
+  }
+
+  .timer-actions .btn {
+    min-height: 40px;
+    padding-inline: var(--space-sm);
+    font-size: 0.85rem;
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  /* Oculta o botão antigo se ainda existir no HTML */
+  #timer-control {
+    display: none;
+  }
+
   .insight-box {
     display: grid;
     gap: var(--space-sm);
@@ -2542,11 +2565,15 @@
       margin-bottom: 8px;
     }
 
-    #timer-control {
-      width: 100%;
-      min-height: 40px;
-      padding: 8px 12px;
-      font-size: 0.85rem;
+    /* Botões de timer em mobile */
+    .timer-actions {
+      gap: 6px;
+    }
+
+    .timer-actions .btn {
+      min-height: 38px;
+      padding-inline: 8px;
+      font-size: 0.78rem;
     }
 
     /* ─── FEEDBACK BUTTONS ─── */
