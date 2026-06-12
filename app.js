@@ -27,7 +27,7 @@ const RANKS = [
    color: "#7c3aed",
    accent: "#a78bfa",
    icon: "whisper",
-   image: "assets/fundo-05.jpg",
+   image: "assets/fundo-01.jpg",
    caption: "Falas, confissões, sussurros e leitura do clima."
  },
  {
@@ -67,7 +67,7 @@ const RANKS = [
     color: "#f97316",
     accent: "#fb923c",
     icon: "game",
-    image: "assets/fundo-04.jpg",
+    image: "assets/fundo-05.jpg",
     caption: "Jogos, imitações, áudios e competição divertida."
   },
   {
