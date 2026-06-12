@@ -198,7 +198,7 @@
   .stage-bg {
     position: absolute;
     inset: 0;
-    background-image: url("assets/fundo-05.jpg");
+    background-image: url("assets/fundo-homepage.jpg");
     background-position: center;
     background-size: cover;
   }
