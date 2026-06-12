@@ -57,7 +57,7 @@ const RANKS = [
     color: "#f9a8d4",
     accent: "#fbcfe8",
     icon: "kiss",
-    image: "assets/fundo-03.jpg",
+    image: "assets/fundo-04.jpg",
     caption: "Boca com boca, mordidas e trilhas pelo corpo."
   },
   {
