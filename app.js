@@ -1,6 +1,7 @@
 "use strict";
 
 const STORAGE_KEYS = {
+  progressionMode: "roletaSensorial.progressionMode",
   partners: "roletaSensorial.partners",
   pauseWord: "roletaSensorial.pauseWord",
   session: "roletaSensorial.session",
@@ -745,6 +746,11 @@ function bindEvents() {
   dom.feedbackDislike.addEventListener("click", () => applyChallengeFeedback("dislike"));
   dom.closeResult.addEventListener("click", closeResult);
   dom.copyResult.addEventListener("click", copyCurrentChallenge);
+  const rhythmSelect = document.getElementById("rhythm-select");
+  if (rhythmSelect) {
+    rhythmSelect.value = state.progressionMode; // inicializa com o valor atual
+    rhythmSelect.addEventListener("change", () => setProgressionMode(rhythmSelect.value));
+  }
 }
 
 function handleEntrySubmit(event) {
@@ -839,6 +845,7 @@ function loadStoredState() {
   state.preferences = normalizeSessionPreferences(storedPreferences, state.partners);
   state.pauseWord = pauseWord;
   state.overrideRank = Number.isInteger(override) ? override : null;
+  state.progressionMode = localStorage.getItem(STORAGE_KEYS.progressionMode) || "standard";
 
   if (session && Date.now() - session.sessionStartTime < SESSION_TTL_MS) {
     state.sessionActive = true;
@@ -3833,6 +3840,7 @@ document.addEventListener('input', (e) => {
 function setProgressionMode(mode) {
   if (["short", "standard", "slow"].includes(mode)) {
     state.progressionMode = mode;
+    localStorage.setItem(STORAGE_KEYS.progressionMode, mode);  // ← nova linha
     saveSession();
     updateSessionRank({ forcePulse: true });
     renderAll();
