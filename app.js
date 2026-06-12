@@ -3116,18 +3116,60 @@ function closeSessionDrawer() {
   dom.sessionDrawer.setAttribute("aria-hidden", "true");
 }
 
-if (!canAdvanceRank()) {
-  const requiredTurns = getRequiredTurnsForCurrentRank();
-  const turns = getTurnsByPartnerInCurrentRank();
+function getNextRankHint() {
+  if (state.overrideRank) return `Curva manual: categoria ${state.overrideRank} em cena.`;
 
-  const pending = state.partners
-    .filter((p) => (turns[p.name] || 0) < requiredTurns)
-    .map((p) => p.name)
-    .join(" e ");
-
-  if (pending) {
-    return `Aguardando mais desafio(s) para ${pending} antes de subir.`;
+  if (shouldEnterClosingMode()) {
+    return getClosingModeHint();
   }
+
+  if (!canAdvanceRank()) {
+    const requiredTurns = getRequiredTurnsForCurrentRank();
+    const turns = getTurnsByPartnerInCurrentRank();
+
+    const pending = state.partners
+      .filter((p) => (turns[p.name] || 0) < requiredTurns)
+      .map((p) => p.name)
+      .join(" e ");
+
+    if (pending) {
+      return `Aguardando mais desafio(s) para ${pending} antes de subir.`;
+    }
+  }
+
+  const arousalHint = getArousalPacingHint();
+  if (arousalHint) return arousalHint;
+
+  const learningHint = getLearningPacingHint();
+  if (learningHint) return learningHint;
+
+  if (state.currentRank >= 14) {
+    return "Categoria final: sessão encerrando, foco no cuidado.";
+  }
+
+  const next = state.currentRank + 1;
+  const preset = PROGRESSION_PRESETS[state.progressionMode] || PROGRESSION_PRESETS.standard;
+  const target = preset[next];
+
+  if (!target) {
+    return "Explore as categorias livremente.";
+  }
+
+  const remainingMinutes = Math.max(
+    0,
+    Math.ceil(target.minutes - getMinutesElapsed())
+  );
+
+  const remainingSpins = Math.max(
+    0,
+    target.spins - state.spinCount
+  );
+
+  if (remainingMinutes <= 0 || remainingSpins <= 0) {
+    return "Próxima categoria liberada no próximo giro.";
+  }
+
+  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} cena(s).`;
 }
 
 function getRequiredTurnsForCurrentRank() {
@@ -3138,31 +3180,6 @@ function getRequiredTurnsForCurrentRank() {
   if (state.currentRank <= 4) return 2;
 
   return 1;
-}
-
-  const arousalHint = getArousalPacingHint();
-  if (arousalHint) return arousalHint;
-  const learningHint = getLearningPacingHint();
-  if (learningHint) return learningHint;
-  if (state.currentRank >= 14) return "Categoria final: sessão encerrando, foco no aftercare.";
-
-  const pool = getChallengePool();
-  const used = new Set(state.usedChallengeIds);
-  if (!getEligibleChallengeEntries(pool, used).length) {
-    const next = getNextAvailableChallengeEntries(pool, used, { promote: false })[0]?.challenge.rank;
-    if (next && next > state.currentRank) {
-      return `Aquecimento completo; a próxima cena sobe para categoria ${next}.`;
-    }
-  }
-
-  const next = state.currentRank + 1;
-  const preset = PROGRESSION_PRESETS[state.progressionMode] || PROGRESSION_PRESETS.standard;
-  const target = preset[next];
-  if (!target) return "Explore as categorias livremente.";
-  const remainingMinutes = Math.max(0, Math.ceil(target.minutes - getMinutesElapsed()));
-  const remainingSpins = Math.max(0, target.spins - state.spinCount);
-
-  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} cena(s).`;
 }
 
 function getLearningPacingHint() {
