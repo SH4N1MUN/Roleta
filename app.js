@@ -3854,6 +3854,13 @@ function getTurnsByPartnerInCurrentRank() {
   }, {});
 }
 
+function getRequiredTurnsForCurrentRank() {
+  if (state.gameMode !== "couple" || state.partners.length < 2) return 0;
+  if (state.progressionMode === "short") return 1;
+  if (state.currentRank <= 4) return 2;
+  return 1;
+}
+
 function everyonePlayedAtLeastInCurrentRank(minTurns = 2) {
   if (state.gameMode !== "couple" || state.partners.length < 2) return true;
   const turns = getTurnsByPartnerInCurrentRank();
@@ -3866,7 +3873,6 @@ function everyonePlayedAtLeastInCurrentRank(minTurns = 2) {
 function canAdvanceRank() {
   const requiredTurns = getRequiredTurnsForCurrentRank();
   if (!requiredTurns) return true;
-
   return everyonePlayedAtLeastInCurrentRank(requiredTurns);
 }
 
