@@ -3057,22 +3057,19 @@ function closeSessionDrawer() {
 
 function getNextRankHint() {
   if (state.overrideRank) return `Curva manual: categoria ${state.overrideRank} em cena.`;
+
   const arousalHint = getArousalPacingHint();
   if (arousalHint) return arousalHint;
+
   const learningHint = getLearningPacingHint();
   if (learningHint) return learningHint;
-  if (state.currentRank >= 14) return "Categoria final: sessão encerrando, foco no aftercare.";
 
-  const pool = getChallengePool();
-  const used = new Set(state.usedChallengeIds);
-  if (!getEligibleChallengeEntries(pool, used).length) {
-    const next = getNextAvailableChallengeEntries(pool, used, { promote: false })[0]?.challenge.rank;
-    if (next && next > state.currentRank) {
-      return `Aquecimento completo; a próxima cena sobe para categoria ${next}.`;
-    }
+  if (state.currentRank >= 14) {
+    return "Categoria final: sessão encerrando, foco no cuidado.";
   }
 
   const next = state.currentRank + 1;
+
   const thresholds = {
     2: { minutes: 3, spins: 3 },
     3: { minutes: 6, spins: 5 },
@@ -3088,12 +3085,28 @@ function getNextRankHint() {
     13: { minutes: 70, spins: 38 },
     14: { minutes: 80, spins: 42 }
   };
-  const target = thresholds[next];
-  if (!target) return "Explore as categorias livremente.";
-  const remainingMinutes = Math.max(0, Math.ceil(target.minutes - getMinutesElapsed()));
-  const remainingSpins = Math.max(0, target.spins - state.spinCount);
 
-  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} cena(s).`;
+  const target = thresholds[next];
+
+  if (!target) {
+    return "Explore as categorias livremente.";
+  }
+
+  const remainingMinutes = Math.max(
+    0,
+    Math.ceil(target.minutes - getMinutesElapsed())
+  );
+
+  const remainingSpins = Math.max(
+    0,
+    target.spins - state.spinCount
+  );
+
+  if (remainingMinutes <= 0 || remainingSpins <= 0) {
+    return `Próxima categoria liberada no próximo giro.`;
+  }
+
+  return `Próxima categoria em ${remainingMinutes} min ou ${remainingSpins} giro(s).`;
 }
 
 function getLearningPacingHint() {
