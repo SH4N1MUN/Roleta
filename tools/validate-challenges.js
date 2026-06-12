@@ -39,6 +39,8 @@ const VALID_PHASE_VARIANTS = new Set(["sensory", "guided", "direct", "edge", "re
 const VALID_INSIGHT_TARGETS = new Set(["actor", "receiver", "female", "couple", undefined]);
 const VALID_REQUIRED_ITEMS = new Set(["lubricant", "massageOil", "vibrator", "analToy", "camera"]);
 const VALID_CONSENT_LIMITS = new Set(["anal", "throat", "impact", "recording"]);
+const VALID_RANK_MIN = 1;
+const VALID_RANK_MAX = 14;
 const VALID_TOKENS = new Set([
   "{actor}", "{receiver}", "{partner_one}", "{partner_two}",
   "{female_partner}", "{other_partner}", "{art_actor}", "{subj_actor}",
@@ -64,8 +66,8 @@ challenges.forEach((challenge, index) => {
   if (ids.has(challenge.id)) errors.push(`${label}: id duplicado`);
   ids.add(challenge.id);
 
-  if (!Number.isInteger(challenge.rank) || challenge.rank < 1 || challenge.rank > 7) {
-    errors.push(`${label}: rank deve ser 1-7`);
+  if (!Number.isInteger(challenge.rank) || challenge.rank < VALID_RANK_MIN || challenge.rank > VALID_RANK_MAX) {
+    errors.push(`${label}: rank deve ser ${VALID_RANK_MIN}-${VALID_RANK_MAX}`);
   }
 
   if (!VALID_MODES.has(challenge.mode)) 

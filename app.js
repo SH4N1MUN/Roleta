@@ -19,6 +19,9 @@ const MUSIC_REVISION = "4";
 const BACKGROUND_TRACK_SRC = "assets/audio/background.mp3";
 const BACKGROUND_TRACK_TITLE = "Smooth Dark Type Beat - Tower Beatz";
 const DEFAULT_MUSIC_VOLUME = 0.42;
+const AVAILABLE_COUPLE_SCENES = {
+  hm: new Set([1, 2, 3, 4, 5, 6, 7])
+};
 
 const PROGRESSION_PRESETS = {
   short: {
@@ -755,6 +758,7 @@ function bindEvents() {
 
 function handleEntrySubmit(event) {
   event.preventDefault();
+  const selectedProgressionMode = normalizeProgressionMode(document.getElementById("rhythm-select")?.value || state.progressionMode);
   const partners = [readProfile(1)];
   if (state.gameMode === "couple") partners.push(readProfile(2));
 
@@ -765,7 +769,7 @@ function handleEntrySubmit(event) {
   }
 
   archiveCurrentSession("new-session");
-  startFreshSession();
+  startFreshSession({ progressionMode: selectedProgressionMode });
   state.partners = partners;
   state.arousal = createArousalState(state.partners);
   state.preferences = readSessionPreferences(state.partners);
@@ -845,7 +849,7 @@ function loadStoredState() {
   state.preferences = normalizeSessionPreferences(storedPreferences, state.partners);
   state.pauseWord = pauseWord;
   state.overrideRank = Number.isInteger(override) ? override : null;
-  state.progressionMode = localStorage.getItem(STORAGE_KEYS.progressionMode) || "standard";
+  state.progressionMode = normalizeProgressionMode(localStorage.getItem(STORAGE_KEYS.progressionMode));
 
   if (session && Date.now() - session.sessionStartTime < SESSION_TTL_MS) {
     state.sessionActive = true;
@@ -860,7 +864,7 @@ function loadStoredState() {
     state.challengeFeedback = normalizeChallengeFeedback(session.challengeFeedback);
     state.arousal = normalizeArousalState(session.arousal);
     state.preferences = normalizeSessionPreferences(session.preferences || storedPreferences, state.partners);
-    state.progressionMode = session.progressionMode || "standard";
+    state.progressionMode = normalizeProgressionMode(session.progressionMode || state.progressionMode);
     if (session.gameMode) state.gameMode = session.gameMode === "solo" ? "solo" : "couple";
   } else if (session) {
     state.sessionActive = false;
@@ -906,7 +910,7 @@ function saveSession() {
 }
 
 function startFreshSession(options = {}) {
-  const { active = true } = options;
+  const { active = true, progressionMode = state.progressionMode } = options;
   stopTimer();
   state.sessionActive = active;
   state.sessionStartTime = Date.now();
@@ -916,7 +920,7 @@ function startFreshSession(options = {}) {
   state.currentRank = 1;
   state.overrideRank = null;
   state.heatBias = 0;
-  state.progressionMode = "standard";
+  state.progressionMode = normalizeProgressionMode(progressionMode);
   state.learning = createLearningProfile();
   state.challengeFeedback = createChallengeFeedbackProfile();
   state.arousal = {};
@@ -1496,7 +1500,8 @@ function preferenceItemAvailable(item, preferences) {
 }
 
 function participantBlocksLimit(partner, limit, preferences) {
-  const key = getContinuityKey(partner?.name || "");
+  const profile = partner?.isSelf ? getCurrentPartner() : partner;
+  const key = getContinuityKey(profile?.name || "");
   return Boolean(preferences.limits[key]?.[limit]);
 }
 
@@ -1741,7 +1746,8 @@ function getRankSceneImage(rank) {
 
 function getCoupleSceneImage(rankNumber) {
   const context = getCoupleImageContext();
-  return context ? `assets/couples/${context}/r${rankNumber}.jpg` : "";
+  const availableRanks = AVAILABLE_COUPLE_SCENES[context];
+  return availableRanks?.has(Number(rankNumber)) ? `assets/couples/${context}/r${rankNumber}.jpg` : "";
 }
 
 function getCoupleImageContext(partners = state.partners) {
@@ -3838,17 +3844,22 @@ document.addEventListener('input', (e) => {
 /* NOVAS FUNÇÕES DE PROGRESSÃO E DIAGNÓSTICO */
 
 function setProgressionMode(mode) {
-  if (["short", "standard", "slow"].includes(mode)) {
-    state.progressionMode = mode;
-    localStorage.setItem(STORAGE_KEYS.progressionMode, mode);  // ← nova linha
+  const normalizedMode = normalizeProgressionMode(mode);
+  if (normalizedMode === mode) {
+    state.progressionMode = normalizedMode;
+    localStorage.setItem(STORAGE_KEYS.progressionMode, normalizedMode);
     saveSession();
     updateSessionRank({ forcePulse: true });
     renderAll();
-    showToast(`Ritmo ${mode === "short" ? "rápido" : mode === "slow" ? "lento" : "padrão"} ativado.`);
+    showToast(`Ritmo ${normalizedMode === "short" ? "rápido" : normalizedMode === "slow" ? "lento" : "padrão"} ativado.`);
   }
 }
 
 window.setProgressionMode = setProgressionMode;
+
+function normalizeProgressionMode(mode) {
+  return Object.prototype.hasOwnProperty.call(PROGRESSION_PRESETS, mode) ? mode : "standard";
+}
 
 function getCurrentRankHistory() {
   return state.history.filter((item) => item.rank === state.currentRank);

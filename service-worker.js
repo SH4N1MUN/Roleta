@@ -9,7 +9,7 @@
  * - Separação lógica de Core Assets vs Imagens
  */
 
-const CACHE_VERSION = 38; // Atualizado apos otimizar assets para PWA
+const CACHE_VERSION = 39; // Atualizado apos revisar assets offline
 const CACHE_NAME = `roleta-sensorial-v${CACHE_VERSION}`;
 
 /* ─── Definição de Assets ─── */
@@ -41,7 +41,34 @@ const CORE_ASSETS = [
   "./assets/icons/og-image.png"
 ];
 
-const APP_SHELL = [...CORE_ASSETS];
+const MEDIA_ASSETS = [
+  "./assets/fundo-homepage.jpg",
+  "./assets/fundo-01.jpg",
+  "./assets/fundo-02.jpg",
+  "./assets/fundo-03.jpg",
+  "./assets/fundo-04.jpg",
+  "./assets/fundo-05.jpg",
+  "./assets/fundo-06.jpg",
+  "./assets/fundo-07.jpg",
+  "./assets/fundo-08.jpg",
+  "./assets/fundo-09.jpg",
+  "./assets/fundo-10.jpg",
+  "./assets/fundo-11.jpg",
+  "./assets/fundo-12.jpg",
+  "./assets/fundo-13.jpg",
+  "./assets/fundo-14.jpg",
+  "./assets/fundo-15.jpg",
+  "./assets/couples/hm/r1.jpg",
+  "./assets/couples/hm/r2.jpg",
+  "./assets/couples/hm/r3.jpg",
+  "./assets/couples/hm/r4.jpg",
+  "./assets/couples/hm/r5.jpg",
+  "./assets/couples/hm/r6.jpg",
+  "./assets/couples/hm/r7.jpg",
+  "./assets/audio/background.mp3"
+];
+
+const APP_SHELL = [...CORE_ASSETS, ...MEDIA_ASSETS];
 
 /* ═══════════════════════════════════════════════════════════════
    1. LIFECYCLE: INSTALL
