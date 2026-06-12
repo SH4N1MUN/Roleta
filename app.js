@@ -20,26 +20,26 @@ const BACKGROUND_TRACK_TITLE = "Smooth Dark Type Beat - Tower Beatz";
 const DEFAULT_MUSIC_VOLUME = 0.42;
 
 const RANKS = [
- {
-   rank: 1,
-   phase: "Falas, confissões, sussurros e leitura do clima.",
-   short: "Conexão",
-   color: "#7c3aed",
-   accent: "#a78bfa",
-   icon: "whisper",
-   image: "assets/fundo-01.jpg",
-   caption: "Falas, confissões, sussurros e leitura do clima."
- },
- {
-   rank: 2,
-   phase: "Mãos, dedos, pressão e descoberta do corpo.",
-   short: "Toque",
-   color: "#d97706",
-   accent: "#f59e0b",
-   icon: "massage",
-   image: "assets/fundo-02.jpg",
-   caption: "Mãos, dedos, pressão e descoberta do corpo."
- },
+  {
+    rank: 1,
+    phase: "Falas, confissões, sussurros e leitura do clima.",
+    short: "Conexão",
+    color: "#7c3aed",
+    accent: "#a78bfa",
+    icon: "whisper",
+    image: "assets/fundo-01.jpg",
+    caption: "Falas, confissões, sussurros e leitura do clima."
+  },
+  {
+    rank: 2,
+    phase: "Mãos, dedos, pressão e descoberta do corpo.",
+    short: "Toque",
+    color: "#d97706",
+    accent: "#f59e0b",
+    icon: "massage",
+    image: "assets/fundo-02.jpg",
+    caption: "Mãos, dedos, pressão e descoberta do corpo."
+  },
   {
     rank: 3,
     phase: "Rituais & Rotina",
@@ -619,7 +619,9 @@ const dom = {
   insightWarmup: document.getElementById("insight-warmup"),
   timerBox: document.getElementById("timer-box"),
   timerDisplay: document.getElementById("timer-display"),
-  timerControl: document.getElementById("timer-control"),
+  timerStart: document.getElementById("timer-start"),
+  timerPause: document.getElementById("timer-pause"),
+  timerRestart: document.getElementById("timer-restart"),
   previousResult: document.getElementById("previous-result"),
   feedbackLike: document.getElementById("feedback-like"),
   feedbackDislike: document.getElementById("feedback-dislike"),
@@ -682,7 +684,9 @@ function bindEvents() {
   dom.arousalPanel.addEventListener("change", handleArousalChange);
   dom.arousalPanel.addEventListener("click", handleArousalStep);
   dom.rankOverride.addEventListener("change", handleOverrideChange);
-  dom.timerControl.addEventListener("click", toggleTimer);
+  dom.timerStart.addEventListener("click", startTimer);
+  dom.timerPause.addEventListener("click", pauseTimer);
+  dom.timerRestart.addEventListener("click", restartTimer);
   dom.insightReady.addEventListener("click", () => applySensoryInsight("ready"));
   dom.insightWarmup.addEventListener("click", () => applySensoryInsight("warmup"));
   dom.previousResult.addEventListener("click", showPreviousChallenge);
@@ -1749,14 +1753,17 @@ function setupTimer(seconds) {
 
   if (seconds > 0) {
     dom.timerBox.hidden = false;
-    dom.timerControl.textContent = "Iniciar";
+    dom.timerStart.textContent = "Iniciar";
+    dom.timerStart.disabled = false;
+    dom.timerPause.disabled = true;
+    dom.timerRestart.disabled = false;
     updateTimerDisplay();
   } else {
     dom.timerBox.hidden = true;
   }
 }
 
-function toggleTimer() {
+function startTimer() {
   if (!state.timerInitial) return;
   unlockAudio();
 
@@ -1766,16 +1773,41 @@ function toggleTimer() {
     updateTimerDisplay();
   }
 
-  if (state.timerRunning) {
-    stopTimer();
-    dom.timerControl.textContent = "Retomar";
-    return;
-  }
-
   state.timerRunning = true;
   state.lastTimerTick = performance.now();
-  dom.timerControl.textContent = "Pausar";
   state.timerFrameId = requestAnimationFrame(tickTimer);
+
+  dom.timerStart.textContent = "Retomar";
+  dom.timerStart.disabled = true;
+  dom.timerPause.disabled = false;
+  dom.timerRestart.disabled = false;
+}
+
+function pauseTimer() {
+  if (!state.timerRunning) return;
+  stopTimer();
+  dom.timerStart.textContent = "Retomar";
+  dom.timerStart.disabled = false;
+  dom.timerPause.disabled = true;
+}
+
+function restartTimer() {
+  stopTimer();
+  state.timerRemaining = state.timerInitial;
+  state.lastCountdownBeep = null;
+  updateTimerDisplay();
+  dom.timerStart.textContent = "Iniciar";
+  dom.timerStart.disabled = false;
+  dom.timerPause.disabled = true;
+  dom.timerRestart.disabled = false;
+}
+
+function stopTimer() {
+  if (state.timerFrameId) {
+    cancelAnimationFrame(state.timerFrameId);
+    state.timerFrameId = null;
+  }
+  state.timerRunning = false;
 }
 
 function tickTimer(timestamp) {
@@ -1790,8 +1822,11 @@ function tickTimer(timestamp) {
 
   if (state.timerRemaining <= 0) {
     stopTimer();
-    dom.timerControl.textContent = "Reiniciar";
     signalTimerEnd();
+    dom.timerStart.textContent = "Iniciar";
+    dom.timerStart.disabled = false;
+    dom.timerPause.disabled = true;
+    dom.timerRestart.disabled = false;
     return;
   }
 
@@ -1828,14 +1863,6 @@ function pulseTimerVibration(timestamp) {
     navigator.vibrate(patterns[rank]);
     state.lastVibrationAt = timestamp;
   }
-}
-
-function stopTimer() {
-  if (state.timerFrameId) {
-    cancelAnimationFrame(state.timerFrameId);
-    state.timerFrameId = null;
-  }
-  state.timerRunning = false;
 }
 
 function updateTimerDisplay() {
@@ -2549,29 +2576,28 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
   const isTablet = canvasWidth > 360 && canvasWidth < 450;
   const isDesktop = canvasWidth >= 450;
 
-  // 🔧 NOVOS VALORES: fontes menores e labels mais próximas do centro
   let fontSize, chipWidth, chipHeight, iconRadius, labelRadius, yOffset;
 
   if (isMobile) {
-    fontSize = 7;        // reduzido de 10
-    chipWidth = 44;      // reduzido de 56
-    chipHeight = 18;     // reduzido de 24
-    iconRadius = 9;      // reduzido de 12
-    labelRadius = radius * 0.72;  // mais perto do centro
+    fontSize = 7;
+    chipWidth = 44;
+    chipHeight = 18;
+    iconRadius = 9;
+    labelRadius = radius * 0.72;
     yOffset = 8;
   } else if (isTablet) {
-    fontSize = 8;        // reduzido de 11
-    chipWidth = 50;      // reduzido de 62
-    chipHeight = 20;     // reduzido de 26
-    iconRadius = 10;     // reduzido de 13
+    fontSize = 8;
+    chipWidth = 50;
+    chipHeight = 20;
+    iconRadius = 10;
     labelRadius = radius * 0.74;
     yOffset = 10;
   } else {
-    fontSize = 10;       // reduzido de 13
-    chipWidth = 58;      // reduzido de 70
-    chipHeight = 22;     // reduzido de 28
-    iconRadius = 12;     // reduzido de 15
-    labelRadius = radius * 0.76;  // mais perto do centro (era 0.69)
+    fontSize = 10;
+    chipWidth = 58;
+    chipHeight = 22;
+    iconRadius = 12;
+    labelRadius = radius * 0.76;
     yOffset = 12;
   }
 
@@ -2594,7 +2620,6 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
 
   ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
   
-  // 🔧 NOVO: abreviação mais agressiva para caber na fatia
   const shortLabels = {
     "Conexão": "Conex",
     "Toque": "Toque",
@@ -2614,8 +2639,6 @@ function drawWheelLabel(rank, active, current, angle, radius, pulse) {
   
   let displayText = shortLabels[rank.short] || rank.short;
   
-  // Se ainda não couber, trunca com "..."
-  ctx.font = `700 ${fontSize}px Inter, system-ui, sans-serif`;
   const textMetrics = ctx.measureText(displayText);
   if (textMetrics.width > chipWidth - 10) {
     displayText = displayText.substring(0, 4) + ".";
@@ -2662,51 +2685,21 @@ function drawRankIconResponsive(icon, x, y, color, radius, active, current) {
   ctx.fill();
 
   switch (icon) {
-    case "massage":
-      drawMassageIcon();
-      break;
-    case "touch":
-      drawTouchIcon();
-      break;
-    case "kiss":
-      drawKissIcon();
-      break;
-    case "strip":
-      drawStripIcon();
-      break;
-    case "hand":
-      drawHandIcon();
-      break;
-    case "mouth":
-      drawMouthIcon();
-      break;
-    case "climax":
-      drawFlameIcon();
-      break;
-    case "game":
-      drawGameIcon();
-      break;
-    case "ritual":
-      drawRitualIcon();
-      break;
-    case "sensory":
-      drawSensoryIcon();
-      break;
-    case "fantasy":
-      drawFantasyIcon();
-      break;
-    case "power":
-      drawPowerIcon();
-      break;
-    case "surprise":
-      drawSurpriseIcon();
-      break;
-    case "aftercare":
-      drawAftercareIcon();
-      break;
-    default:
-      drawWhisperIcon();
-      break;
+    case "massage": drawMassageIcon(); break;
+    case "touch": drawTouchIcon(); break;
+    case "kiss": drawKissIcon(); break;
+    case "strip": drawStripIcon(); break;
+    case "hand": drawHandIcon(); break;
+    case "mouth": drawMouthIcon(); break;
+    case "climax": drawFlameIcon(); break;
+    case "game": drawGameIcon(); break;
+    case "ritual": drawRitualIcon(); break;
+    case "sensory": drawSensoryIcon(); break;
+    case "fantasy": drawFantasyIcon(); break;
+    case "power": drawPowerIcon(); break;
+    case "surprise": drawSurpriseIcon(); break;
+    case "aftercare": drawAftercareIcon(); break;
+    default: drawWhisperIcon(); break;
   }
 
   ctx.restore();
@@ -2727,51 +2720,21 @@ function drawRankIcon(icon, x, y, color, active, current) {
   ctx.fill();
 
   switch (icon) {
-    case "massage":
-      drawMassageIcon();
-      break;
-    case "touch":
-      drawTouchIcon();
-      break;
-    case "kiss":
-      drawKissIcon();
-      break;
-    case "strip":
-      drawStripIcon();
-      break;
-    case "hand":
-      drawHandIcon();
-      break;
-    case "mouth":
-      drawMouthIcon();
-      break;
-    case "climax":
-      drawFlameIcon();
-      break;
-    case "game":
-      drawGameIcon();
-      break;
-    case "ritual":
-      drawRitualIcon();
-      break;
-    case "sensory":
-      drawSensoryIcon();
-      break;
-    case "fantasy":
-      drawFantasyIcon();
-      break;
-    case "power":
-      drawPowerIcon();
-      break;
-    case "surprise":
-      drawSurpriseIcon();
-      break;
-    case "aftercare":
-      drawAftercareIcon();
-      break;
-    default:
-      drawWhisperIcon();
-      break;
+    case "massage": drawMassageIcon(); break;
+    case "touch": drawTouchIcon(); break;
+    case "kiss": drawKissIcon(); break;
+    case "strip": drawStripIcon(); break;
+    case "hand": drawHandIcon(); break;
+    case "mouth": drawMouthIcon(); break;
+    case "climax": drawFlameIcon(); break;
+    case "game": drawGameIcon(); break;
+    case "ritual": drawRitualIcon(); break;
+    case "sensory": drawSensoryIcon(); break;
+    case "fantasy": drawFantasyIcon(); break;
+    case "power": drawPowerIcon(); break;
+    case "surprise": drawSurpriseIcon(); break;
+    case "aftercare": drawAftercareIcon(); break;
+    default: drawWhisperIcon(); break;
   }
 
   ctx.restore();
