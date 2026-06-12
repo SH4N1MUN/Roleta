@@ -959,6 +959,9 @@ function updateSessionRank(options = {}) {
 function calculateNaturalRank() {
   const minutesElapsed = getMinutesElapsed();
 
+  // Garante que a sessão sempre comece no rank 1
+  if (state.spinCount < 2) return 1;
+
   if (minutesElapsed >= 80 || state.spinCount >= 35) return 14;
   if (minutesElapsed >= 70 || state.spinCount >= 30) return 13;
   if (minutesElapsed >= 60 || state.spinCount >= 26) return 12;
