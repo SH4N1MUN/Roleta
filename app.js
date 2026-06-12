@@ -3889,8 +3889,13 @@ function getTagCooldownMultiplier(challenge) {
   return 1;
 }
 
+function getClosingThresholdMinutes() {
+  const preset = PROGRESSION_PRESETS[state.progressionMode] || PROGRESSION_PRESETS.standard;
+  return preset[14]?.minutes || 80;
+}
+
 function shouldEnterClosingMode() {
-  return state.currentRank >= 14 || getMinutesElapsed() >= 80;
+  return state.currentRank >= 14 || getMinutesElapsed() >= getClosingThresholdMinutes();
 }
 
 function getClosingModeHint() {
