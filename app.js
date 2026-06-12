@@ -35,35 +35,37 @@ const PROGRESSION_PRESETS = {
     13: { minutes: 65, spins: 34 },
     14: { minutes: 75, spins: 38 }
   },
+
   standard: {
-    2: { minutes: 3, spins: 1 },
-    3: { minutes: 6, spins: 3 },
-    4: { minutes: 10, spins: 4 },
-    5: { minutes: 14, spins: 6 },
-    6: { minutes: 18, spins: 8 },
-    7: { minutes: 22, spins: 10 },
-    8: { minutes: 28, spins: 12 },
-    9: { minutes: 35, spins: 15 },
-    10: { minutes: 42, spins: 18 },
-    11: { minutes: 50, spins: 22 },
-    12: { minutes: 60, spins: 26 },
-    13: { minutes: 70, spins: 30 },
-    14: { minutes: 80, spins: 35 }
+    2: { minutes: 3, spins: 4 },
+    3: { minutes: 7, spins: 8 },
+    4: { minutes: 11, spins: 12 },
+    5: { minutes: 15, spins: 16 },
+    6: { minutes: 20, spins: 20 },
+    7: { minutes: 25, spins: 24 },
+    8: { minutes: 31, spins: 28 },
+    9: { minutes: 38, spins: 32 },
+    10: { minutes: 46, spins: 36 },
+    11: { minutes: 55, spins: 40 },
+    12: { minutes: 65, spins: 44 },
+    13: { minutes: 75, spins: 48 },
+    14: { minutes: 85, spins: 52 }
   },
+
   slow: {
-    2: { minutes: 5, spins: 2 },
-    3: { minutes: 10, spins: 4 },
-    4: { minutes: 16, spins: 6 },
-    5: { minutes: 22, spins: 9 },
-    6: { minutes: 30, spins: 12 },
-    7: { minutes: 38, spins: 15 },
-    8: { minutes: 48, spins: 18 },
-    9: { minutes: 60, spins: 22 },
-    10: { minutes: 72, spins: 26 },
-    11: { minutes: 84, spins: 30 },
-    12: { minutes: 96, spins: 34 },
-    13: { minutes: 108, spins: 38 },
-    14: { minutes: 120, spins: 42 }
+    2: { minutes: 5, spins: 6 },
+    3: { minutes: 10, spins: 10 },
+    4: { minutes: 16, spins: 14 },
+    5: { minutes: 23, spins: 18 },
+    6: { minutes: 31, spins: 23 },
+    7: { minutes: 40, spins: 28 },
+    8: { minutes: 50, spins: 33 },
+    9: { minutes: 62, spins: 39 },
+    10: { minutes: 74, spins: 45 },
+    11: { minutes: 86, spins: 51 },
+    12: { minutes: 98, spins: 57 },
+    13: { minutes: 110, spins: 63 },
+    14: { minutes: 120, spins: 70 }
   }
 };
 
