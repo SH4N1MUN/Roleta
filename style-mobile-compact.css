@@ -163,9 +163,11 @@
 
   #result-card .result-profile {
     width: 100%;
+    justify-content: center;
     gap: 10px;
     margin: 0;
     padding: 8px 10px;
+    text-align: center;
   }
 
   #result-card .result-avatar {
@@ -176,6 +178,7 @@
   }
 
   #result-card .result-profile-copy {
+    justify-items: center;
     gap: 5px;
   }
 

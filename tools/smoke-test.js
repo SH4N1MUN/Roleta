@@ -198,6 +198,22 @@ state.partners = [
 ];
 assertSmoke(getCoupleSceneImage(1) === "", "same-preset contexts should use fallback images until assets exist");
 
+assertSmoke(getCountdownSoundCue(31) === null, "timer should stay quiet before 30 seconds");
+assertSmoke(Boolean(getCountdownSoundCue(30)), "timer should beep at 30 seconds");
+assertSmoke(getCountdownSoundCue(24) === null, "timer should not beep every second before 20 seconds");
+assertSmoke(getCountdownSoundCue(20).gain > getCountdownSoundCue(30).gain, "timer should intensify at 20 seconds");
+assertSmoke(Boolean(getCountdownSoundCue(10)), "timer should beep in the final 10 seconds");
+assertSmoke(getCountdownSoundCue(10).gain > getCountdownSoundCue(20).gain, "final 10 seconds should be louder than the 20-second cue");
+
+state.musicMuted = true;
+state.musicVolume = 0.5;
+assertSmoke(getSoundEffectGain(0.04) === 0, "muted sound should silence effects");
+state.musicMuted = false;
+state.musicVolume = 0;
+assertSmoke(getSoundEffectGain(0.04) === 0, "zero sound volume should silence effects");
+state.musicVolume = 0.25;
+assertSmoke(Math.abs(getSoundEffectGain(0.04) - 0.02) < 0.001, "sound slider should scale effects volume");
+
 console.log("smoke-test-ok");
 `;
 

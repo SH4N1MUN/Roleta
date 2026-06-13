@@ -19,6 +19,7 @@ const MUSIC_REVISION = "4";
 const BACKGROUND_TRACK_SRC = "assets/audio/background.mp3";
 const BACKGROUND_TRACK_TITLE = "Smooth Dark Type Beat - Tower Beatz";
 const DEFAULT_MUSIC_VOLUME = 0.42;
+const SOUND_EFFECT_VOLUME_CURVE = 0.5;
 const AVAILABLE_COUPLE_SCENES = {
   hm: new Set([1, 2, 3, 4, 5, 6, 7])
 };
@@ -3620,8 +3621,8 @@ function renderMusicControls() {
   dom.musicToggle.classList.toggle("is-muted", state.musicMuted);
   dom.musicToggle.textContent = state.musicMuted ? "Off" : "Som";
   dom.musicToggle.setAttribute("aria-pressed", String(!state.musicMuted));
-  dom.musicToggle.setAttribute("title", state.musicMuted ? `Ativar trilha: ${BACKGROUND_TRACK_TITLE}` : `Silenciar trilha: ${BACKGROUND_TRACK_TITLE}`);
-  dom.musicVolume.setAttribute("title", `Volume da trilha: ${BACKGROUND_TRACK_TITLE}`);
+  dom.musicToggle.setAttribute("title", state.musicMuted ? "Ativar som" : "Silenciar som");
+  dom.musicVolume.setAttribute("title", `Volume do som: trilha e alertas do timer`);
   dom.musicVolume.value = String(Math.round(state.musicVolume * 100));
 }
 
@@ -3714,11 +3715,19 @@ function unlockAudio() {
   }
 }
 
+function getSoundEffectGain(gain) {
+  if (state.musicMuted || state.musicVolume <= 0) return 0;
+  return gain * Math.pow(clamp(state.musicVolume, 0, 1), SOUND_EFFECT_VOLUME_CURVE);
+}
+
 function playTone({ frequency = 640, duration = 0.08, gain = 0.035, type = "sine", delay = 0 }) {
   try {
     const ctx = getAudioContext();
     if (!ctx) return;
     if (ctx.state === "suspended") ctx.resume();
+
+    const effectGain = getSoundEffectGain(gain);
+    if (effectGain <= 0) return;
 
     const start = ctx.currentTime + delay;
     const osc = ctx.createOscillator();
@@ -3726,7 +3735,7 @@ function playTone({ frequency = 640, duration = 0.08, gain = 0.035, type = "sine
     osc.type = type;
     osc.frequency.setValueAtTime(frequency, start);
     amp.gain.setValueAtTime(0.0001, start);
-    amp.gain.exponentialRampToValueAtTime(gain, start + 0.012);
+    amp.gain.exponentialRampToValueAtTime(effectGain, start + 0.012);
     amp.gain.exponentialRampToValueAtTime(0.0001, start + duration);
     osc.connect(amp);
     amp.connect(ctx.destination);
@@ -3743,6 +3752,9 @@ function playRouletteSound() {
     if (!ctx) return;
     if (ctx.state === "suspended") ctx.resume();
 
+    const sweepGain = getSoundEffectGain(0.03);
+    if (sweepGain <= 0) return;
+
     const now = ctx.currentTime;
     const osc = ctx.createOscillator();
     const amp = ctx.createGain();
@@ -3750,7 +3762,7 @@ function playRouletteSound() {
     osc.frequency.setValueAtTime(190, now);
     osc.frequency.exponentialRampToValueAtTime(82, now + 0.75);
     amp.gain.setValueAtTime(0.0001, now);
-    amp.gain.exponentialRampToValueAtTime(0.03, now + 0.04);
+    amp.gain.exponentialRampToValueAtTime(sweepGain, now + 0.04);
     amp.gain.exponentialRampToValueAtTime(0.0001, now + 0.82);
     osc.connect(amp);
     amp.connect(ctx.destination);
@@ -3770,16 +3782,48 @@ function playRouletteStopSound() {
 
 function playFinalCountdownBeep() {
   const seconds = Math.ceil(state.timerRemaining);
-  if (seconds > 10 || seconds <= 0 || seconds === state.lastCountdownBeep) return;
+  if (seconds <= 0 || seconds === state.lastCountdownBeep) return;
+
+  const cue = getCountdownSoundCue(seconds);
+  if (!cue) return;
 
   state.lastCountdownBeep = seconds;
-  const urgent = seconds <= 3;
-  playTone({
-    frequency: urgent ? 980 : 680,
-    duration: urgent ? 0.095 : 0.065,
-    gain: urgent ? 0.055 : 0.038,
-    type: urgent ? "triangle" : "sine"
-  });
+  playTone(cue);
+  if (seconds <= 3) {
+    playTone({ ...cue, frequency: cue.frequency * 1.32, duration: cue.duration * 0.72, gain: cue.gain * 0.72, delay: 0.075 });
+  }
+}
+
+function getCountdownSoundCue(seconds) {
+  if (seconds <= 10) {
+    const urgent = seconds <= 3;
+    return {
+      frequency: urgent ? 1040 : 820,
+      duration: urgent ? 0.105 : 0.085,
+      gain: urgent ? 0.078 : 0.062,
+      type: urgent ? "triangle" : "sine"
+    };
+  }
+
+  if (seconds <= 20 && seconds % 2 === 0) {
+    return {
+      frequency: 700,
+      duration: 0.07,
+      gain: 0.046,
+      type: "triangle"
+    };
+  }
+
+  if (seconds <= 30 && seconds % 5 === 0) {
+    return {
+      frequency: 540,
+      duration: 0.06,
+      gain: 0.032,
+      type: "sine"
+    };
+  }
+
+  return null;
 }
 
 function playTimerEndSound() {

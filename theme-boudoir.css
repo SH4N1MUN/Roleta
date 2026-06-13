@@ -354,6 +354,8 @@ h2 {
     linear-gradient(135deg, rgba(224, 69, 123, 0.13), rgba(13, 10, 11, 0.46)),
     rgba(13, 10, 11, 0.44);
   padding: 16px;
+  justify-items: center;
+  text-align: center;
 }
 
 .status-head .eyebrow {
@@ -364,12 +366,15 @@ h2 {
 .status-profile {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   min-width: 0;
+  width: 100%;
 }
 
 .status-profile-copy {
   display: grid;
+  justify-items: center;
   gap: 8px;
   min-width: 0;
 }
@@ -799,7 +804,7 @@ textarea,
 }
 
 .rank-card {
-  grid-template-columns: 78px 1fr;
+  grid-template-columns: minmax(78px, auto) minmax(0, 1fr);
 }
 
 .rank-card > div,
@@ -833,6 +838,11 @@ textarea,
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 600;
+  overflow: visible;
+  line-height: 1.16;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .arousal-meter {
@@ -1286,9 +1296,11 @@ textarea,
 .result-profile {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 13px;
   width: fit-content;
   max-width: 100%;
+  margin-inline: auto;
   border: 1px solid rgba(224, 69, 123, 0.28);
   border-radius: 6px;
   background:
