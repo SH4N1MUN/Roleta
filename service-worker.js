@@ -9,7 +9,7 @@
  * - Separação lógica de Core Assets vs Imagens
  */
 
-const CACHE_VERSION = 39; // Atualizado apos revisar assets offline
+const CACHE_VERSION = 40; // Atualizado apos ajuste mobile do modal de cena
 const CACHE_NAME = `roleta-sensorial-v${CACHE_VERSION}`;
 
 /* ─── Definição de Assets ─── */
