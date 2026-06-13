@@ -32,7 +32,7 @@
 <body data-rank="1">
   <section id="age-screen" class="screen screen-age is-active">
     <div class="entry-bg" aria-hidden="true"></div>
-    <form id="entry-form" class="entry-panel" autocomplete="off">
+    <form id="entry-form" class="entry-panel entry-onboarding" autocomplete="off">
       <div class="entry-main">
         <div class="app-logo" aria-hidden="true">
           <svg viewBox="0 0 96 96" role="img">
@@ -45,6 +45,10 @@
         <p class="eyebrow">Experiência privada +18</p>
         <h1>Roleta <em>Erótica</em></h1>
         <p class="subtitle">Progressão sensorial adaptativa</p>
+
+        <div class="entry-section-head">
+          <p class="eyebrow">Quem joga hoje?</p>
+        </div>
 
         <div class="mode-toggle" role="radiogroup" aria-label="Modo de jogo">
           <label>
@@ -66,9 +70,26 @@
               <option value="slow">Lenta (mais romântica)</option>
             </select>
           </label>
+          <div class="rhythm-card-grid" aria-label="Ritmo da noite">
+              <button class="rhythm-card is-active" type="button" data-rhythm-value="standard" aria-pressed="true">
+                <strong>Equilibrado</strong>
+                <small>progresso natural</small>
+              </button>
+              <button class="rhythm-card" type="button" data-rhythm-value="short" aria-pressed="false">
+                <strong>Curta</strong>
+                <small>sobe mais rapido</small>
+              </button>
+              <button class="rhythm-card" type="button" data-rhythm-value="slow" aria-pressed="false">
+                <strong>Lenta</strong>
+                <small>mais romantica</small>
+              </button>
+          </div>
         </div>
             
-        <div class="field-grid">
+        <div class="field-grid participant-grid">
+          <section class="participant-card">
+            <span id="entry-partner-one-initial" class="entry-avatar" aria-hidden="true">G</span>
+            <div class="participant-fields">
           <label class="profile-name">
             <span id="partner-one-label">Perfil 1</span>
             <input id="partner-one-name" name="partnerOne" type="text" maxlength="28" placeholder="Nome" required>
@@ -80,6 +101,12 @@
               <option value="masculine">o / ele / dele</option>
             </select>
           </label>
+            </div>
+          </section>
+
+          <section class="participant-card partner-two-field">
+            <span id="entry-partner-two-initial" class="entry-avatar is-alt" aria-hidden="true">R</span>
+            <div class="participant-fields">
           <label class="profile-name partner-two-field">
             <span>Perfil 2</span>
             <input id="partner-two-name" name="partnerTwo" type="text" maxlength="28" placeholder="Nome" required>
@@ -91,6 +118,11 @@
               <option value="masculine">o / ele / dele</option>
             </select>
           </label>
+            </div>
+          </section>
+        </div>
+
+        <div class="field-grid entry-pause-grid">
           <label class="wide">
             <span id="pause-word-label">Palavra de pausa</span>
             <input id="pause-word" name="pauseWord" type="text" maxlength="24" placeholder="Ex.: vermelho" required>
@@ -98,22 +130,28 @@
         </div>
       </div>
 
-      <div id="preference-panel" class="preference-panel">
-        <div class="preference-group">
+      <div id="preference-panel" class="preference-panel preference-tabs-panel" data-active-tab="partner-0">
+        <div class="preference-tabs" role="tablist" aria-label="Preferencias da noite">
+          <button id="preference-tab-partner-0" class="preference-tab is-active" type="button" data-preference-tab="partner-0" role="tab" aria-selected="true" aria-controls="preference-page-partner-0">Gabriel</button>
+          <button id="preference-tab-partner-1" class="preference-tab partner-two-field" type="button" data-preference-tab="partner-1" role="tab" aria-selected="false" aria-controls="preference-page-partner-1">Rafaela</button>
+          <button id="preference-tab-items" class="preference-tab" type="button" data-preference-tab="items" role="tab" aria-selected="false" aria-controls="preference-page-items">Itens</button>
+        </div>
+        <div class="preference-tab-content">
+        <div id="preference-page-partner-0" class="preference-group" data-preference-page="partner-0" role="tabpanel" aria-labelledby="preference-tab-partner-0">
           <strong id="profile1-limits-label">Perfil 1 · limites</strong>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="0" data-pref-key="anal"> Sem anal em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="0" data-pref-key="throat"> Sem garganta/ritmo forçado em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="0" data-pref-key="impact"> Sem dor, tapas ou puxões em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="0" data-pref-key="recording"> Sem gravação/exposição minha</label>
         </div>
-        <div class="preference-group partner-two-field">
+        <div id="preference-page-partner-1" class="preference-group partner-two-field" data-preference-page="partner-1" role="tabpanel" aria-labelledby="preference-tab-partner-1" hidden>
           <strong id="profile2-limits-label">Perfil 2 · limites</strong>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="1" data-pref-key="anal"> Sem anal em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="1" data-pref-key="throat"> Sem garganta/ritmo forçado em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="1" data-pref-key="impact"> Sem dor, tapas ou puxões em mim</label>
           <label><input type="checkbox" data-pref-scope="partner" data-partner-index="1" data-pref-key="recording"> Sem gravação/exposição minha</label>
         </div>
-        <div class="preference-group preference-items">
+        <div id="preference-page-items" class="preference-group preference-items" data-preference-page="items" role="tabpanel" aria-labelledby="preference-tab-items" hidden>
           <strong>Itens da noite</strong>
           <label><input type="checkbox" data-pref-scope="item" data-pref-key="lubricant"> Lubrificante</label>
           <label><input type="checkbox" data-pref-scope="item" data-pref-key="massageOil"> Óleo ou vela de massagem</label>
@@ -123,13 +161,21 @@
         </div>
       </div>
 
+      </div>
+
       <label class="consent-line">
         <input id="adult-consent" type="checkbox" required>
+        <span class="consent-shield" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3 5 6v5.4c0 4.3 2.7 7.6 7 9.6 4.3-2 7-5.3 7-9.6V6l-7-3Z"></path>
+            <path d="M9 12l2 2 4-5"></path>
+          </svg>
+        </span>
         <span id="consent-text">Ambos são maiores de 18 anos e concordam com limites, pausa e consentimento contínuo.</span>
       </label>
 
       <div class="entry-actions">
-        <button class="btn btn-primary entry-submit" type="submit">Entrar na sessão</button>
+        <button class="btn btn-primary entry-submit" type="submit">Come&ccedil;ar noite</button>
       </div>
     </form>
   </section>
@@ -325,12 +371,35 @@
 
         <div id="timer-box" class="timer-box" hidden>
           <div id="timer-display" class="timer-display">00:00</div>
-          <div class="timer-actions" style="display:flex; gap:8px; justify-content:center;">
-            <button id="timer-start" class="btn btn-secondary" type="button">Iniciar</button>
-    <button id="timer-pause" class="btn btn-secondary" type="button" disabled>Pausar</button>
-    <button id="timer-restart" class="btn btn-secondary" type="button">Reiniciar</button>
+          <div class="timer-actions">
+            <button id="timer-start" class="btn btn-secondary timer-btn" type="button" aria-label="Iniciar timer">
+              <span class="timer-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7Z"></path>
+                </svg>
+              </span>
+              <span class="timer-btn-label">Iniciar</span>
+            </button>
+            <button id="timer-pause" class="btn btn-secondary timer-btn" type="button" aria-label="Pausar timer" disabled>
+              <span class="timer-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 5v14"></path>
+                  <path d="M16 5v14"></path>
+                </svg>
+              </span>
+              <span class="timer-btn-label">Pausar</span>
+            </button>
+            <button id="timer-restart" class="btn btn-secondary timer-btn" type="button" aria-label="Reiniciar timer">
+              <span class="timer-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 12a9 9 0 1 0 3-6.7"></path>
+                  <path d="M3 4v6h6"></path>
+                </svg>
+              </span>
+              <span class="timer-btn-label">Reiniciar</span>
+            </button>
+          </div>
         </div>
-      </div>
         <div class="challenge-feedback" aria-label="Avaliar pergunta">
           <div class="feedback-actions">
             <button id="previous-result" class="feedback-icon feedback-back" type="button" aria-label="Voltar para pergunta anterior" title="Voltar pergunta">

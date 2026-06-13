@@ -132,20 +132,20 @@
   }
 
   #result-modal {
-    align-items: center;
+    align-items: end;
     justify-items: center;
     overflow: hidden;
-    padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
+    padding: max(10px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
   }
 
   #result-card.result-panel {
     width: min(100%, 420px);
-    max-height: calc(100vh - 16px);
-    max-height: calc(100svh - 16px);
+    max-height: calc(100vh - 12px);
+    max-height: calc(100svh - 12px);
     min-height: 0;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: 8px;
+    border-radius: 22px 22px 8px 8px;
     padding: 8px;
     scrollbar-width: none;
   }
@@ -157,24 +157,24 @@
   #result-card .result-content {
     min-height: 0;
     justify-content: flex-start;
-    gap: 8px;
-    padding: 12px;
+    gap: 9px;
+    padding: 18px 12px 12px;
   }
 
   #result-card .result-profile {
     width: 100%;
     justify-content: center;
-    gap: 10px;
+    gap: 9px;
     margin: 0;
     padding: 8px 10px;
     text-align: center;
   }
 
   #result-card .result-avatar {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    font-size: 1.25rem;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 1.12rem;
   }
 
   #result-card .result-profile-copy {
@@ -183,7 +183,7 @@
   }
 
   #result-card .result-profile .result-turn {
-    font-size: 1.08rem;
+    font-size: 1rem;
     line-height: 1.05;
   }
 
@@ -194,8 +194,9 @@
   }
 
   #result-card .profile-badge {
+    min-height: 21px;
     padding: 3px 7px;
-    font-size: 0.66rem;
+    font-size: 0.62rem;
   }
 
   #result-card .result-meta {
@@ -241,9 +242,15 @@
   }
 
   #result-card .timer-actions .btn {
+    gap: 5px;
     min-height: 36px;
     padding: 8px 6px;
     font-size: 0.74rem;
+  }
+
+  #result-card .timer-btn-icon {
+    width: 15px;
+    height: 15px;
   }
 
   #result-card .challenge-feedback {

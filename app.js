@@ -624,11 +624,17 @@ const dom = {
   partnerOnePronoun: document.getElementById("partner-one-pronoun"),
   partnerTwoName: document.getElementById("partner-two-name"),
   partnerTwoPronoun: document.getElementById("partner-two-pronoun"),
+  entryPartnerOneInitial: document.getElementById("entry-partner-one-initial"),
+  entryPartnerTwoInitial: document.getElementById("entry-partner-two-initial"),
   pauseWord: document.getElementById("pause-word"),
   pauseWordLabel: document.getElementById("pause-word-label"),
   adultConsent: document.getElementById("adult-consent"),
   consentText: document.getElementById("consent-text"),
   gameModeInputs: Array.from(document.querySelectorAll('input[name="gameMode"]')),
+  rhythmCards: Array.from(document.querySelectorAll("[data-rhythm-value]")),
+  preferencePanel: document.getElementById("preference-panel"),
+  preferenceTabs: Array.from(document.querySelectorAll("[data-preference-tab]")),
+  preferencePages: Array.from(document.querySelectorAll("[data-preference-page]")),
   preferenceInputs: Array.from(document.querySelectorAll("[data-pref-scope]")),
   entryPanel: document.getElementById("entry-form"),
   stageBg: document.getElementById("stage-bg"),
@@ -721,6 +727,18 @@ function bindEvents() {
   dom.gameModeInputs.forEach((input) => {
     input.addEventListener("change", () => setGameMode(input.value));
   });
+  dom.rhythmCards.forEach((button) => {
+    button.addEventListener("click", () => {
+      const rhythmSelect = document.getElementById("rhythm-select");
+      const value = normalizeProgressionMode(button.dataset.rhythmValue);
+      if (rhythmSelect) rhythmSelect.value = value;
+      setProgressionMode(value);
+      syncRhythmCards(value);
+    });
+  });
+  dom.preferenceTabs.forEach((button) => {
+    button.addEventListener("click", () => setPreferenceTab(button.dataset.preferenceTab));
+  });
   dom.spin.addEventListener("click", spinWheel);
   dom.openSession.addEventListener("click", openSessionDrawer);
   dom.closeSession.addEventListener("click", closeSessionDrawer);
@@ -753,8 +771,58 @@ function bindEvents() {
   const rhythmSelect = document.getElementById("rhythm-select");
   if (rhythmSelect) {
     rhythmSelect.value = state.progressionMode; // inicializa com o valor atual
-    rhythmSelect.addEventListener("change", () => setProgressionMode(rhythmSelect.value));
+    rhythmSelect.addEventListener("change", () => {
+      setProgressionMode(rhythmSelect.value);
+      syncRhythmCards(rhythmSelect.value);
+    });
+    syncRhythmCards(rhythmSelect.value);
   }
+  setPreferenceTab(dom.preferencePanel?.dataset.activeTab || "partner-0");
+  updateEntryParticipantPreview();
+}
+
+function syncRhythmCards(mode = state.progressionMode) {
+  const normalizedMode = normalizeProgressionMode(mode);
+  dom.rhythmCards.forEach((button) => {
+    const isActive = button.dataset.rhythmValue === normalizedMode;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function setPreferenceTab(tab = "partner-0") {
+  const fallbackTab = state.gameMode === "solo" && tab === "partner-1" ? "partner-0" : tab;
+  const activeTab = ["partner-0", "partner-1", "items"].includes(fallbackTab) ? fallbackTab : "partner-0";
+
+  if (dom.preferencePanel) dom.preferencePanel.dataset.activeTab = activeTab;
+  dom.preferenceTabs.forEach((button) => {
+    const isActive = button.dataset.preferenceTab === activeTab;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+  dom.preferencePages.forEach((page) => {
+    page.hidden = page.dataset.preferencePage !== activeTab;
+  });
+}
+
+function getEntryName(input, fallback) {
+  return input?.value.trim() || fallback;
+}
+
+function getEntryInitial(input, fallback) {
+  return getEntryName(input, fallback).trim().charAt(0).toUpperCase();
+}
+
+function updateEntryParticipantPreview() {
+  const firstName = getEntryName(dom.partnerOneName, state.gameMode === "solo" ? "Você" : "Gabriel");
+  const secondName = getEntryName(dom.partnerTwoName, "Rafaela");
+  if (dom.entryPartnerOneInitial) dom.entryPartnerOneInitial.textContent = getEntryInitial(dom.partnerOneName, firstName);
+  if (dom.entryPartnerTwoInitial) dom.entryPartnerTwoInitial.textContent = getEntryInitial(dom.partnerTwoName, secondName);
+
+  const firstTab = document.getElementById("preference-tab-partner-0");
+  const secondTab = document.getElementById("preference-tab-partner-1");
+  if (firstTab) firstTab.textContent = firstName;
+  if (secondTab) secondTab.textContent = secondName;
 }
 
 function handleEntrySubmit(event) {
@@ -811,6 +879,10 @@ function setGameMode(mode) {
     : "Ambos são maiores de 18 anos e concordam com limites, pausa e consentimento contínuo.";
   if (state.gameMode === "solo" && !dom.partnerOneName.value.trim()) dom.partnerOneName.value = "Você";
   localStorage.setItem(STORAGE_KEYS.gameMode, state.gameMode);
+  if (state.gameMode === "solo" && dom.preferencePanel?.dataset.activeTab === "partner-1") {
+    setPreferenceTab("partner-0");
+  }
+  updateEntryParticipantPreview();
   updateSessionRank({ forcePulse: true });
   renderAll();
 }
@@ -1831,6 +1903,19 @@ function getSeductionFocusLabel(challenge = state.currentChallenge) {
   return getSeductionFocus(challenge).name || "O casal";
 }
 
+function setTimerButtonLabel(button, label) {
+  if (!button) return;
+
+  const labelNode = button.querySelector(".timer-btn-label");
+  if (labelNode) {
+    labelNode.textContent = label;
+  } else {
+    button.textContent = label;
+  }
+
+  button.setAttribute("aria-label", `${label} timer`);
+}
+
 function setupTimer(seconds) {
   stopTimer();
   state.timerInitial = seconds || 0;
@@ -1840,7 +1925,7 @@ function setupTimer(seconds) {
 
   if (seconds > 0) {
     dom.timerBox.hidden = false;
-    dom.timerStart.textContent = "Iniciar";
+    setTimerButtonLabel(dom.timerStart, "Iniciar");
     dom.timerStart.disabled = false;
     dom.timerPause.disabled = true;
     dom.timerRestart.disabled = false;
@@ -1864,7 +1949,7 @@ function startTimer() {
   state.lastTimerTick = performance.now();
   state.timerFrameId = requestAnimationFrame(tickTimer);
 
-  dom.timerStart.textContent = "Retomar";
+  setTimerButtonLabel(dom.timerStart, "Retomar");
   dom.timerStart.disabled = true;
   dom.timerPause.disabled = false;
   dom.timerRestart.disabled = false;
@@ -1873,7 +1958,7 @@ function startTimer() {
 function pauseTimer() {
   if (!state.timerRunning) return;
   stopTimer();
-  dom.timerStart.textContent = "Retomar";
+  setTimerButtonLabel(dom.timerStart, "Retomar");
   dom.timerStart.disabled = false;
   dom.timerPause.disabled = true;
 }
@@ -1883,7 +1968,7 @@ function restartTimer() {
   state.timerRemaining = state.timerInitial;
   state.lastCountdownBeep = null;
   updateTimerDisplay();
-  dom.timerStart.textContent = "Iniciar";
+  setTimerButtonLabel(dom.timerStart, "Iniciar");
   dom.timerStart.disabled = false;
   dom.timerPause.disabled = true;
   dom.timerRestart.disabled = false;
@@ -1910,7 +1995,7 @@ function tickTimer(timestamp) {
   if (state.timerRemaining <= 0) {
     stopTimer();
     signalTimerEnd();
-    dom.timerStart.textContent = "Iniciar";
+    setTimerButtonLabel(dom.timerStart, "Iniciar");
     dom.timerStart.disabled = false;
     dom.timerPause.disabled = true;
     dom.timerRestart.disabled = false;
@@ -3877,6 +3962,7 @@ function updateProfileLabels() {
   const name2 = nameInput2?.value.trim() || 'Perfil 2';
   if (label1) label1.textContent = `${name1} · limites`;
   if (label2) label2.textContent = `${name2} · limites`;
+  updateEntryParticipantPreview();
 }
 
 document.addEventListener('input', (e) => {
